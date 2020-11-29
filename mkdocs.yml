@@ -15,7 +15,6 @@ theme:
     repo: fontawesome/brands/github
 
 plugins:
-  - autolinks
   - git-revision-date-localized
   - search
   - section-index
@@ -25,9 +24,9 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
 
-# google_analytics:
-#   - UA-184169799-1
-#   - auto
+google_analytics:
+  - UA-184169799-1
+  - auto
 
 nav:
   - Introduction: README.md

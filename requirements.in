@@ -1,5 +1,4 @@
 mkdocs
 mkdocs-material
 mkdocs-section-index
-mkdocs-autolinks-plugin
 mkdocs-git-revision-date-localized-plugin
