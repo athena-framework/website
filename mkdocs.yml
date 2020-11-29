@@ -1,0 +1,39 @@
+site_name: Athena Framework
+use_directory_urls: true
+repo_url: https://github.com/athena-framework/website
+edit_uri: https://github.com/athena-framework/website/tree/master/docs/
+site_url: https://athena-framework.github.io/website
+
+strict: true
+
+theme:
+  name: material
+  palette:
+    primary: black
+    accent: red
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - autolinks
+  - git-revision-date-localized
+  - search
+  - section-index
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+# google_analytics:
+#   - UA-184169799-1
+#   - auto
+
+nav:
+  - Introduction: README.md
+  - Architecture: architecture.md
+  - Cookbook:
+    - cookbook/README.md
+    - Listeners: cookbook/listeners.md
+    - Param Converters: cookbook/param_converters.md
+    - Exclusion Strategies: cookbook/exclusion_strategies.md
