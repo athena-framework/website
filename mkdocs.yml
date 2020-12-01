@@ -1,14 +1,14 @@
 site_name: Athena Framework
 use_directory_urls: true
-repo_url: https://github.com/athena-framework/website
+strict: true
+repo_url: https://github.com/athena-framework/athena
 edit_uri: https://github.com/athena-framework/website/tree/master/docs/
 site_url: https://athena-framework.github.io/website
-
-strict: true
 
 theme:
   name: material
   palette:
+    scheme: preference
     primary: black
     accent: red
   icon:
@@ -28,9 +28,26 @@ google_analytics:
   - UA-184169799-1
   - auto
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/athena-framework
+    - icon: fontawesome/brands/gitter
+      link: https://gitter.im/athena-frameworkcr/community
+
 nav:
   - Introduction: README.md
-  - Architecture: architecture.md
+  - Getting Started: 
+    - getting_started/README.md
+    - Advanced Usage: getting_started/advanced_usage.md
+  - Components:
+    - components/README.md
+    - Config: components/config.md
+    - Dependency Injection: components/dependency_injection.md
+    - Event Dispatcher: components/event_dispatcher.md
+    - Serializer: components/serializer.md
+    - Spec: components/spec.md
+    - Validator: components/validator.md
   - Cookbook:
     - cookbook/README.md
     - Listeners: cookbook/listeners.md

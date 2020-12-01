@@ -1,0 +1,87 @@
+Athena also ships with some more advanced features to provide more flexibility/control for an application.
+These features may not be required for a simple application; however as the application grows they may become more useful.
+
+## Param Converters
+
+[ART::ParamConverterInterface](https://athena-framework.github.io/athena/Athena/Routing/ParamConverterInterface.html) s allow complex types to be supplied to an action via its arguments.
+An example of this could be extracting the id from `/users/10`, doing a DB query to lookup the user with the PK of `10`, then providing the full user object to the action.
+Param converters abstract any custom parameter handling that would otherwise have to be done in each action.
+
+```crystal
+require "athena"
+
+@[ADI::Register]
+struct MultiplyConverter < ART::ParamConverterInterface
+  # :inherit:
+  def apply(request : HTTP::Request, configuration : Configuration) : Nil
+    arg_name = configuration.name
+
+    return unless request.attributes.has? arg_name
+
+    value = request.attributes.get arg_name, Int32
+    request.attributes.set arg_name, value * 2, Int32
+  end
+end
+
+class ParamConverterController < ART::Controller
+  @[ART::Get(path: "/multiply/:num")]
+  @[ART::ParamConverter("num", converter: MultiplyConverter)]
+  def multiply(num : Int32) : Int32
+    num
+  end
+end
+
+ART.run
+
+# GET / multiply/3 # => 6
+```
+
+## Middleware
+
+Athena is an event based framework; meaning it emits [ART::Events](https://athena-framework.github.io/athena/Athena/Routing/Events.html) that are acted upon internally to handle the request.  These same events can also be listened on by custom listeners, via [AED::EventListenerInterface](https://athena-framework.github.io/athena/Athena/EventDispatcher/EventListenerInterface.html), in order to tap into the life-cycle of the request as a more flexible alternative to [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html)s.  An example use case of this could be: adding common headers, cookies, compressing the response, authentication, or even returning a response early like [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html).
+
+See the [Event Dispatcher](../components/event_dispatcher.md) component for a more detailed look.
+
+## Custom Annotations
+
+
+
+## Testing
+
+Athena strongly suggests following the [SOLID](https://en.wikipedia.org/wiki/SOLID) design principles;
+especially the [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) in order to create types that are easy to test.  See the [Dependency Injection](../components/dependency_injection.md) component for a more detailed look.
+
+If these principles are followed then any of the previously mentioned concepts, param converters, event listeners, and/or controllers,
+can easily be unit tested on their own as you would any Crystal type, possibly utilizing `ASPEC::TestCase` to provide helpful abstractions around common testing/helper logic for sets of common types.
+
+However, Athena also comes bundled with [ART::Spec::APITestCase](https://athena-framework.github.io/athena/Athena/Spec/TestCase.html) to allow for easily creating integration tests for [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)s.
+
+```crystal
+require "athena"
+require "athena/spec"
+
+class ExampleController < ART::Controller
+  @[ART::QueryParam("negative")]
+  @[ART::Get("/add/:value1/:value2")]
+  def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
+    sum = value1 + value2
+    negative ? -sum : sum
+  end
+end
+
+struct ExampleControllerTest < ART::Spec::APITestCase
+  def test_add_positive : Nil
+    self.request("GET", "/add/5/3").body.should eq "8"
+  end
+
+  def test_add_negative : Nil
+    self.request("GET", "/add/5/3?negative=true").body.should eq "-8"
+  end
+end
+
+# Run all test case tests.
+ASPEC.run_all
+```
+
+Integration tests allow testing the full system, including event listeners, param converters, etc at once.
+These tests do not utilize an [HTTP::Server](https://crystal-lang.org/api/HTTP/Server.html) which results in more performant specs.
