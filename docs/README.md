@@ -4,7 +4,7 @@ Athena Framework was created with the intention of providing various high qualit
 
 In regards to other Crystal web frameworks, Athena employs some unique concepts, features, and design principles:
 
-* Annotations are used to define & configure routes among other things
+* Annotations, including user-defined ones, are used to define & configure routes among other things
 * Adheres to the [SOLID](https://en.wikipedia.org/wiki/SOLID) design principles; basing its dependencies on interfaces, and providing a [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection) Service Container to help manage dependencies/ease testing
 * Event based; allows tapping into various events during the life-cycle of a request
 * Flexible foundation; can make an application as simple or complex as needed, using only the features/components that are needed

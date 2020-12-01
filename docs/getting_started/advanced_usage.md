@@ -44,7 +44,9 @@ See the [Event Dispatcher](../components/event_dispatcher.md) component for a mo
 
 ## Custom Annotations
 
+User defined annotations may also be used to allow for more advanced logic; such as for [Pagination](../cookbook/listeners.md#pagination) or Rate limiting logic.  Custom annotations can be applied to a controller class and/or controller action method.  These annotations can then be accessed, including the data defined on them, within even listeners or anywhere the current request's [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) is exposed.
 
+See the [Config](../components/config.md) component for a more detailed look.
 
 ## Testing
 
@@ -52,9 +54,9 @@ Athena strongly suggests following the [SOLID](https://en.wikipedia.org/wiki/SOL
 especially the [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) in order to create types that are easy to test.  See the [Dependency Injection](../components/dependency_injection.md) component for a more detailed look.
 
 If these principles are followed then any of the previously mentioned concepts, param converters, event listeners, and/or controllers,
-can easily be unit tested on their own as you would any Crystal type, possibly utilizing `ASPEC::TestCase` to provide helpful abstractions around common testing/helper logic for sets of common types.
+can easily be unit tested on their own as you would any Crystal type, possibly utilizing [ART::Spec::TestCase](https://athena-framework.github.io/athena/Athena/Spec/TestCase.html) to provide helpful abstractions around common testing/helper logic for sets of common types.
 
-However, Athena also comes bundled with [ART::Spec::APITestCase](https://athena-framework.github.io/athena/Athena/Spec/TestCase.html) to allow for easily creating integration tests for [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)s.
+However, Athena also comes bundled with [ART::Spec::APITestCase](https://athena-framework.github.io/athena/Athena/Routing/Spec/APITestCase.html) to allow for easily creating integration tests for [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)s.
 
 ```crystal
 require "athena"
