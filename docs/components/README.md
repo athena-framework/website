@@ -10,13 +10,13 @@ Steps 1 and 3 are handled via Crystal's [HTTP::Server](https://crystal-lang.org/
 
 ## Powered By Events
 
-Athena is an event based framework, meaning it emits various events via the [Event Dispatcher](./event_dispatcher.md) component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are emitted, is depicted below in  visual format:
+Athena is an event based framework, meaning it emits various events via the [Event Dispatcher](./event_dispatcher.md) component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are dispatched, is depicted below in  visual format:
 
 ![High Level Request Life-cycle Flow](../img/Athena.png)
 
 ### 1. Request Event
 
-The very first event that is emitted is the [ART::Events::Request](https://athena-framework.github.io/athena/Athena/Routing/Events/Request.html) event and can have a varitey of listeners.  The primary purpose of this event is to create an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
+The very first event that is dispatched is the [ART::Events::Request](https://athena-framework.github.io/athena/Athena/Routing/Events/Request.html) event and can have a varitey of listeners.  The primary purpose of this event is to create an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
 
 In some cases the listener may have enough information to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) immediately.  An example of this would be the [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html) listener.  If enabled it is able to return a CORS preflight response even before routing is invoked.
 
@@ -32,7 +32,7 @@ Another use case for this event is populating additional data into the request's
 
 ### 2. Action Event
 
-The next event to be emitted is the [ART::Events::Action](https://athena-framework.github.io/athena/Athena/Routing/Events/Action.html) event, assuming a response was not already returned within the `Request` event.  This event is emitted after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html); such as reading custom annotations off of it via the [Config](./config.md) component.
+The next event to be dispatched is the [ART::Events::Action](https://athena-framework.github.io/athena/Athena/Routing/Events/Action.html) event, assuming a response was not already returned within the `Request` event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html); such as reading custom annotations off of it via the [Config](./config.md) component.
 
 !!! example "Action event in Athena"
     This is the event that [ART::Listeners::ParamConverter](https://athena-framework.github.io/athena/Athena/Routing/Listeners/ParamConverter.html) and [ART::Listeners::ParamFetcher](https://athena-framework.github.io/athena/Athena/Routing/Listeners/ParamFetcher.html) listen on to apply custom conversion logic via an [ART::ParamConverterInterface](https://athena-framework.github.io/athena/Athena/Routing/ParamConverterInterface.html), or resolve request parameters such as [ART::QueryParam](https://athena-framework.github.io/athena/Athena/Routing/QueryParam.html)s.
@@ -64,11 +64,11 @@ The job of a controller action is to apply business/application logic to build a
 
 #### Handle the Response
 
-The type of the value returned from the controller action determines what happens next.  If the value is an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html), then it is used as is, skipping directly to the [response](#5-response-event) event.  However, if the value is _NOT_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html), then the [view](#4-view-event) is emitted (since Athena _needs_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) in order to have something to send back to the client).
+The type of the value returned from the controller action determines what happens next.  If the value is an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html), then it is used as is, skipping directly to the [response](#5-response-event) event.  However, if the value is _NOT_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html), then the [view](#4-view-event) is dispatched (since Athena _needs_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) in order to have something to send back to the client).
 
 ### 4. View Event
 
-The [ART::Events::View](https://athena-framework.github.io/athena/Athena/Routing/Events/View.html) event is only emitted when the controller action does _NOT_ return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  The purpose of this event is to turn the controller action's return value into an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).
+The [ART::Events::View](https://athena-framework.github.io/athena/Athena/Routing/Events/View.html) event is only dispatched when the controller action does _NOT_ return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  The purpose of this event is to turn the controller action's return value into an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).
 
 This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.).
 
@@ -77,7 +77,7 @@ This event is intended to be used as a "View" layer; allowing scalar values/obje
 
 ### 5. Response Event
 
-The end goal of Athena is to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) back to the client; which might be created within the [request](#1-request-event) event, returned from the related controller action, or set within the [view](#4-view-event) event.  Regardless of how the response was created, the [ART::Events::Response](https://athena-framework.github.io/athena/Athena/Routing/Events/Response.html) event is emitted directly after.
+The end goal of Athena is to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) back to the client; which might be created within the [request](#1-request-event) event, returned from the related controller action, or set within the [view](#4-view-event) event.  Regardless of how the response was created, the [ART::Events::Response](https://athena-framework.github.io/athena/Athena/Routing/Events/Response.html) event is dispatched directly after.
 
 The intended use case for this event is to allow for modifying the response object in some manner.  Common examples include: add/edit headers, add cookies, change/compress the response body.
 
@@ -89,72 +89,22 @@ The raw [HTTP::Server::Response](https://crystal-lang.org/api/HTTP/Server/Respon
 
 Each [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) has a [ART::Response::Writer](https://athena-framework.github.io/athena/Athena/Routing/Response/Writer.html) instance that determines _how_ the response should be written to the raw response's IO.  By default it is written directly, but can be customized via the [response](#5-response-event), such as for compression.
 
-#### 7. Terminate Event
+### 7. Terminate Event
 
+The final event to be dispatched is the [ART::Events::Terminate](https://athena-framework.github.io/athena/Athena/Routing/Events/Terminate.html) event.  This is event is dispatched _after_ the response has been sent to the user.
 
+The intended use case for this event is to perform some "heavy" action after the user has received the response; as to not affect the response time of the request.  E.x. queuing up emails or logs to be sent/written after a successful request.
 
-#### 8. Exception Handling
+### 8. Exception Handling
 
-## Extensions
+If an exception is raised at anytime while a request is being handled, the [ART::Events::Exception](https://athena-framework.github.io/athena/Athena/Routing/Events/Exception.html) is dispatched.  The purpose of this event is to convert the exception into an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  This is globally handled via an [ART::ErrorRendererInterface](https://athena-framework.github.io/athena/Athena/Routing/ErrorRendererInterface.html), with the default being to JSON serialize the exception.
 
-Athena comes bundled with some additional potentially useful components (shards).
-Due to the nature of Crystal's build process, any types/methods that are not used, are not included in the resulting binary.
-Thus if your project does not use any of these extensions, the resulting binary will be unchanged.
-However by having them included by default, they are available and ready to go when/if the need arises.
-It's also worth noting that these extra components are not Athena specific and can be used within any project/library outside of the Athena ecosystem.
+It is also possible to handle specific error states differently by registering multiple exception listeners to handle each case.  An example of this could be to invoke some special logic only if the exception is of a specific type.
 
-These extensions register additional component specific types as services with the service container.
-This allows them to be injected via DI into your `Athena::Routing` related types, such as controllers, param converters, and/or event listeners.
+See the [error handling](../getting_started/README.md#error-handling) section in the getting started docs for more details on how error handling works in Athena.
 
-### Serialization
+## Orchestrated via Dependency Injection
 
-The `Athena::Serializer` component adds enhanced (de)serialization features.
-See the API documentation for more detailed information, or [this forum post](https://forum.crystal-lang.org/t/athena-0-11-0/2627) for a quick overview.
+All of the components have been designed with Dependency Injection (DI) in mind; even if it's not a requirement when using a component on its own.  Athena itself makes heavy use of DI as the means to orchestrate all the dependencies that do/may exist in an application.
 
-Some highlights:
-
-* `ASRA::Name` - Supporting different keys when deserializing versus serializing
-* `ASRA::VirtualProperty` - Allow a method to appear as a property upon serialization
-* `ASRA::IgnoreOnSerialize` - Allow a property to be set on deserialization, but should not be serialized (or vice versa)
-* `ASRA::Expose` - Allows for more granular control over which properties should be (de)serialized
-* `ASR::ExclusionStrategies` - Allows defining runtime logic to determine if a given property should be (de)serialized
-* `ASR::ObjectConstructorInterface` - Determine how a new object is constructed during deserialization, e.x. sourcing an object from the DB
-
-#### Dependency Injection
-
-This extension registers the following types as services:
-
-* `ASR::Serializer`
-
-### Validation
-
-The `Athena::Validator` component adds a robust/flexible validation framework.
-See the API documentation for more detailed information, or [this forum post]() for a quick overview.
-
-#### Dependency Injection
-
-This extension registers the following types as services:
-
-* `AVD::Validator::RecursiveValidator`
-
-#### Custom Constraints
-
-In addition to the general information for defining [Custom Constraints](https://athena-framework.github.io/validator/Athena/Validator/Constraint.html#custom-constraints),
-the validator component defines a specific type for defining service based constraint validators: `AVD::ServiceConstraintValidator`.
-This type should be inherited from instead of `AVD::ConstraintValidator` _IF_ the validator for your custom constraint needs to be a service, E.x.
-
-```crystal
-class Athena::Validator::Constraints::CustomConstraint < AVD::Constraint
-  # ...
-
-  @[ADI::Register]
-  struct Validator < AVD::ServiceConstraintValidator
-    def initialize(...); end
-
-    # :inherit:
-    def validate(value : _, constraint : AVD::Constraints::CustomConstraint) : Nil
-      # ...
-    end
-  end
-end
-```
+DI is used to allow for easier [testing](../getting_started/advanced_usage.md#testing), allowing for better reusablilty, and sharing state between types.  See the [Dependency Injection](./dependency_injection.md) component for more details on how to use it within Athena.
