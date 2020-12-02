@@ -42,12 +42,13 @@ nav:
     - Advanced Usage: getting_started/advanced_usage.md
   - Components:
     - components/README.md
-    - Config: components/config.md
     - Dependency Injection: components/dependency_injection.md
     - Event Dispatcher: components/event_dispatcher.md
+    - Config: components/config.md
+    - Routing: components/routing.md
     - Serializer: components/serializer.md
-    - Spec: components/spec.md
     - Validator: components/validator.md
+    - Spec: components/spec.md
   - Cookbook:
     - cookbook/README.md
     - Listeners: cookbook/listeners.md
