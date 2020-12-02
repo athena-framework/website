@@ -16,7 +16,7 @@ Athena is an event based framework, meaning it emits various events via the [Eve
 
 ### 1. Request Event
 
-The very first event that is dispatched is the [ART::Events::Request](https://athena-framework.github.io/athena/Athena/Routing/Events/Request.html) event and can have a varitey of listeners.  The primary purpose of this event is to create an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
+The very first event that is dispatched is the [ART::Events::Request](https://athena-framework.github.io/athena/Athena/Routing/Events/Request.html) event and can have a variety of listeners.  The primary purpose of this event is to create an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
 
 In some cases the listener may have enough information to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) immediately.  An example of this would be the [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html) listener.  If enabled it is able to return a CORS preflight response even before routing is invoked.
 
@@ -107,4 +107,4 @@ See the [error handling](../getting_started/README.md#error-handling) section in
 
 All of the components have been designed with Dependency Injection (DI) in mind; even if it's not a requirement when using a component on its own.  Athena itself makes heavy use of DI as the means to orchestrate all the dependencies that do/may exist in an application.
 
-DI is used to allow for easier [testing](../getting_started/advanced_usage.md#testing), allowing for better reusablilty, and sharing state between types.  See the [Dependency Injection](./dependency_injection.md) component for more details on how to use it within Athena.
+DI is used to allow for easier [testing](../getting_started/advanced_usage.md#testing), allowing for better reusability, and sharing state between types.  See the [Dependency Injection](./dependency_injection.md) component for more details on how to use it within Athena.

@@ -2,7 +2,7 @@ Athena includes the [Config](https://athena-framework.github.io/config/Athena/Co
 
 ## Configuration
 
-A core part of the config component is defining a `YAML` based way to configure an application in the form of `athena.yml`.  Other components and/or devlopers may add configuration options to [ACF::Base](https://athena-framework.github.io/athena/Athena/Config/Base.html).  This utilizes `YAML::Serializable`, with the `Strict` module in order to proivde type safe configuration for an application.
+A core part of the config component is defining a `YAML` based way to configure an application in the form of `athena.yml`.  Other components and/or developers may add configuration options to [ACF::Base](https://athena-framework.github.io/athena/Athena/Config/Base.html).  This utilizes `YAML::Serializable`, with the `Strict` module in order to provide type safe configuration for an application.
 
 ### CORS
 
@@ -26,7 +26,7 @@ routing:
 
 Athena integrates the `Config` component's ability to define custom annotation configurations.  This feature allows developers to define custom annotations, and the data that should be read off of them, then apply/access the annotations on [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html) and/or [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html)s.
 
-This is a powerful feature that allows for almost limitless flexibility/customization.  Some ideas include: storing some value in the request attributes, raise an exception, invoke some external service; all based on the presence/absence of it, a value read off of it, or either/both of those inconjunction with an external service
+This is a powerful feature that allows for almost limitless flexibility/customization.  Some ideas include: storing some value in the request attributes, raise an exception, invoke some external service; all based on the presence/absence of it, a value read off of it, or either/both of those in-conjunction with an external service
 
 ```crystal
 require "athena"
