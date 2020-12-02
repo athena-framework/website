@@ -50,6 +50,45 @@ Annotations applied to the methods are used to define the HTTP method this metho
 
 Controllers are simply classes and routes are simply methods.  Controllers and actions can be documented/tested as you would any Crystal class/method.
 
+#### URL Generation
+
+A common use case, especially when rendering HTML, is generating links to other routes based on a set of provided parameters.
+
+```crystal
+require "athena"
+
+class ExampleController < ART::Controller
+  # Define a route to redirect to, expliciatlly naming this route `add`.
+  # The default route name is controller + method down snakecased; e.x. `example_controller_add`.
+  @[ART::Get("/add/:value1/:value2", name: "add")]
+  def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
+    sum = value1 + value2
+    negative ? -sum : sum
+  end
+
+  # Define a route that redirects to the `add` route with fixed parameters.
+  @[ART::Get("/")]
+  def redirect : ART::RedirectResponse
+    # Generate a link to the other route.
+    url = self.generate_url "add", value1: 8, value2: 2
+
+    url # => /add/8/2
+
+    # Redirect to the user to the generated url.
+    self.redirect url
+
+    # Or could have used a method that does both
+    self.redirect_to_route "add", value1: 8, value2: 2
+  end
+end
+
+ART.run
+
+# GET / # => 10
+```
+
+See [ART::URLGeneratorInterface](https://athena-framework.github.io/athena/Athena/Routing/URLGeneratorInterface.html) in the API Docs for more details.
+
 ### Route Parameters
 
 Arguments are converted to their expected types if possible, otherwise an error response is automatically returned.
@@ -93,8 +132,6 @@ ART.run
 # GET /?page=bar # => {"code":400,"message":"Required parameter 'page' with value 'bar' could not be converted into a valid 'Int32'."}
 # GET /?page=5   # => {"code":422,"message":"Parameter 'page' of value '5' violated a constraint: 'Parameter 'page' value does not match requirements: (?-imsx:^(?-imsx:\\d{2})$)'\n"}
 ```
-
-
 
 Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.
 This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create
