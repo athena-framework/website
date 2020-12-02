@@ -50,45 +50,6 @@ Annotations applied to the methods are used to define the HTTP method this metho
 
 Controllers are simply classes and routes are simply methods.  Controllers and actions can be documented/tested as you would any Crystal class/method.
 
-#### URL Generation
-
-A common use case, especially when rendering HTML, is generating links to other routes based on a set of provided parameters.
-
-```crystal
-require "athena"
-
-class ExampleController < ART::Controller
-  # Define a route to redirect to, expliciatlly naming this route `add`.
-  # The default route name is controller + method down snakecased; e.x. `example_controller_add`.
-  @[ART::Get("/add/:value1/:value2", name: "add")]
-  def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
-    sum = value1 + value2
-    negative ? -sum : sum
-  end
-
-  # Define a route that redirects to the `add` route with fixed parameters.
-  @[ART::Get("/")]
-  def redirect : ART::RedirectResponse
-    # Generate a link to the other route.
-    url = self.generate_url "add", value1: 8, value2: 2
-
-    url # => /add/8/2
-
-    # Redirect to the user to the generated url.
-    self.redirect url
-
-    # Or could have used a method that does both
-    self.redirect_to_route "add", value1: 8, value2: 2
-  end
-end
-
-ART.run
-
-# GET / # => 10
-```
-
-See [ART::URLGeneratorInterface](https://athena-framework.github.io/athena/Athena/Routing/URLGeneratorInterface.html) in the API Docs for more details.
-
 ### Route Parameters
 
 Arguments are converted to their expected types if possible, otherwise an error response is automatically returned.
@@ -176,6 +137,45 @@ ART.run
 
 An [ART::Events::View](https://athena-framework.github.io/athena/Athena/Routing/Events/View.html) is emitted if the returned value is _NOT_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  By default, non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html)s are JSON serialized.
 However, this event can be listened on to customize how the value is serialized.
+
+### URL Generation
+
+A common use case, especially when rendering HTML, is generating links to other routes based on a set of provided parameters.
+
+```crystal
+require "athena"
+
+class ExampleController < ART::Controller
+  # Define a route to redirect to, expliciatlly naming this route `add`.
+  # The default route name is controller + method down snakecased; e.x. `example_controller_add`.
+  @[ART::Get("/add/:value1/:value2", name: "add")]
+  def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
+    sum = value1 + value2
+    negative ? -sum : sum
+  end
+
+  # Define a route that redirects to the `add` route with fixed parameters.
+  @[ART::Get("/")]
+  def redirect : ART::RedirectResponse
+    # Generate a link to the other route.
+    url = self.generate_url "add", value1: 8, value2: 2
+
+    url # => /add/8/2
+
+    # Redirect to the user to the generated url.
+    self.redirect url
+
+    # Or could have used a method that does both
+    self.redirect_to_route "add", value1: 8, value2: 2
+  end
+end
+
+ART.run
+
+# GET / # => 10
+```
+
+See [ART::URLGeneratorInterface](https://athena-framework.github.io/athena/Athena/Routing/URLGeneratorInterface.html) in the API Docs for more details.
 
 ### Error Handling
 
