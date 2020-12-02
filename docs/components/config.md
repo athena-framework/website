@@ -1,7 +1,3 @@
-User defined annotations registered via [ACF.configuration_annotation](https://athena-framework.github.io/athena/Athena/Config.html#configuration_annotation(name,*args,&)-macro) may also be used to allow for more advanced logic for use within your middleware.
-An example of this could be a `@[Paginated]` or `@[RateLimited]` annotation.  See [ART::Events::RequestAware](https://athena-framework.github.io/athena/Athena/Routing/Events/RequestAware.html) for more information.
-
-
 Listeners of an event including `self` also have access to the `ART::Action` that will be handling the given `#request` via `.request.action`.
 In addition, any custom annotations defined using `Athena::Config.configuration_annotation` are accessible via `ART::Action#annotation_configurations`.
 The main purpose of this is to allow for more advanced annotation based `ART::ParamConverterInterface` and `ART::Listeners`' logic.
@@ -9,7 +5,7 @@ The main purpose of this is to allow for more advanced annotation based `ART::Pa
 ### Example
 Lets define a `SecurityListener` that denies access to users without the required permissions from annotated endpoints.
 
-```
+```crystal
 # Define an enum to represent our security levels.
 enum Level
   # No permissions required.
