@@ -89,7 +89,7 @@ struct RequestBody < ART::ParamConverterInterface
     # Deserialize the object, based on the type provided in the annotation.
     object = @serializer.deserialize configuration.entity, body, :json
 
-    # Validate the object if it is validatable
+    # Validate the object if it is validatable.
     if object.is_a? AVD::Validatable
       errors = @validator.validate object
       raise AVD::Exceptions::ValidationFailed.new errors unless errors.empty?
