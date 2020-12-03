@@ -10,7 +10,7 @@ Steps 1 and 3 are handled via Crystal's [HTTP::Server](https://crystal-lang.org/
 
 ## Powered By Events
 
-Athena is an event based framework, meaning it emits various events via the [Event Dispatcher](./event_dispatcher.md) component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are dispatched, is depicted below in  visual format:
+Athena is an event based framework, meaning it emits various events via the [Event Dispatcher](./event_dispatcher.md) component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are dispatched, is depicted below in a visual format:
 
 ![High Level Request Life-cycle Flow](../img/Athena.png)
 
@@ -18,7 +18,7 @@ Athena is an event based framework, meaning it emits various events via the [Eve
 
 The very first event that is dispatched is the [ART::Events::Request](https://athena-framework.github.io/athena/Athena/Routing/Events/Request.html) event and can have a variety of listeners.  The primary purpose of this event is to create an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
 
-In some cases the listener may have enough information to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) immediately.  An example of this would be the [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html) listener.  If enabled it is able to return a CORS preflight response even before routing is invoked.
+In some cases the listener may have enough information to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) immediately.  An example of this would be the [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html) listener.  If enabled it is able to return a `CORS` preflight response even before routing is invoked.
 
 !!! warning
     If an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) is returned at this stage, the flow of the request skips directly to the [response](#5-response-event) event.  Future `Request` event listeners will not be invoked either.
@@ -26,13 +26,14 @@ In some cases the listener may have enough information to return an [ART::Respon
 Another use case for this event is populating additional data into the request's attributes; such as the locale or format of the request.
 
 !!! example "Request event in Athena"
-    This is the event that [ART::Listeners::Routing](https://athena-framework.github.io/athena/Athena/Routing/Listeners/Routing.html) listens on to determine which [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/.html)/[ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) pair should handle the request.
+    This is the event that [ART::Listeners::Routing](https://athena-framework.github.io/athena/Athena/Routing/Listeners/Routing.html) listens on to determine which [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)/[ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) pair should handle the request.
     
+
     See [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html) for more details on routing.
 
 ### 2. Action Event
 
-The next event to be dispatched is the [ART::Events::Action](https://athena-framework.github.io/athena/Athena/Routing/Events/Action.html) event, assuming a response was not already returned within the `Request` event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html); such as reading custom annotations off of it via the [Config](./config.md) component.
+The next event to be dispatched is the [ART::Events::Action](https://athena-framework.github.io/athena/Athena/Routing/Events/Action.html) event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html); such as reading custom annotations off of it via the [Config](./config.md) component.
 
 !!! example "Action event in Athena"
     This is the event that [ART::Listeners::ParamConverter](https://athena-framework.github.io/athena/Athena/Routing/Listeners/ParamConverter.html) and [ART::Listeners::ParamFetcher](https://athena-framework.github.io/athena/Athena/Routing/Listeners/ParamFetcher.html) listen on to apply custom conversion logic via an [ART::ParamConverterInterface](https://athena-framework.github.io/athena/Athena/Routing/ParamConverterInterface.html), or resolve request parameters such as [ART::QueryParam](https://athena-framework.github.io/athena/Athena/Routing/QueryParam.html)s.
@@ -47,7 +48,7 @@ Before Athena can call the controller action, it first needs to determine what a
 
 The default algorithm is as follows:
 
-1. Check the request attributes for a key that matches the name of the argument
+1. Check the request's attributes for a key that matches the name of the argument
 	* Such as as a path param or something set via a listener (either built-in or custom)
 2. Check if the type of the argument is `HTTP::Request`, if so use the current request object
 3. Check if the argument has a default value, or use `nil` if it is nilable

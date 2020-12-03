@@ -26,7 +26,7 @@ routing:
 
 Athena integrates the `Config` component's ability to define custom annotation configurations.  This feature allows developers to define custom annotations, and the data that should be read off of them, then apply/access the annotations on [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html) and/or [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html)s.
 
-This is a powerful feature that allows for almost limitless flexibility/customization.  Some ideas include: storing some value in the request attributes, raise an exception, invoke some external service; all based on the presence/absence of it, a value read off of it, or either/both of those in-conjunction with an external service
+This is a powerful feature that allows for almost limitless flexibility/customization.  Some ideas include: storing some value in the request attributes, raise an exception, invoke some external service; all based on the presence/absence of it, a value read off of it, or either/both of those in-conjunction with an external service.
 
 ```crystal
 require "athena"
@@ -41,7 +41,7 @@ class MyAnnotationListener
   include AED::EventListenerInterface
 
   def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{ART::Events::View => 255}
+    AED::SubscribedEvents{ART::Events::View => 0}
   end
 
   def call(event : ART::Events::View, dispatcher : AED::EventDispatcherInterface) : Nil

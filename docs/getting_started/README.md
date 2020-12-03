@@ -53,7 +53,7 @@ Controllers are simply classes and routes are simply methods.  Controllers and a
 ### Route Parameters
 
 Arguments are converted to their expected types if possible, otherwise an error response is automatically returned.
-The values are provided directly as method arguments, thus preventing the need for `env.params.url["name"]` and any boilerplate related to it. Just like normal methods arguments, default values can be defined. The method's return type adds some type safety to ensure the expected value is being returned.
+The values are provided directly as method arguments, thus preventing the need for `env.params.url["name"]` and any boilerplate related to it. Just like normal method arguments, default values can be defined. The method's return type adds some type safety to ensure the expected value is being returned.
 
 ```crystal
 require "athena"
@@ -140,7 +140,7 @@ However, this event can be listened on to customize how the value is serialized.
 
 ### URL Generation
 
-A common use case, especially when rendering HTML, is generating links to other routes based on a set of provided parameters.
+A common use case, especially when rendering `HTML`, is generating links to other routes based on a set of provided parameters.  Parameters that do not map to a controller action argument are added as query params.
 
 ```crystal
 require "athena"

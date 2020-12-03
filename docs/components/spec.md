@@ -1,10 +1,9 @@
 Athena strongly suggests following the [SOLID](https://en.wikipedia.org/wiki/SOLID) design principles;
 especially the [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) in order to create types that are easy to test.  See the [Dependency Injection](../components/dependency_injection.md) component for a more detailed look.
 
-If these principles are followed then any of the previously mentioned concepts, param converters, event listeners, and/or controllers,
-can easily be unit tested on their own as you would any Crystal type, possibly utilizing [ART::Spec::TestCase](https://athena-framework.github.io/athena/Athena/Spec/TestCase.html) to provide helpful abstractions around common testing/helper logic for sets of common types.
+If these principles are followed then any controller/service can easily be unit tested on their own as you would any Crystal type, possibly utilizing [ART::Spec::TestCase](https://athena-framework.github.io/athena/Athena/Spec/TestCase.html) to provide helpful abstractions around common testing/helper logic for sets of common types.
 
-However, Athena also comes bundled with [ART::Spec::APITestCase](https://athena-framework.github.io/athena/Athena/Routing/Spec/APITestCase.html) to allow for easily creating integration tests for [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)s.
+However, Athena also comes bundled with [ART::Spec::APITestCase](https://athena-framework.github.io/athena/Athena/Routing/Spec/APITestCase.html) to allow for easily creating integration tests for [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)s; which is the more ideal way to test a controller.
 
 ```crystal
 require "athena"

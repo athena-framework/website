@@ -2,7 +2,7 @@ As mentiond in the [architecture](./README.md) section, Athena is an event based
 
 ## Basic Usage
 
-An event listener is defined by registering a type that includes `AED::EventListenerInterface` as an interface.  The type should also define a `self.subscribed_events` method that defines what [events](https://athena-framework.github.io/athena/Athena/Routing/Events.html) it should be listening on.
+An event listener is defined by registering a service that includes [AED::EventListenerInterface](https://athena-framework.github.io/athena/Athena/EventDispatcher/EventDispatcherInterface.html).  The type should also define a `self.subscribed_events` method that represents what [events](https://athena-framework.github.io/athena/Athena/Routing/Events.html) it should be listening on.
 
 ```crystal
 require "athena"
@@ -15,9 +15,7 @@ class CustomListener
   # The value of the hash represents this listener's priority;
   # the higher the value the sooner it gets executed.
   def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{
-      ART::Events::Response => 25,
-    }
+    AED::SubscribedEvents{ART::Events::Response => 25}
   end
 
   def call(event : ART::Events::Response, dispatcher : AED::EventDispatcherInterface) : Nil
@@ -37,7 +35,7 @@ ART.run
 ```
 
 !!! tip
-    An single event listener may listen on multiple events.  Instance variables can be used to share state between the events.
+    A single event listener may listen on multiple events.  Instance variables can be used to share state between the events.
 
 ## Custom Events
 

@@ -44,7 +44,7 @@ See the [Event Dispatcher](../components/event_dispatcher.md) component for a mo
 
 ## Custom Annotations
 
-User defined annotations may also be used to allow for more advanced logic; such as for [Pagination](../cookbook/listeners.md#pagination) or Rate limiting logic.  Custom annotations can be applied to a controller class and/or controller action method.  These annotations can then be accessed, including the data defined on them, within even listeners or anywhere the current request's [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) is exposed.
+User defined annotations may also be used to allow for more advanced logic; such as for [Pagination](../cookbook/listeners.md#pagination) or Rate limiting logic.  Custom annotations can be applied to a controller class and/or controller action method.  These annotations can then be accessed, including the data defined on them, within event listeners or anywhere the current request's [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) is exposed.
 
 See the [Config](../components/config.md) component for a more detailed look.
 
