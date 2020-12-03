@@ -75,8 +75,11 @@ struct RequestBody < ART::ParamConverterInterface
   # in order to define _what_ entity should be queried for.
   configuration entity : Granite::Base.class
 
-  # Inject the serializer object into our converter.
-  def initialize(@serializer : ASR::SerializerInterface); end
+  # Inject the serializer and validator into our converter.
+  def initialize(
+      @serializer : ASR::SerializerInterface,
+      @validator : AVD::Validator::ValidatorInterface,
+  ); end
 
   # :inherit:
   def apply(request : HTTP::Request, configuration : Configuration) : Nil
@@ -86,7 +89,11 @@ struct RequestBody < ART::ParamConverterInterface
     # Deserialize the object, based on the type provided in the annotation.
     object = @serializer.deserialize configuration.entity, body, :json
 
-    # Do stuff with the deserialized object, such as running validations.
+    # Validate the object if it is validatable
+    if object.is_a? AVD::Validatable
+      errors = @validator.validate object
+      raise AVD::Exceptions::ValidationFailedError.new errors unless errors.empty?
+    end
 
     # Add the resolved object to the request's attributes.
     request.attributes.set configuration.name, object, configuration.entity

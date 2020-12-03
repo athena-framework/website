@@ -146,8 +146,8 @@ A common use case, especially when rendering `HTML`, is generating links to othe
 require "athena"
 
 class ExampleController < ART::Controller
-  # Define a route to redirect to, expliciatlly naming this route `add`.
-  # The default route name is controller + method down snakecased; e.x. `example_controller_add`.
+  # Define a route to redirect to, explicitly naming this route `add`.
+  # The default route name is controller + method down snake-cased; e.x. `example_controller_add`.
   @[ART::Get("/add/:value1/:value2", name: "add")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
@@ -187,7 +187,7 @@ Non [ART::Exceptions::HTTPException](https://athena-framework.github.io/athena/A
 
 When an exception is raised, Athena emits the [ART::Events::Exception](https://athena-framework.github.io/athena/Athena/Routing/Events/Exception.html) event to allow an opportunity for it to be handled.
 By default these exceptions will return a `JSON` serialized version of the exception, via [ART::ErrorRenderer](https://athena-framework.github.io/athena/Athena/Routing/ErrorRenderer.html), that includes the message and code; with the proper response status set.
-If the exception goes unhandled, i.e. no listener sets an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  By default, non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) on the event, then the request is finished and the exception is reraised.
+If the exception goes unhandled, i.e. no listener sets an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  By default, non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) on the event, then the request is finished and the exception is re-raised.
 
 ```crystal
 require "athena"
