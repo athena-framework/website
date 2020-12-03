@@ -30,6 +30,16 @@ plugins:
       default_handler: crystal
       handlers:
         crystal:
+          crystal_docs_flags:
+            - lib/athena-spec/src/athena-spec.cr
+            - lib/athena-event_dispatcher/src/athena-event_dispatcher.cr
+            - lib/athena-config/src/athena-config.cr
+            - lib/athena-dependency_injection/src/athena-dependency_injection.cr
+            - lib/athena-serializer/src/athena-serializer.cr
+            - lib/athena-validator/src/athena-validator.cr
+            - lib/athena-validator/src/spec.cr
+            - lib/athena/src/athena.cr
+            - lib/athena/src/spec.cr
           rendering:
             show_source_links: false
 
