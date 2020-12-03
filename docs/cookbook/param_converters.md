@@ -92,7 +92,7 @@ struct RequestBody < ART::ParamConverterInterface
     # Validate the object if it is validatable
     if object.is_a? AVD::Validatable
       errors = @validator.validate object
-      raise AVD::Exceptions::ValidationFailedError.new errors unless errors.empty?
+      raise AVD::Exceptions::ValidationFailed.new errors unless errors.empty?
     end
 
     # Add the resolved object to the request's attributes.
