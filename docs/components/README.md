@@ -16,27 +16,27 @@ Athena is an event based framework, meaning it emits various events via the [Eve
 
 ### 1. Request Event
 
-The very first event that is dispatched is the [ART::Events::Request](https://athena-framework.github.io/athena/Athena/Routing/Events/Request.html) event and can have a variety of listeners.  The primary purpose of this event is to create an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
+The very first event that is dispatched is the [ART::Events::Request][Athena::Routing::Events::Request] event and can have a variety of listeners.  The primary purpose of this event is to create an [ART::Response][Athena::Routing::Response] directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
 
-In some cases the listener may have enough information to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) immediately.  An example of this would be the [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html) listener.  If enabled it is able to return a `CORS` preflight response even before routing is invoked.
+In some cases the listener may have enough information to return an [ART::Response][Athena::Routing::Response] immediately.  An example of this would be the [ART::Listeners::CORS][Athena::Routing::Listeners::CORS] listener.  If enabled it is able to return a `CORS` preflight response even before routing is invoked.
 
 !!! warning
-    If an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) is returned at this stage, the flow of the request skips directly to the [response](#5-response-event) event.  Future `Request` event listeners will not be invoked either.
+    If an [ART::Response][Athena::Routing::Response] is returned at this stage, the flow of the request skips directly to the [response](#5-response-event) event.  Future `Request` event listeners will not be invoked either.
 
 Another use case for this event is populating additional data into the request's attributes; such as the locale or format of the request.
 
 !!! example "Request event in Athena"
-    This is the event that [ART::Listeners::Routing](https://athena-framework.github.io/athena/Athena/Routing/Listeners/Routing.html) listens on to determine which [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)/[ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) pair should handle the request.
+    This is the event that [ART::Listeners::Routing][Athena::Routing::Listeners::Routing] listens on to determine which [ART::Controller][Athena::Routing::Controller]/[ART::Action][Athena::Routing::Action] pair should handle the request.
     
 
-    See [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html) for more details on routing.
+    See [ART::Controller][Athena::Routing::Controller] for more details on routing.
 
 ### 2. Action Event
 
-The next event to be dispatched is the [ART::Events::Action](https://athena-framework.github.io/athena/Athena/Routing/Events/Action.html) event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html); such as reading custom annotations off of it via the [Config](./config.md) component.
+The next event to be dispatched is the [ART::Events::Action][Athena::Routing::Events::Action] event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action][Athena::Routing::Action]; such as reading custom annotations off of it via the [Config](./config.md) component.
 
 !!! example "Action event in Athena"
-    This is the event that [ART::Listeners::ParamConverter](https://athena-framework.github.io/athena/Athena/Routing/Listeners/ParamConverter.html) and [ART::Listeners::ParamFetcher](https://athena-framework.github.io/athena/Athena/Routing/Listeners/ParamFetcher.html) listen on to apply custom conversion logic via an [ART::ParamConverterInterface](https://athena-framework.github.io/athena/Athena/Routing/ParamConverterInterface.html), or resolve request parameters such as [ART::QueryParam](https://athena-framework.github.io/athena/Athena/Routing/QueryParam.html)s.
+    This is the event that [ART::Listeners::ParamConverter][Athena::Routing::Listeners::ParamConverter] and [ART::Listeners::ParamFetcher][Athena::Routing::Listeners::ParamFetcher] listen on to apply custom conversion logic via an [ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface], or resolve request parameters such as [ART::QueryParam][Athena::Routing::QueryParam]s.
 
 ### 3. Invoke the Controller Action
 
@@ -44,7 +44,7 @@ This next step is not an event, but a important concept within Athena nonetheles
 
 #### Argument Resolution
 
-Before Athena can call the controller action, it first needs to determine what arguments, if any, should be passed to it.  This is achieved via an [ART::Arguments::ArgumentResolverInterface](https://athena-framework.github.io/athena/Athena/Routing/Arguments/ArgumentResolverInterface.html) that facilitates gathering all the arguments.  One or more [ART::Arguments::Resolvers::ArgumentValueResolverInterface](https://athena-framework.github.io/athena/Athena/Routing/Arguments/Resolvers/ArgumentValueResolverInterface.html) will then be used to resolve each specific argument's value.
+Before Athena can call the controller action, it first needs to determine what arguments, if any, should be passed to it.  This is achieved via an [ART::Arguments::ArgumentResolverInterface][Athena::Routing::Arguments::ArgumentResolverInterface] that facilitates gathering all the arguments.  One or more [ART::Arguments::Resolvers::ArgumentValueResolverInterface][Athena::Routing::Arguments::Resolvers::ArgumentValueResolverInterface] will then be used to resolve each specific argument's value.
 
 The default algorithm is as follows:
 
@@ -65,20 +65,20 @@ The job of a controller action is to apply business/application logic to build a
 
 #### Handle the Response
 
-The type of the value returned from the controller action determines what happens next.  If the value is an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html), then it is used as is, skipping directly to the [response](#5-response-event) event.  However, if the value is _NOT_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html), then the [view](#4-view-event) is dispatched (since Athena _needs_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) in order to have something to send back to the client).
+The type of the value returned from the controller action determines what happens next.  If the value is an [ART::Response][Athena::Routing::Response], then it is used as is, skipping directly to the [response](#5-response-event) event.  However, if the value is _NOT_ an [ART::Response][Athena::Routing::Response], then the [view](#4-view-event) is dispatched (since Athena _needs_ an [ART::Response][Athena::Routing::Response] in order to have something to send back to the client).
 
 ### 4. View Event
 
-The [ART::Events::View](https://athena-framework.github.io/athena/Athena/Routing/Events/View.html) event is only dispatched when the controller action does _NOT_ return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  The purpose of this event is to turn the controller action's return value into an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).
+The [ART::Events::View][Athena::Routing::Events::View] event is only dispatched when the controller action does _NOT_ return an [ART::Response][Athena::Routing::Response].  The purpose of this event is to turn the controller action's return value into an [ART::Response][Athena::Routing::Response].
 
 This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.).
 
 !!! example "View event in Athena"
-    By default Athena will JSON serialize any non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) values.
+    By default Athena will JSON serialize any non [ART::Response][Athena::Routing::Response] values.
 
 ### 5. Response Event
 
-The end goal of Athena is to return an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) back to the client; which might be created within the [request](#1-request-event) event, returned from the related controller action, or set within the [view](#4-view-event) event.  Regardless of how the response was created, the [ART::Events::Response](https://athena-framework.github.io/athena/Athena/Routing/Events/Response.html) event is dispatched directly after.
+The end goal of Athena is to return an [ART::Response][Athena::Routing::Response] back to the client; which might be created within the [request](#1-request-event) event, returned from the related controller action, or set within the [view](#4-view-event) event.  Regardless of how the response was created, the [ART::Events::Response][Athena::Routing::Events::Response] event is dispatched directly after.
 
 The intended use case for this event is to allow for modifying the response object in some manner.  Common examples include: add/edit headers, add cookies, change/compress the response body.
 
@@ -88,17 +88,17 @@ The raw [HTTP::Server::Response](https://crystal-lang.org/api/HTTP/Server/Respon
 
 > The response `#status` and `#headers` must be configured before writing the response body. Once response output is written, changing the `#status` and `#headers` properties has no effect.
 
-Each [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) has a [ART::Response::Writer](https://athena-framework.github.io/athena/Athena/Routing/Response/Writer.html) instance that determines _how_ the response should be written to the raw response's IO.  By default it is written directly, but can be customized via the [response](#5-response-event), such as for compression.
+Each [ART::Response][Athena::Routing::Response] has a [ART::Response::Writer][Athena::Routing::Response::Writer] instance that determines _how_ the response should be written to the raw response's IO.  By default it is written directly, but can be customized via the [response](#5-response-event), such as for compression.
 
 ### 7. Terminate Event
 
-The final event to be dispatched is the [ART::Events::Terminate](https://athena-framework.github.io/athena/Athena/Routing/Events/Terminate.html) event.  This is event is dispatched _after_ the response has been sent to the user.
+The final event to be dispatched is the [ART::Events::Terminate][Athena::Routing::Events::Terminate] event.  This is event is dispatched _after_ the response has been sent to the user.
 
 The intended use case for this event is to perform some "heavy" action after the user has received the response; as to not affect the response time of the request.  E.x. queuing up emails or logs to be sent/written after a successful request.
 
 ### 8. Exception Handling
 
-If an exception is raised at anytime while a request is being handled, the [ART::Events::Exception](https://athena-framework.github.io/athena/Athena/Routing/Events/Exception.html) is dispatched.  The purpose of this event is to convert the exception into an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  This is globally handled via an [ART::ErrorRendererInterface](https://athena-framework.github.io/athena/Athena/Routing/ErrorRendererInterface.html), with the default being to JSON serialize the exception.
+If an exception is raised at anytime while a request is being handled, the [ART::Events::Exception][Athena::Routing::Events::Exception] is dispatched.  The purpose of this event is to convert the exception into an [ART::Response][Athena::Routing::Response].  This is globally handled via an [ART::ErrorRendererInterface][Athena::Routing::ErrorRendererInterface], with the default being to JSON serialize the exception.
 
 It is also possible to handle specific error states differently by registering multiple exception listeners to handle each case.  An example of this could be to invoke some special logic only if the exception is of a specific type.
 

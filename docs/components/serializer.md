@@ -1,11 +1,11 @@
-The [Serializer](https://athena-framework.github.io/serializer/Athena/Serializer.html) component adds enhanced (de)serialization features.  This component is mostly optional, but is integrated into the default view layer of Athena.
+The [Serializer][Athena::Serializer] component adds enhanced (de)serialization features.  This component is mostly optional, but is integrated into the default view layer of Athena.
 
-When an [ASR::Serializable](https://athena-framework.github.io/serializer/Athena/Serializer/Serializable.html) is returned from a controller action, that object will be serialized via the serializer component, as opposed to Crystal's standard libraries' `#to_json` method.
+When an [ASR::Serializable][Athena::Serializer::Serializable] is returned from a controller action, that object will be serialized via the serializer component, as opposed to Crystal's standard libraries' `#to_json` method.
 
 !!! info
     If an object implements _both_ `ASR::Serializable` and `JSON::Serializable`, the serializer component takes priority.
 
-The [ART::View](https://athena-framework.github.io/athena/Athena/Routing/View.html) annotation can be used to configure serialization related options on a per route basis.
+The [ART::View][Athena::Routing::View] annotation can be used to configure serialization related options on a per route basis.
 
 ```crystal
 require "athena"
@@ -47,4 +47,4 @@ ART.run
 # POST /publish/10 # => {"id":10,"name":"Crystal Lang 101","published":true} - 202
 ```
 
-See the [API Docs](https://athena-framework.github.io/serializer/Athena/Serializer.html) for more detailed information, or [this forum post](https://forum.crystal-lang.org/t/athena-0-11-0/2627) for a quick overview.
+See the [API Docs][Athena::Serializer] for more detailed information, or [this forum post](https://forum.crystal-lang.org/t/athena-0-11-0/2627) for a quick overview.

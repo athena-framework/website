@@ -3,7 +3,7 @@ These features may not be required for a simple application; however as the appl
 
 ## Param Converters
 
-[ART::ParamConverterInterface](https://athena-framework.github.io/athena/Athena/Routing/ParamConverterInterface.html) s allow complex types to be supplied to an action via its arguments.
+[ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface] s allow complex types to be supplied to an action via its arguments.
 An example of this could be extracting the id from `/users/10`, doing a DB query to lookup the user with the PK of `10`, then providing the full user object to the action.
 Param converters abstract any custom parameter handling that would otherwise have to be done in each action.
 
@@ -38,18 +38,18 @@ ART.run
 
 ## Middleware
 
-Athena is an event based framework; meaning it emits [ART::Events](https://athena-framework.github.io/athena/Athena/Routing/Events.html) that are acted upon internally to handle the request.  These same events can also be listened on by custom listeners, via [AED::EventListenerInterface](https://athena-framework.github.io/athena/Athena/EventDispatcher/EventListenerInterface.html), in order to tap into the life-cycle of the request as a more flexible alternative to [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html)s.  An example use case of this could be: adding common headers, cookies, compressing the response, authentication, or even returning a response early like [ART::Listeners::CORS](https://athena-framework.github.io/athena/Athena/Routing/Listeners/CORS.html).
+Athena is an event based framework; meaning it emits [ART::Events][Athena::Routing::Events] that are acted upon internally to handle the request.  These same events can also be listened on by custom listeners, via [AED::EventListenerInterface][Athena::EventDispatcher::EventListenerInterface], in order to tap into the life-cycle of the request as a more flexible alternative to [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html)s.  An example use case of this could be: adding common headers, cookies, compressing the response, authentication, or even returning a response early like [ART::Listeners::CORS][Athena::Routing::Listeners::CORS].
 
 See the [Event Dispatcher](../components/event_dispatcher.md) component for a more detailed look.
 
 ## Custom Annotations
 
-User defined annotations may also be used to allow for more advanced logic; such as for [Pagination](../cookbook/listeners.md#pagination) or Rate limiting logic.  Custom annotations can be applied to a controller class and/or controller action method.  These annotations can then be accessed, including the data defined on them, within event listeners or anywhere the current request's [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) is exposed.
+User defined annotations may also be used to allow for more advanced logic; such as for [Pagination](../cookbook/listeners.md#pagination) or Rate limiting logic.  Custom annotations can be applied to a controller class and/or controller action method.  These annotations can then be accessed, including the data defined on them, within event listeners or anywhere the current request's [ART::Action][Athena::Routing::Action] is exposed.
 
 See the [Config](../components/config.md) component for a more detailed look.
 
 ## Testing
 
-Each component in the Athena Framework includes a `Spec` module that includes common/helpful testing utilities/types for testing that specific component.  Athena itself defines some of its own testing types, mainly to allow for easisly integration testing [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html)s.
+Each component in the Athena Framework includes a `Spec` module that includes common/helpful testing utilities/types for testing that specific component.  Athena itself defines some of its own testing types, mainly to allow for easisly integration testing [ART::Controller][Athena::Routing::Controller]s.
 
 See the [Spec](../components/spec.md) component for a more detailed look.

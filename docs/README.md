@@ -12,6 +12,6 @@ In regards to other Crystal web frameworks, Athena employs some unique concepts,
 ## Resources
 
 * [Gitter Channel](https://gitter.im/athena-frameworkcr/community)
-* [API Docs](https://athena-framework.github.io/athena/Athena/Routing.html)
+* [API Docs](Routing/)
 * [Github Organization](https://github.com/athena-framework)
 * [Roadmap](https://app.gitkraken.com/glo/board/XtK9RMK6oAARECCq)
