@@ -115,7 +115,7 @@ ART.run
 
 #### Returning Raw Data
 
-An [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) can be used to fully customize the response; such as returning a specific status code, adding some one-off headers, or saving memory by directly writing the response value to the Response IO.
+An [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) can be used to fully customize the response; such as returning a specific status code, adding some one-off headers.
 
 ```crystal
 require "athena"
@@ -137,6 +137,28 @@ ART.run
 
 An [ART::Events::View](https://athena-framework.github.io/athena/Athena/Routing/Events/View.html) is emitted if the returned value is _NOT_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  By default, non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html)s are JSON serialized.
 However, this event can be listened on to customize how the value is serialized.
+
+##### Streaming Response
+
+By default `ART::Response` content is written all at once to the response's `IO`.  However in some cases the content may be too large to fit into memory.  In this case an [ART::StreamedResponse](https://athena-framework.github.io/athena/Athena/Routing/StreamedResponse.html) may be used to stream the content back to the client.
+
+```crystal
+require "athena"
+require "mime"
+
+class ExampleController < ART::Controller
+  @[ART::Get(path: "/users")]
+  def users : ART::Response
+    ART::StreamedResponse.new headers: HTTP::Headers{"content-type" => "application/json; charset=UTF-8"} do |io|
+      User.all.to_json io
+    end
+  end
+end
+
+ART.run
+
+# GET /athena/users" # => [{"id":1,...},...]
+```
 
 ### URL Generation
 
@@ -208,6 +230,52 @@ end
 
 ART.run
 
-# GET /divide/10/0 # => {"code":500,"message":"Internal Server Error"}
-# GET /divide_rescued/10/0 # => {"code":400,"message":"Invalid num2:  Cannot divide by zero"}
+# GET /divide/10/0          # => {"code":500,"message":"Internal Server Error"}
+# GET /divide_rescued/10/0  # => {"code":400,"message":"Invalid num2:  Cannot divide by zero"}
+# GET /divide_rescued/10/10 # => 1
 ```
+
+### Logging
+
+Logging is handled via Crystal's [Log](https://crystal-lang.org/api/Log.html) module.  Athena logs when a request matches a controller action, as well as any exception.  This of course can be augmented with additional application specific messages.
+
+```bash
+2020-12-06T17:20:12.334700Z   INFO - Server has started and is listening at http://0.0.0.0:3000
+2020-12-06T17:20:17.163953Z   INFO - athena.routing: Matched route /divide/10/0 -- uri: "/divide/10/0", method: "GET", path_params: {"num2" => "0", "num1" => "10"}, query_params: {}
+2020-12-06T17:20:17.280199Z  ERROR - athena.routing: Uncaught exception #<DivisionByZeroError:Division by 0> at ../../../../../../usr/lib/crystal/int.cr:138:7 in 'check_div_argument'
+Division by 0 (DivisionByZeroError)
+  from ../../../../../../usr/lib/crystal/int.cr:138:7 in 'check_div_argument'
+  from ../../../../../../usr/lib/crystal/int.cr:102:5 in '//'
+  from src/athena.cr:151:5 in 'get_divide__num1__num2'
+  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'execute'
+  from src/route_handler.cr:80:5 in 'handle_raw'
+  from src/route_handler.cr:14:21 in 'handle'
+  from src/athena.cr:127:9 in '->'
+  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'process'
+  from ../../../../../../usr/lib/crystal/http/server.cr:513:5 in 'handle_client'
+  from ../../../../../../usr/lib/crystal/http/server.cr:468:13 in '->'
+  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'run'
+  from ../../../../../../usr/lib/crystal/fiber.cr:92:34 in '->'
+  from ???
+
+2020-12-06T17:20:18.979050Z   INFO - athena.routing: Matched route /divide_rescued/10/0 -- uri: "/divide_rescued/10/0", method: "GET", path_params: {"num2" => "0", "num1" => "10"}, query_params: {}
+2020-12-06T17:20:18.980397Z   WARN - athena.routing: Uncaught exception #<Athena::Routing::Exceptions::BadRequest:Invalid num2:  Cannot divide by zero> at src/athena.cr:159:5 in 'get_divide_rescued__num1__num2'
+Invalid num2:  Cannot divide by zero (Athena::Routing::Exceptions::BadRequest)
+  from src/athena.cr:159:5 in 'get_divide_rescued__num1__num2'
+  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'execute'
+  from src/route_handler.cr:80:5 in 'handle_raw'
+  from src/route_handler.cr:14:21 in 'handle'
+  from src/athena.cr:127:9 in '->'
+  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'process'
+  from ../../../../../../usr/lib/crystal/http/server.cr:513:5 in 'handle_client'
+  from ../../../../../../usr/lib/crystal/http/server.cr:468:13 in '->'
+  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'run'
+  from ../../../../../../usr/lib/crystal/fiber.cr:92:34 in '->'
+  from ???
+
+2020-12-06T17:20:21.993811Z   INFO - athena.routing: Matched route /divide_rescued/10/10 -- uri: "/divide_rescued/10/10", method: "GET", path_params: {"num2" => "10", "num1" => "10"}, query_params: {}
+```
+
+##### Customization
+
+By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines.  This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ART::Listeners::Error](https://athena-framework.github.io/athena/Athena/Routing/Listeners/Error.html).
