@@ -1,4 +1,6 @@
 mkdocs
 mkdocs-material
+mkdocstrings-crystal
+mkdocs-gen-files
+mkdocs-literate-nav
 mkdocs-section-index
-mkdocs-git-revision-date-localized-plugin
