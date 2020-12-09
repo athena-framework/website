@@ -10,7 +10,7 @@ Add the dependency to your `shard.yml`:
 dependencies:
   athena:
     github: athena-framework/athena
-    version: ~> 0.11.0
+    version: ~> 0.12.0
 ```
 
 Run `shards install`.  This will install Athena and its required dependencies.
