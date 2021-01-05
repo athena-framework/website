@@ -1,9 +1,5 @@
 name: Deploy docs
-on:
-  push:
-  pull_request:
-  schedule:
-    - cron: '0 6 * * 1'  # Every Monday 6 AM UTC
+on: [push, pull_request]
 jobs:
   build:
     name: Deploy docs
