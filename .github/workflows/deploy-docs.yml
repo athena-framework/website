@@ -17,6 +17,8 @@ jobs:
         run: pip install --no-deps -r requirements.txt
       - name: Install Crystal libs
         run: shards install
+      - name: Build site
+        run: mkdocs build
       - name: Deploy to gh-pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: mkdocs gh-deploy --force
