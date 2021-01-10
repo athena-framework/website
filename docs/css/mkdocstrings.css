@@ -69,7 +69,7 @@ h2.doc.doc-heading > small {
 }
 
 .doc.doc-method {
-  padding-bottom: 1em;
+  padding-bottom: 0.5em;
 }
 
 .doc-method h4 {
