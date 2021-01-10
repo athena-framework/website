@@ -1,4 +1,4 @@
-[Exclusion Strategies](https://athena-framework.github.io/serializer/Athena/Serializer/ExclusionStrategies/ExclusionStrategyInterface.html) allow defining custom runtime logic that controls which properties should be (de)serialized.
+[Exclusion Strategies][Athena::Serializer::ExclusionStrategies::ExclusionStrategyInterface] allow defining custom runtime logic that controls which properties should be (de)serialized.
 
 ## Request Method
 

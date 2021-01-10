@@ -1,8 +1,8 @@
-As mentiond in the [architecture](./README.md) section, Athena is an event based framework utilizing the [Event Dispatcher](https://athena-framework.github.io/athena/Athena/EventDispatcher.html) component.
+As mentiond in the [architecture](./README.md) section, Athena is an event based framework utilizing the [Event Dispatcher][Athena::EventDispatcher] component.
 
 ## Basic Usage
 
-An event listener is defined by registering a service that includes [AED::EventListenerInterface](https://athena-framework.github.io/athena/Athena/EventDispatcher/EventDispatcherInterface.html).  The type should also define a `self.subscribed_events` method that represents what [events](https://athena-framework.github.io/athena/Athena/Routing/Events.html) it should be listening on.
+An event listener is defined by registering a service that includes [AED::EventListenerInterface][Athena::EventDispatcher::EventListenerInterface].  The type should also define a `self.subscribed_events` method that represents what [events][Athena::Routing::Events] it should be listening on.
 
 ```crystal
 require "athena"
@@ -39,7 +39,7 @@ ART.run
 
 ## Custom Events
 
-Custom events can also be defined and dispatched; either within a listener, or in another service by injecting [AED::EventDispatcherInterface](https://athena-framework.github.io/athena/Athena/EventDispatcher/EventDispatcherInterface.html) and calling `#dispatch`.
+Custom events can also be defined and dispatched; either within a listener, or in another service by injecting [AED::EventDispatcherInterface][Athena::EventDispatcher::EventDispatcherInterface] and calling `#dispatch`.
 
 ```crystal
 require "athena"

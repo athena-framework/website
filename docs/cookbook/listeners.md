@@ -75,7 +75,7 @@ struct SecurityListener
 end
 ```
 
-From here, it would be up to the developer to implement a way to authorize the user now that they have been authenticated and are accessible within the application.  One option could be to utilize the [Custom Annotations](../components/config.md#custom-annotations) as a means to "tag" controller actions with specific "levels" of security; then add another `#call` method to the security listener to listen on the [action](../components/README.md#2-action-event) event which exposes the [ART::Action](https://athena-framework.github.io/athena/Athena/Routing/Action.html) related to the current request from which the annotations could be read off of.
+From here, it would be up to the developer to implement a way to authorize the user now that they have been authenticated and are accessible within the application.  One option could be to utilize the [Custom Annotations](../components/config.md#custom-annotations) as a means to "tag" controller actions with specific "levels" of security; then add another `#call` method to the security listener to listen on the [action](../components/README.md#2-action-event) event which exposes the [ART::Action][Athena::Routing::Action] related to the current request from which the annotations could be read off of.
 
 !!! page
     This example is a modified version of the one used as part of the [JSON API Blog Tutorial](https://dev.to/blacksmoke16/creating-a-json-api-with-athena--granite-510i) blog post.

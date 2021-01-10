@@ -21,7 +21,7 @@ Athena has a goal of being easy to start using for simple use cases, while still
 
 ### Routing
 
-Athena is a MVC based framework, as such, the logic to handle a given route is defined in an [ART::Controller](https://athena-framework.github.io/athena/Athena/Routing/Controller.html) class.
+Athena is a MVC based framework, as such, the logic to handle a given route is defined in an [ART::Controller][Athena::Routing::Controller] class.
 
 ```crystal
 require "athena"
@@ -45,8 +45,8 @@ ART.run
 
 # GET / # => Hello World
 ```
-Annotations applied to the methods are used to define the HTTP method this method handles, such as [ART::Get](https://athena-framework.github.io/athena/Athena/Routing/Get.html) or [ART::Post](https://athena-framework.github.io/athena/Athena/Routing/Post.html).  A macro DSL also exists to make them a bit less verbose;
-[ART::Controller.get](https://athena-framework.github.io/athena/Athena/Routing/Controller.html#get(path,*args,**named_args,&)-macro) or [ART::Controller.post](https://athena-framework.github.io/athena/Athena/Routing/Controller.html#post(path,*args,**named_args,&)-macro).  The [ART::Route](https://athena-framework.github.io/athena/Athena/Routing/Route.html) annotation can also be used to define custom `HTTP` methods.
+Annotations applied to the methods are used to define the HTTP method this method handles, such as [ART::Get][Athena::Routing::Get] or [ART::Post][Athena::Routing::Post].  A macro DSL also exists to make them a bit less verbose;
+[ART::Controller.get][Athena::Routing::Controller:get(path,*args,**named_args,&)] or [ART::Controller.post][Athena::Routing::Controller:post(path,*args,**named_args,&)].  The [ART::Route][Athena::Routing::Route] annotation can also be used to define custom `HTTP` methods.
 
 Controllers are simply classes and routes are simply methods.  Controllers and actions can be documented/tested as you would any Crystal class/method.
 
@@ -73,7 +73,7 @@ ART.run
 # GET /add/foo/12            # => {"code":400,"message":"Required parameter 'value1' with value 'foo' could not be converted into a valid 'Int32'"}
 ```
 
-[ART::QueryParam](https://athena-framework.github.io/athena/Athena/Routing/QueryParam.html) and [ART::RequestParam](https://athena-framework.github.io/athena/Athena/Routing/RequestParam.html)s are defined via annotations and map directly to the method's arguments.  See the related annotation docs for more information.
+[ART::QueryParam][Athena::Routing::QueryParam] and [ART::RequestParam][Athena::Routing::RequestParam]s are defined via annotations and map directly to the method's arguments.  See the related annotation docs for more information.
 
 ```crystal
 require "athena"
@@ -115,7 +115,7 @@ ART.run
 
 #### Returning Raw Data
 
-An [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) can be used to fully customize the response; such as returning a specific status code, adding some one-off headers.
+An [ART::Response][Athena::Routing::Response] can be used to fully customize the response; such as returning a specific status code, adding some one-off headers.
 
 ```crystal
 require "athena"
@@ -135,12 +135,12 @@ ART.run
 # GET /index # => "<h1>Welcome to my website!</h1>"
 ```
 
-An [ART::Events::View](https://athena-framework.github.io/athena/Athena/Routing/Events/View.html) is emitted if the returned value is _NOT_ an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  By default, non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html)s are JSON serialized.
+An [ART::Events::View][Athena::Routing::Events::View] is emitted if the returned value is _NOT_ an [ART::Response][Athena::Routing::Response].  By default, non [ART::Response][Athena::Routing::Response]s are JSON serialized.
 However, this event can be listened on to customize how the value is serialized.
 
 ##### Streaming Response
 
-By default `ART::Response` content is written all at once to the response's `IO`.  However in some cases the content may be too large to fit into memory.  In this case an [ART::StreamedResponse](https://athena-framework.github.io/athena/Athena/Routing/StreamedResponse.html) may be used to stream the content back to the client.
+By default `ART::Response` content is written all at once to the response's `IO`.  However in some cases the content may be too large to fit into memory.  In this case an [ART::StreamedResponse][Athena::Routing::StreamedResponse] may be used to stream the content back to the client.
 
 ```crystal
 require "athena"
@@ -197,19 +197,19 @@ ART.run
 # GET / # => 10
 ```
 
-See [ART::URLGeneratorInterface](https://athena-framework.github.io/athena/Athena/Routing/URLGeneratorInterface.html) in the API Docs for more details.
+See [ART::URLGeneratorInterface][Athena::Routing::URLGeneratorInterface] in the API Docs for more details.
 
 ### Error Handling
 
-Exception handling in Athena is similar to exception handling in any Crystal program, with the addition of a new unique exception type, [ART::Exceptions::HTTPException](https://athena-framework.github.io/athena/Athena/Routing/Exceptions/HTTPException.html).
-Custom `HTTP` errors can also be defined by inheriting from [ART::Exceptions::HTTPException](https://athena-framework.github.io/athena/Athena/Routing/Exceptions/HTTPException.html) or a child type.
+Exception handling in Athena is similar to exception handling in any Crystal program, with the addition of a new unique exception type, [ART::Exceptions::HTTPException][Athena::Routing::Exceptions::HTTPException].
+Custom `HTTP` errors can also be defined by inheriting from [ART::Exceptions::HTTPException][Athena::Routing::Exceptions::HTTPException] or a child type.
 A use case for this could be allowing additional data/context to be included within the exception.
 
-Non [ART::Exceptions::HTTPException](https://athena-framework.github.io/athena/Athena/Routing/Exceptions/HTTPException.html) exceptions are represented as a `500 Internal Server Error`.
+Non [ART::Exceptions::HTTPException][Athena::Routing::Exceptions::HTTPException] exceptions are represented as a `500 Internal Server Error`.
 
-When an exception is raised, Athena emits the [ART::Events::Exception](https://athena-framework.github.io/athena/Athena/Routing/Events/Exception.html) event to allow an opportunity for it to be handled.
-By default these exceptions will return a `JSON` serialized version of the exception, via [ART::ErrorRenderer](https://athena-framework.github.io/athena/Athena/Routing/ErrorRenderer.html), that includes the message and code; with the proper response status set.
-If the exception goes unhandled, i.e. no listener sets an [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html).  By default, non [ART::Response](https://athena-framework.github.io/athena/Athena/Routing/Response.html) on the event, then the request is finished and the exception is re-raised.
+When an exception is raised, Athena emits the [ART::Events::Exception][Athena::Routing::Events::Exception] event to allow an opportunity for it to be handled.
+By default these exceptions will return a `JSON` serialized version of the exception, via [ART::ErrorRenderer][Athena::Routing::ErrorRenderer], that includes the message and code; with the proper response status set.
+If the exception goes unhandled, i.e. no listener sets an [ART::Response][Athena::Routing::Response].  By default, non [ART::Response][Athena::Routing::Response] on the event, then the request is finished and the exception is re-raised.
 
 ```crystal
 require "athena"
@@ -278,4 +278,4 @@ Invalid num2:  Cannot divide by zero (Athena::Routing::Exceptions::BadRequest)
 
 ##### Customization
 
-By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines.  This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ART::Listeners::Error](https://athena-framework.github.io/athena/Athena/Routing/Listeners/Error.html).
+By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines.  This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ART::Listeners::Error][Athena::Routing::Listeners::Error].
