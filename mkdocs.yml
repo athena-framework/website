@@ -2,7 +2,7 @@ site_name: Athena Framework
 use_directory_urls: true
 repo_url: https://github.com/athena-framework/athena
 edit_uri: https://github.com/athena-framework/website/tree/master/docs/
-site_url: https://athena-framework.github.io/website
+site_url: https://athenaframework.org/
 
 theme:
   name: material
