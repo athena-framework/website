@@ -40,6 +40,7 @@ plugins:
             - lib/athena-validator/src/spec.cr
             - lib/athena/src/athena.cr
             - lib/athena/src/spec.cr
+            - lib/athena-negotiation/src/athena-negotiation.cr
           rendering:
             show_source_links: false
 

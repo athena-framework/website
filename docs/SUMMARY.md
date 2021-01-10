@@ -19,4 +19,5 @@
 * [Config](Config/)
 * [Serializer](Serializer/)
 * [Validator](Validator/)
+* [Negotation](Negotiation/)
 * [Spec](Spec/)

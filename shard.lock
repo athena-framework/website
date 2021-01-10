@@ -20,6 +20,10 @@ shards:
     git: https://github.com/athena-framework/event-dispatcher.git
     version: 0.1.2
 
+  athena-negotiation:
+    git: https://github.com/athena-framework/negotiation.git
+    version: 0.1.0
+
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git
     version: 0.2.2
