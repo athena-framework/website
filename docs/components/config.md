@@ -1,4 +1,69 @@
-Athena includes the [Athena::Config][] component as a means to configure an Athena application.
+Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [Athena::Config::Base][] and [Athena::Config::Parameters][]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener](Athena::Routing::Listeners::CORS).  `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
+
+## Basics
+
+Both configuration and parameters make use of the same high level implementation.  A type is used to "model" the structure and type of each value, whether it's a scalar value like a `String`, or another object.  These types are then added into the base types provided by `Athena::Config`.  This approach provides full compile time type safety both in the structure of the configuration/parameters, but also the type of each value.  It also allows for plenty of flexibility in _how_ each object is constructed.
+
+!!!tip
+    Structs are the preferred type to use, especially for parameters. 
+
+From an organization standpoint, it is up to the user to determine how they wish to define/organize these configuration/parameter types.  However, the suggested way is to use a central file that should require the individual custom types, for example:
+
+```crystal
+# config/config_one.cr
+record NestedParameters, id : Int32 = 1  
+
+# Define a struct to store some parameters;
+# a scalar value, and a nested object.
+struct ConfigOne
+  getter do_something : Bool = true
+  getter nested_config : NestedConfig = NestedConfig.new
+  
+  getter special_value : Float64
+  
+  # Using getters with default values is the suggested way to handle simple/static types.
+  # An argless constructor can also be used to apply more custom logic to what the values should be.
+  def initialize
+    @special_value = # ...
+  end
+end
+
+# config/config_two.cr
+record ConfigTwo, keys : Array(String) = ["a", "b", "c"]
+
+# config.cr
+require "./config/config_one"
+require "./config/config_two"
+# ...
+
+# It is suggested to define custom parameter/configuration types within a dedicated namespace
+# e.g. `app`, in order to avoid conflicts with built in types and/or third party shards.
+struct MyApp
+  getter config_one : ConfigOne = ConfigOne.new
+  getter config_two : ConfigTwo = ConfigTwo.new
+end
+
+# Add our configuration type into the base type.
+class ACF::Base
+  getter app : MyApp = MyApp.new
+end
+```
+
+The parameters and configuration can be accessed directly via `ACF.parameters` and `ACF.config` respectively.  However there are better ways; direct access is discouraged.
+
+By default both `ACF::Base` and `ACF::Parameters` types are instantiated by calling `.new` on them without any arguments.  However, `ACF.load_configuration` and/or `ACF.load_parameters` methods can be redefined to change _how_ each object is created.  An example of this could be deserializing a `YAML`, or other configuration type, file into the type itself.
+
+```crystal
+# Overload the method that supplies the `ACF::Base` object to create it from a configuration file.
+# NOTE: This of course assumes each configuration types includes `JSON::Serializable` or some other deserialization implementation.
+def ACF.load_configuration : ACF::Base
+  ACF::Base.from_json File.read "./config.json"
+end
+```
+
+## Parameters
+
+
 
 ## Configuration
 
@@ -21,6 +86,8 @@ routing:
       - PUT
       - DELETE
 ```
+
+
 
 ## Custom Annotations
 
