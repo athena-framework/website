@@ -1,4 +1,4 @@
-Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [Athena::Config::Base][] and [Athena::Config::Parameters][]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener](Athena::Routing::Listeners::CORS).  `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
+Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [ACF::Base][Athena::Config::Base] and [ACF::Parameters][Athena::Config::Parameters]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener](Athena::Routing::Listeners::CORS).  `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
 
 ## Basics
 
@@ -49,7 +49,7 @@ class ACF::Base
 end
 ```
 
-The parameters and configuration can be accessed directly via `ACF.parameters` and `ACF.config` respectively.  However there are better ways; direct access is discouraged.
+The parameters and configuration can be accessed directly via `ACF.parameters` and `ACF.config` respectively.  However there are better ways; direct access is (mostly) discouraged.
 
 By default both `ACF::Base` and `ACF::Parameters` types are instantiated by calling `.new` on them without any arguments.  However, `ACF.load_configuration` and/or `ACF.load_parameters` methods can be redefined to change _how_ each object is created.  An example of this could be deserializing a `YAML`, or other configuration type, file into the type itself.
 
@@ -61,33 +61,80 @@ def ACF.load_configuration : ACF::Base
 end
 ```
 
-## Parameters
-
-
-
 ## Configuration
 
-A core part of the config component is defining a `YAML` based way to configure an application in the form of `athena.yml`.  Other components and/or developers may add configuration options to [ACF::Base][Athena::Config::Base].  This utilizes `YAML::Serializable`, with the `Strict` module in order to provide type safe configuration for an application.
+Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime.  This is best explained with an example, such as how [ART::Config::CORS][Athena::Routing::Config::CORS] can be used to control [ART::Listeners::CORS][Athena::Routing::Listeners::CORS] listener.  Say we want to enable CORS for our application from our APP URL, expose some custom headers, and allow credentials to be sent.  To do this we would want to redefine the configuration type's `self.configure` method.  This method should return an instance of `self`, configured how we wish.  Alternatively, it could return `nil` to disable the listener, which is the default.
 
-### CORS
-
-Currently the only configurable piece of Athena is [ART::Config::CORS][Athena::Routing::Config::CORS] to support configuring the [ART::Listeners::CORS][Athena::Routing::Listeners::CORS] listener.
-
-```yaml
----
-routing:
-  cors:
-    allow_credentials: true
-    allow_origin: 
-      - https://api.myblog.com
-    allow_methods:
-      - GET
-      - POST
-      - PUT
-      - DELETE
+```crystal
+def ART::Config::CORS.configure : ART::Config::CORS?
+  new(
+    allow_credentials: true,
+    allow_origin: %(https://app.example.com),
+    expose_headers: %w(X-Transaction-ID X-Some-Custom-Header),
+  )
+end
 ```
 
+Other configurable types would be handled in a similar fashion.  However, in some cases `nil` may not be a valid return value if it's required.
 
+### Configuration Resolver
+
+The config component also defines the [ACF::ConfigurationResolverInterface][Athena::Config::ConfigurationResolverInterface] type, which is wired up as a service automatically in order to inject it as a dependency.  This type is the preferred way to access configuration, as opposed to directly via `ACF.config`.
+
+```crystal
+@[ADI::Register]
+class MyService
+  def initialize(@configuration_resolver : ACF::ConfigurationResolverInterface); end
+  
+  def execute : Nil
+    # `config` would be the configured `MyServiceConfig` instance, or `nil` if it optional and not configured.
+    config = @configuration_resolver.resolve(MyServiceConfig)
+    
+    # ...
+  end
+end
+```
+
+## Parameters
+
+Parameters represent reuseable values that can be used as part of an application's configuration, or directly within the application's services.  Parameters allow configuration to be implemented in a way that is agnostic of the current environment.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
+
+```crystal
+# Assume we added our `AppParams` type to the base `ACF::Parameters` type
+# within our centralized configuration file, as mentioned in the "Basics" section.
+struct AppParams
+  # A getter with a default value is the simpliest solution.
+  getter app_url : String = ENV["APP_URL"]
+
+  # Alternatively we can define/set the instance variable manually,
+  # such as if more complex logic is needed, or ENV vars are not being utilized.
+  @app_url : String
+
+  def initialize
+    @app_url = case Athena.environment
+               when "production" then "https://app.example.com"
+               else                   "https://app.dev.example.com"
+               end
+  end
+end
+```
+
+We could now update the configuration from the earlier example to use this parameter.
+
+```crystal
+def ART::Config::CORS.configure : ART::Config::CORS?
+  new(
+    allow_credentials: true,
+    allow_origin: [ACF.parameters.app.app_url],
+    expose_headers: %w(X-Transaction-ID X-Some-Custom-Header),
+  )
+end
+```
+
+With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  It is also possible to access the same paramter directly within a service via a feature of the [Dependency Injection](./dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+
+!!!note
+    Accessing parameters directly via `ART.parameters` within a configuration type should be considered the only usecase for direct access.
 
 ## Custom Annotations
 
