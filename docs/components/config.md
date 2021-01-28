@@ -97,13 +97,13 @@ end
 
 ## Parameters
 
-Parameters represent reuseable values that can be used as part of an application's configuration, or directly within the application's services.  Parameters allow configuration to be implemented in a way that is agnostic of the current environment.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
+Parameters represent reusable values that can be used as part of an application's configuration, or directly within the application's services.  Parameters allow configuration to be implemented in a way that is agnostic of the current environment.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
 
 ```crystal
 # Assume we added our `AppParams` type to the base `ACF::Parameters` type
 # within our centralized configuration file, as mentioned in the "Basics" section.
 struct AppParams
-  # A getter with a default value is the simpliest solution.
+  # A getter with a default value is the simplest solution.
   getter app_url : String = ENV["APP_URL"]
 
   # Alternatively we can define/set the instance variable manually,
@@ -131,7 +131,7 @@ def ART::Config::CORS.configure : ART::Config::CORS?
 end
 ```
 
-With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  It is also possible to access the same paramter directly within a service via a feature of the [Dependency Injection](./dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](./dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
 
 !!!note
     Accessing parameters directly via `ART.parameters` within a configuration type should be considered the only usecase for direct access.
