@@ -55,15 +55,15 @@ By default both `ACF::Base` and `ACF::Parameters` types are instantiated by call
 
 ```crystal
 # Overload the method that supplies the `ACF::Base` object to create it from a configuration file.
-# NOTE: This of course assumes each configuration types includes `JSON::Serializable` or some other deserialization implementation.
+# NOTE: This of course assumes each configuration type includes `JSON::Serializable` or some other deserialization implementation.
 def ACF.load_configuration : ACF::Base
   ACF::Base.from_json File.read "./config.json"
 end
 ```
 
-## Configuration
+### Configuration
 
-Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime.  This is best explained with an example, such as how [ART::Config::CORS][Athena::Routing::Config::CORS] can be used to control [ART::Listeners::CORS][Athena::Routing::Listeners::CORS] listener.  Say we want to enable CORS for our application from our APP URL, expose some custom headers, and allow credentials to be sent.  To do this we would want to redefine the configuration type's `self.configure` method.  This method should return an instance of `self`, configured how we wish.  Alternatively, it could return `nil` to disable the listener, which is the default.
+Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime.  This is best explained with an example, such as how [ART::Config::CORS][Athena::Routing::Config::CORS] can be used to control [ART::Listeners::CORS][Athena::Routing::Listeners::CORS].  Say we want to enable CORS for our application from our app URL, expose some custom headers, and allow credentials to be sent.  To do this we would want to redefine the configuration type's `self.configure` method.  This method should return an instance of `self`, configured how we wish.  Alternatively, it could return `nil` to disable the listener, which is the default.
 
 ```crystal
 def ART::Config::CORS.configure : ART::Config::CORS?
@@ -77,9 +77,9 @@ end
 
 Other configurable types would be handled in a similar fashion.  However, in some cases `nil` may not be a valid return value if it's required.
 
-### Configuration Resolver
+#### Configuration Resolver
 
-The config component also defines the [ACF::ConfigurationResolverInterface][Athena::Config::ConfigurationResolverInterface] type, which is wired up as a service automatically in order to inject it as a dependency.  This type is the preferred way to access configuration, as opposed to directly via `ACF.config`.
+The config component also defines the [ACF::ConfigurationResolverInterface][Athena::Config::ConfigurationResolverInterface] type, which is wired up as a service automatically in order to inject it as a dependency in other services.  This type is the preferred way to access configuration, as opposed to directly via `ACF.config`.
 
 ```crystal
 @[ADI::Register]
@@ -95,9 +95,11 @@ class MyService
 end
 ```
 
-## Parameters
+### Parameters
 
 Parameters represent reusable values that can be used as part of an application's configuration, or directly within the application's services.  Parameters allow configuration to be implemented in a way that is agnostic of the current environment.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
+
+It is important to understand that parameters are _not_ a replacement to environment variables.  Ideally the values of the parameters would (if possible) be set via environmental variables.  However, parameters can act as an extension of environmental variables.  E.g. to support more complex values and provide additional compile time type saftey to their usages.
 
 ```crystal
 # Assume we added our `AppParams` type to the base `ACF::Parameters` type
@@ -131,10 +133,24 @@ def ART::Config::CORS.configure : ART::Config::CORS?
 end
 ```
 
-With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](./dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  
+
+It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](./dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+
+```crystal
+# Tell ADI what parameter we wish to inject as the `app_url` argument.
+# The value between the `%` represents the "path" to the value from the base `ACF::Parameters` type.
+# ADI.bind may also be used to more easily share commonly injected parameters.
+@[ADI::Register(_app_url: "%app.app_url%")]
+class SomeService
+  def initialize(@app_url : String); end
+end
+```
+
+To reiterate, the primary benefit of parameters is to centralize and decouple their values from the types that actually use them.  Another benefit is they offer full compile time safety, if for example, the type of `app_url` was mistakenly set to `Int32` or if the parameter's name was typo'd, e.g. `"%app.ap_url%"`; both would result in compile time errors.
 
 !!!note
-    Accessing parameters directly via `ART.parameters` within a configuration type should be considered the only usecase for direct access.
+    The only valid usecases for accessing parameters directly via `ART.parameters` is within a configuration type, or a type outside of Athena's control/DI framework.
 
 ## Custom Annotations
 
