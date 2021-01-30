@@ -40,10 +40,10 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ART::Prefix("article")]
+@[ARTA::Prefix("article")]
 class ExampleController < ART::Controller
-  @[ART::Get("/:id")]
-  @[ART::ParamConverter("article", converter: DBConverter, entity: Article)]
+  @[ARTA::Get("/:id")]
+  @[ARTA::ParamConverter("article", converter: DBConverter, entity: Article)]
   def get_article(article : Article) : Article
     # Nothing else to do except return the releated article.
     article
@@ -113,11 +113,11 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ART::Prefix("article")]
+@[ARTA::Prefix("article")]
 class ExampleController < ART::Controller
-  @[ART::Post(path: "")]
-  @[ART::View(status: :created)]
-  @[ART::ParamConverter("article", converter: RequestBody, model: Article)]
+  @[ARTA::Post(path: "")]
+  @[ARTA::View(status: :created)]
+  @[ARTA::ParamConverter("article", converter: RequestBody, model: Article)]
   def new_article(article : Article) : Article
     # Since we have an actual `Article` instance, we can simply save and return the article.
     article.save

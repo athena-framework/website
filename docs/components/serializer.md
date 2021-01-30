@@ -5,7 +5,7 @@ When an [ASR::Serializable][Athena::Serializer::Serializable] is returned from a
 !!! info
     If an object implements _both_ `ASR::Serializable` and `JSON::Serializable`, the serializer component takes priority.
 
-The [ART::View][Athena::Routing::View] annotation can be used to configure serialization related options on a per route basis.
+The [ARTA::View][Athena::Routing::Annotations::View] annotation can be used to configure serialization related options on a per route basis.
 
 ```crystal
 require "athena"
@@ -33,8 +33,8 @@ class Article
 end
 
 class ArticleController < ART::Controller
-  @[ART::Post(path: "/publish/:id")]
-  @[ART::View(status: :accepted, serialization_groups: ["default"])]
+  @[ARTA::Post(path: "/publish/:id")]
+  @[ARTA::View(status: :accepted, serialization_groups: ["default"])]
   def publish(id : Int32) : Article
     article = Article.find id
     article.published = true

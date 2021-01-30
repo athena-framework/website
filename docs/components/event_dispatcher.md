@@ -71,7 +71,7 @@ end
 class ExampleController < ART::Controller
   def initialize(@event_dispatcher : AED::EventDispatcherInterface); end
   
-  @[ART::Get("/:value")]
+  @[ARTA::Get("/:value")]
   def get_value(value : Int32) : Int32
     event = MyEvent.new value
     
