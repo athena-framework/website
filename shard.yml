@@ -3,6 +3,7 @@ version: 0.1.0
 dependencies:
   athena:
     github: athena-framework/athena
+    branch: master
   athena-config:
     github: athena-framework/config
   athena-dependency_injection:
