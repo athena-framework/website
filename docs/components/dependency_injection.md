@@ -34,7 +34,7 @@ end
 class ExampleController < ART::Controller
   def initialize(@value_provider : ValueProvider); end
   
-  @[ART::Get("/")]
+  @[ARTA::Get("/")]
   def get_value : String
     @value_provider.value
   end

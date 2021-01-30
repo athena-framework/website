@@ -10,8 +10,8 @@ require "athena"
 require "athena/spec"
 
 class ExampleController < ART::Controller
-  @[ART::QueryParam("negative")]
-  @[ART::Get("/add/:value1/:value2")]
+  @[ARTA::QueryParam("negative")]
+  @[ARTA::Get("/add/:value1/:value2")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
     negative ? -sum : sum
