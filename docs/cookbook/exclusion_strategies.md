@@ -97,12 +97,12 @@ class ExampleController < ART::Controller
   # most likely be a part of an `ART::ParamConverterInterface`.
   def initialize(@serializer : ASR::SerializerInterface); end
 
-  @[ART::Post("/article")]
+  @[ARTA::Post("/article")]
   def new_article(request : HTTP::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end
 
-  @[ART::Put("/article")]
+  @[ARTA::Put("/article")]
   def update_article(request : HTTP::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end

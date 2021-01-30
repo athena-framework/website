@@ -29,7 +29,7 @@ require "athena"
 # Define a controller
 class ExampleController < ART::Controller
   # Define an action to handle the related route
-  @[ART::Get("/")]
+  @[ARTA::Get("/")]
   def index : String
     "Hello World"
   end
@@ -45,8 +45,8 @@ ART.run
 
 # GET / # => Hello World
 ```
-Annotations applied to the methods are used to define the HTTP method this method handles, such as [ART::Get][Athena::Routing::Get] or [ART::Post][Athena::Routing::Post].  A macro DSL also exists to make them a bit less verbose;
-[ART::Controller.get][Athena::Routing::Controller:get(path,*args,**named_args,&)] or [ART::Controller.post][Athena::Routing::Controller:post(path,*args,**named_args,&)].  The [ART::Route][Athena::Routing::Route] annotation can also be used to define custom `HTTP` methods.
+Annotations applied to the methods are used to define the HTTP method this method handles, such as [ART::Get][Athena::Routing::Annotations::Get] or [ART::Post][Athena::Routing::Annotations::Post].  A macro DSL also exists to make them a bit less verbose;
+[ART::Controller.get][Athena::Routing::Controller:get(path,*args,**named_args,&)] or [ART::Controller.post][Athena::Routing::Controller:post(path,*args,**named_args,&)].  The [ART::Route][Athena::Routing::Annotations::Route] annotation can also be used to define custom `HTTP` methods.
 
 Controllers are simply classes and routes are simply methods.  Controllers and actions can be documented/tested as you would any Crystal class/method.
 
@@ -59,7 +59,7 @@ The values are provided directly as method arguments, thus preventing the need f
 require "athena"
 
 class ExampleController < ART::Controller
-  @[ART::Get("/add/:value1/:value2")]
+  @[ARTA::Get("/add/:value1/:value2")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
     negative ? -sum : sum
@@ -73,14 +73,14 @@ ART.run
 # GET /add/foo/12            # => {"code":400,"message":"Required parameter 'value1' with value 'foo' could not be converted into a valid 'Int32'"}
 ```
 
-[ART::QueryParam][Athena::Routing::QueryParam] and [ART::RequestParam][Athena::Routing::RequestParam]s are defined via annotations and map directly to the method's arguments.  See the related annotation docs for more information.
+[ART::QueryParam][Athena::Routing::Annotations::QueryParam] and [ART::RequestParam][Athena::Routing::Annotations::RequestParam]s are defined via annotations and map directly to the method's arguments.  See the related annotation docs for more information.
 
 ```crystal
 require "athena"
 
 class ExampleController < ART::Controller
-  @[ART::Get("/")]
-  @[ART::QueryParam("page", requirements: /\d{2}/)]
+  @[ARTA::Get("/")]
+  @[ARTA::QueryParam("page", requirements: /\d{2}/)]
   def index(page : Int32) : Int32
     page
   end
@@ -102,7 +102,7 @@ a [Param Converter](./advanced_usage.md#param-converters).
 require "athena"
 
 class ExampleController < ART::Controller
-  @[ART::Post("/data")]
+  @[ARTA::Post("/data")]
   def data(request : HTTP::Request) : String?
     request.body.try &.gets_to_end
   end
@@ -124,7 +124,7 @@ require "mime"
 class ExampleController < ART::Controller
   # A GET endpoint returning an `ART::Response`.
   # Can be used to return raw data, such as HTML or CSS etc, in a one-off manner.
-  @[ART::Get("/index")]
+  @[ARTA::Get("/index")]
   def index : ART::Response
     ART::Response.new "<h1>Welcome to my website!</h1>", headers: HTTP::Headers{"content-type" => MIME.from_extension(".html")}
   end
@@ -147,7 +147,7 @@ require "athena"
 require "mime"
 
 class ExampleController < ART::Controller
-  @[ART::Get(path: "/users")]
+  @[ARTA::Get(path: "/users")]
   def users : ART::Response
     ART::StreamedResponse.new headers: HTTP::Headers{"content-type" => "application/json; charset=UTF-8"} do |io|
       User.all.to_json io
@@ -170,14 +170,14 @@ require "athena"
 class ExampleController < ART::Controller
   # Define a route to redirect to, explicitly naming this route `add`.
   # The default route name is controller + method down snake-cased; e.x. `example_controller_add`.
-  @[ART::Get("/add/:value1/:value2", name: "add")]
+  @[ARTA::Get("/add/:value1/:value2", name: "add")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
     negative ? -sum : sum
   end
 
   # Define a route that redirects to the `add` route with fixed parameters.
-  @[ART::Get("/")]
+  @[ARTA::Get("/")]
   def redirect : ART::RedirectResponse
     # Generate a link to the other route.
     url = self.generate_url "add", value1: 8, value2: 2

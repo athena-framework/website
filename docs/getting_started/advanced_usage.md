@@ -24,8 +24,8 @@ struct MultiplyConverter < ART::ParamConverterInterface
 end
 
 class ParamConverterController < ART::Controller
-  @[ART::Get(path: "/multiply/:num")]
-  @[ART::ParamConverter("num", converter: MultiplyConverter)]
+  @[ARTA::Get(path: "/multiply/:num")]
+  @[ARTA::ParamConverter("num", converter: MultiplyConverter)]
   def multiply(num : Int32) : Int32
     num
   end
