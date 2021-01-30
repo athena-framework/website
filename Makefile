@@ -19,7 +19,7 @@ $(OUTPUT_DIR): $(DOCS_FILES) $(MKDOCS)
 .PHONY: serve
 serve: ## Run live-preview server
 serve: $(MKDOCS)
-	$(MKDOCS) serve
+	$(MKDOCS) serve --strict
 
 deps: $(MKDOCS)
 
