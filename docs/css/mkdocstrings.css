@@ -80,3 +80,7 @@ h2.doc.doc-heading > small {
 .md-typeset dd {
   margin: 0.4em 0 0.8em 1.875em;
 }
+
+.md-typeset pre>code::-webkit-scrollbar {
+  height: 0.4em;
+}
