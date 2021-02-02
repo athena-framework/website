@@ -4,7 +4,7 @@
 
 In a REST API, endpoints usually contain a reference to the `id` of the object in question; e.x. `GET /user/10`.  A useful converter would be able to extract this ID from the path, lookup the related entity, and provide that object directly to the controller action.  This reduces the boilerplate associated with doing a DB lookup within every controller action.  It also makes testing easier as it abstract the logic of _how_ that object is resolved from what should be done to it.
 
-> **NOTE:** This examples uses the `Granite` ORM, but should work with others.
+This example uses the `Granite` ORM, but should work with others.  Alternatively a [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) may be used to keep (de)serialization and validation logic separate from the actual models.
 
 ```crystal
 # Define an register our param converter as a service.

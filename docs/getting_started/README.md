@@ -96,7 +96,7 @@ ART.run
 
 Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.
 This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create
-a [Param Converter](./advanced_usage.md#param-converters).
+a [Param Converter](./advanced_usage.md#param-converters) to handle deserializing directly into an object.  The [cookbook](../cookbook/param_converters/#request-body) contains an example of this.
 
 ```crystal
 require "athena"
@@ -160,9 +160,35 @@ ART.run
 # GET /athena/users" # => [{"id":1,...},...]
 ```
 
+#### Returning Files
+
+An [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] may be used to return [static files](../cookbook/listeners#static-files).  This response type handles caching, partial requests, and setting the relevant headers.  Athena also supports downloading of dynamically generated content by using an [ART::Response][Athena::Routing::Response] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header.  [ART::HeaderUtils.make_dispostion][Athena::Routing::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
+
+```crystal
+require "athena"
+require "mime"
+
+class ExampleController < ART::Controller
+  @[ARTA::Get(path: "/data/export")]
+  def data_export : ART::Response
+    # ...
+    
+    ART::Response.new(
+      content,
+      headers: HTTP::Headers{
+        "content-disposition" => ART::HeaderUtils.make_disposition(:attachment, "data.csv"),
+        "content-type" => MIME.from_extension(".csv")
+      }
+    )
+  end
+end
+
+ART.run
+```
+
 ### URL Generation
 
-A common use case, especially when rendering `HTML`, is generating links to other routes based on a set of provided parameters.  Parameters that do not map to a controller action argument are added as query params.
+A common use case, especially when rendering `HTML`, is generating links to other routes based on a set of provided parameters.
 
 ```crystal
 require "athena"
