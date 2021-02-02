@@ -125,7 +125,8 @@ class ExampleController < ART::Controller
   end
 end
 ```
-We can now easily save new entities, and be assured they are valid by running validations as well within our converter.  However what about updating an entity?  The [Serializer][Athena::Serializer] component has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  This feature allows updated values to be *applied* to an existing object as opposed to either needing to create a whole new object from the request data or manually handle applying those changes. 
+
+We can now easily save new entities, and be assured they are valid by running validations as well within our converter.  However what about updating an entity?  The [Serializer][Athena::Serializer] component has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  This feature allows updated values to be *applied* to an existing object as opposed to either needing to create a whole new object from the request data or manually handle applying those changes.
 
 ```crystal
 # Define a custom `ASR::ObjectConstructorInterface` to allow sourcing the model from the database

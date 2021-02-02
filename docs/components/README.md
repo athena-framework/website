@@ -27,7 +27,6 @@ Another use case for this event is populating additional data into the request's
 
 !!! example "Request event in Athena"
     This is the event that [ART::Listeners::Routing][Athena::Routing::Listeners::Routing] listens on to determine which [ART::Controller][Athena::Routing::Controller]/[ART::Action][Athena::Routing::Action] pair should handle the request.
-    
 
     See [ART::Controller][Athena::Routing::Controller] for more details on routing.
 

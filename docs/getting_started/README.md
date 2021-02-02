@@ -45,6 +45,7 @@ ART.run
 
 # GET / # => Hello World
 ```
+
 Annotations applied to the methods are used to define the HTTP method this method handles, such as [ARTA::Get][Athena::Routing::Annotations::Get] or [ARTA::Post][Athena::Routing::Annotations::Post].  A macro DSL also exists to make them a bit less verbose;
 [ART::Controller.get][Athena::Routing::Controller:get(path,*args,**named_args,&)] or [ART::Controller.post][Athena::Routing::Controller:post(path,*args,**named_args,&)].  The [ARTA::Route][Athena::Routing::Annotations::Route] annotation can also be used to define custom `HTTP` methods.
 
@@ -302,6 +303,6 @@ Invalid num2:  Cannot divide by zero (Athena::Routing::Exceptions::BadRequest)
 2020-12-06T17:20:21.993811Z   INFO - athena.routing: Matched route /divide_rescued/10/10 -- uri: "/divide_rescued/10/10", method: "GET", path_params: {"num2" => "10", "num1" => "10"}, query_params: {}
 ```
 
-##### Customization
+#### Customization
 
 By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines.  This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ART::Listeners::Error][Athena::Routing::Listeners::Error].
