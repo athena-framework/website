@@ -1,4 +1,4 @@
-Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [ACF::Base][Athena::Config::Base] and [ACF::Parameters][Athena::Config::Parameters]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener](Athena::Routing::Listeners::CORS).  `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
+Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [ACF::Base][Athena::Config::Base] and [ACF::Parameters][Athena::Config::Parameters]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener][Athena::Routing::Listeners::CORS].  `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
 
 ## Basics
 
@@ -57,7 +57,12 @@ By default both `ACF::Base` and `ACF::Parameters` types are instantiated by call
 # Overload the method that supplies the `ACF::Base` object to create it from a configuration file.
 # NOTE: This of course assumes each configuration type includes `JSON::Serializable` or some other deserialization implementation.
 def ACF.load_configuration : ACF::Base
+  # Use `File.read`, `File.open` could also have been used.
+  # NOTE: Both of these require the file be present with the built binary.
   ACF::Base.from_json File.read "./config.json"
+  
+  # Macro method `read_file` could also be used to embed the file contents in the binary.
+  ACF::Base.from_json {{read_file "./config.json"}}
 end
 ```
 
@@ -151,7 +156,7 @@ end
 
 #### Configuration Resolver
 
-The config component also defines the [ACF::ConfigurationResolverInterface][Athena::Config::ConfigurationResolverInterface] type, which is wired up as a service automatically in order to inject it as a dependency in other services.  This type is the preferred way to access configuration, as opposed to directly via `ACF.config`.
+The config component also defines the [ACF::ConfigurationResolverInterface][Athena::Config::ConfigurationResolverInterface] type, which is wired up as a service automatically in order to inject it as a dependency in other services.  This type is the preferred way to access configuration, as opposed to directly via `ACF.config`.  See the [ACFA::Resolvable][Athena::Config::Annotations::Resolvable] annotation as well.
 
 ```crystal
 @[ADI::Register]
