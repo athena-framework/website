@@ -263,7 +263,7 @@ class MyAnnotationListener
 
     my_ann = ann_configs[MyAnnotation]
 
-  	# Access data off the annotation.
+    # Access data off the annotation.
     if my_ann.name == "Fred"
       # Do something if the provided name is/is not some value.
       # Would be executed for `ExampleController#two` since it has the annotation applied, and name value equal to "Fred".
