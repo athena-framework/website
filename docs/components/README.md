@@ -27,7 +27,6 @@ Another use case for this event is populating additional data into the request's
 
 !!! example "Request event in Athena"
     This is the event that [ART::Listeners::Routing][Athena::Routing::Listeners::Routing] listens on to determine which [ART::Controller][Athena::Routing::Controller]/[ART::Action][Athena::Routing::Action] pair should handle the request.
-    
 
     See [ART::Controller][Athena::Routing::Controller] for more details on routing.
 
@@ -48,11 +47,10 @@ Before Athena can call the controller action, it first needs to determine what a
 
 The default algorithm is as follows:
 
-1. Check the request's attributes for a key that matches the name of the argument
-	* Such as as a path param or something set via a listener (either built-in or custom)
-2. Check if the type of the argument is `HTTP::Request`, if so use the current request object
-3. Check if the argument has a default value, or use `nil` if it is nilable
-4. Raise an exception if an argument's value could be not resolved
+1. Check the request's attributes for a key that matches the name of the argument; such as as a path param or something set via a listener (either built-in or custom)
+1. Check if the type of the argument is `HTTP::Request`, if so use the current request object
+1. Check if the argument has a default value, or use `nil` if it is nilable
+1. Raise an exception if an argument's value could be not resolved
 
 Custom `ArgumentValueResolverInterface`s may be created & registered to extend this functionality.
 

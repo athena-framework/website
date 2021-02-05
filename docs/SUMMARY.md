@@ -8,7 +8,6 @@
         * [Config](components/config.md)
         * [Serializer](components/serializer.md)
         * [Validator](components/validator.md)
-        * [Negotiation](components/negotiation.md)
         * [Spec](components/spec.md)
     * [Cookbook](cookbook/README.md)
         * [Listeners](cookbook/listeners.md)
