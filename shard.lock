@@ -6,7 +6,7 @@ shards:
 
   athena:
     git: https://github.com/athena-framework/athena.git
-    version: 0.12.0+git.commit.e52cc6836bbb7973eae368d0d43c8ccdf95adc05
+    version: 0.13.0
 
   athena-config:
     git: https://github.com/athena-framework/config.git
