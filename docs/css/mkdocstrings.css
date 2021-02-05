@@ -55,3 +55,7 @@ h5.doc-heading {
 
 /* Increase size of doc headings. */
 h4.doc-heading { font-size: 1.25em; }
+
+.md-typeset pre>code::-webkit-scrollbar {
+  height: 0.4em;
+}

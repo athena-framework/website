@@ -4,7 +4,7 @@
 
 In a REST API, endpoints usually contain a reference to the `id` of the object in question; e.x. `GET /user/10`.  A useful converter would be able to extract this ID from the path, lookup the related entity, and provide that object directly to the controller action.  This reduces the boilerplate associated with doing a DB lookup within every controller action.  It also makes testing easier as it abstract the logic of _how_ that object is resolved from what should be done to it.
 
-> **NOTE:** This examples uses the `Granite` ORM, but should work with others.
+This example uses the `Granite` ORM, but should work with others.  Alternatively a [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) may be used to keep (de)serialization and validation logic separate from the actual models.
 
 ```crystal
 # Define an register our param converter as a service.
@@ -40,10 +40,10 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ART::Prefix("article")]
+@[ARTA::Prefix("article")]
 class ExampleController < ART::Controller
-  @[ART::Get("/:id")]
-  @[ART::ParamConverter("article", converter: DBConverter, entity: Article)]
+  @[ARTA::Get("/:id")]
+  @[ARTA::ParamConverter("article", converter: DBConverter, entity: Article)]
   def get_article(article : Article) : Article
     # Nothing else to do except return the releated article.
     article
@@ -113,11 +113,11 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ART::Prefix("article")]
+@[ARTA::Prefix("article")]
 class ExampleController < ART::Controller
-  @[ART::Post(path: "")]
-  @[ART::View(status: :created)]
-  @[ART::ParamConverter("article", converter: RequestBody, model: Article)]
+  @[ARTA::Post(path: "")]
+  @[ARTA::View(status: :created)]
+  @[ARTA::ParamConverter("article", converter: RequestBody, model: Article)]
   def new_article(article : Article) : Article
     # Since we have an actual `Article` instance, we can simply save and return the article.
     article.save
@@ -125,7 +125,8 @@ class ExampleController < ART::Controller
   end
 end
 ```
-We can now easily save new entities, and be assured they are valid by running validations as well within our converter.  However what about updating an entity?  The [Serializer][Athena::Serializer] component has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  This feature allows updated values to be *applied* to an existing object as opposed to either needing to create a whole new object from the request data or manually handle applying those changes. 
+
+We can now easily save new entities, and be assured they are valid by running validations as well within our converter.  However what about updating an entity?  The [Serializer][Athena::Serializer] component has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  This feature allows updated values to be *applied* to an existing object as opposed to either needing to create a whole new object from the request data or manually handle applying those changes.
 
 ```crystal
 # Define a custom `ASR::ObjectConstructorInterface` to allow sourcing the model from the database

@@ -27,7 +27,6 @@ Another use case for this event is populating additional data into the request's
 
 !!! example "Request event in Athena"
     This is the event that [ART::Listeners::Routing][Athena::Routing::Listeners::Routing] listens on to determine which [ART::Controller][Athena::Routing::Controller]/[ART::Action][Athena::Routing::Action] pair should handle the request.
-    
 
     See [ART::Controller][Athena::Routing::Controller] for more details on routing.
 
@@ -36,7 +35,7 @@ Another use case for this event is populating additional data into the request's
 The next event to be dispatched is the [ART::Events::Action][Athena::Routing::Events::Action] event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action][Athena::Routing::Action]; such as reading custom annotations off of it via the [Config](./config.md) component.
 
 !!! example "Action event in Athena"
-    This is the event that [ART::Listeners::ParamConverter][Athena::Routing::Listeners::ParamConverter] and [ART::Listeners::ParamFetcher][Athena::Routing::Listeners::ParamFetcher] listen on to apply custom conversion logic via an [ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface], or resolve request parameters such as [ART::QueryParam][Athena::Routing::QueryParam]s.
+    This is the event that [ART::Listeners::ParamConverter][Athena::Routing::Listeners::ParamConverter] and [ART::Listeners::ParamFetcher][Athena::Routing::Listeners::ParamFetcher] listen on to apply custom conversion logic via an [ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface], or resolve request parameters such as [ARTA::QueryParam][Athena::Routing::Annotations::QueryParam]s.
 
 ### 3. Invoke the Controller Action
 
@@ -48,11 +47,10 @@ Before Athena can call the controller action, it first needs to determine what a
 
 The default algorithm is as follows:
 
-1. Check the request's attributes for a key that matches the name of the argument
-	* Such as as a path param or something set via a listener (either built-in or custom)
-2. Check if the type of the argument is `HTTP::Request`, if so use the current request object
-3. Check if the argument has a default value, or use `nil` if it is nilable
-4. Raise an exception if an argument's value could be not resolved
+1. Check the request's attributes for a key that matches the name of the argument; such as as a path param or something set via a listener (either built-in or custom)
+1. Check if the type of the argument is `HTTP::Request`, if so use the current request object
+1. Check if the argument has a default value, or use `nil` if it is nilable
+1. Raise an exception if an argument's value could be not resolved
 
 Custom `ArgumentValueResolverInterface`s may be created & registered to extend this functionality.
 
