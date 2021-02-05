@@ -152,7 +152,7 @@ ART.run
 
 ## Static Files
 
-Static files can also be served from an Athena application.  This can be achieved by combining an [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] with the [action](../components/README.md#1-request-event) event; checking if the request's path represents a file/directory within the application's public directory and returning the file if so.
+Static files can also be served from an Athena application.  This can be achieved by combining an [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] with the [request](../components/README.md#1-request-event) event; checking if the request's path represents a file/directory within the application's public directory and returning the file if so.
 
 ```crystal
 # Register a request event listener to handle returning static files.

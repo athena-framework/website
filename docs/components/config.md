@@ -133,7 +133,7 @@ struct NestedParameters
   end
 end
  
-class Parameters
+class ACF::Parameters
   getter my_params : MyParameters = MyParameters.new
 end
 ```
@@ -174,27 +174,21 @@ end
 
 ## Parameters
 
-Parameters represent reusable values that can be used as part of an application's configuration, or directly within the application's services.  Parameters allow configuration to be implemented in a way that is agnostic of the current environment.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
+Parameters represent reusable values that are used to control the application's behavior, e.g. used within its configuration, or directly within the application's services.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
 
-It is important to understand that parameters are _not_ a replacement to environment variables.  Ideally the values of the parameters would (if possible) be set via environmental variables.  However, parameters can act as an extension of environmental variables.  E.g. to support more complex values and provide additional compile time type safety to their usages.
+Parameters should _NOT_ be used for values that rarely change, such as the max amount of items to return per page.  These types of values are better suited to being a [constant](https://crystal-lang.org/reference/syntax_and_semantics/constants.html) within the related type.  Similarly, infrastructure related values that change from one machine to another, e.g. development machine to production server, should be defined using environmental variables.
+
+Parameters are intended for values that do not change between machines, and control the application's behavior, e.g. the sender of notification emails, what features are enabled, or other high level application level values.
 
 ```crystal
 # Assume we added our `AppParams` type to the base `ACF::Parameters` type
 # within our centralized configuration file, as mentioned in the "Basics" section.
 struct AppParams
-  # A getter with a default value is the simplest solution.
+  # Define a getter for our app's URL, fetching the value of it from `ENV`.
   getter app_url : String = ENV["APP_URL"]
-
-  # Alternatively we can define/set the instance variable manually,
-  # such as if more complex logic is needed, or ENV vars are not being utilized.
-  @app_url : String
-
-  def initialize
-    @app_url = case Athena.environment
-               when "production" then "https://app.example.com"
-               else                   "https://app.dev.example.com"
-               end
-  end
+  
+  # Define another parameter to represent if some_feature should be enabled.
+  getter some_feature_enable : Bool = Athena.environment != "development"
 end
 ```
 
