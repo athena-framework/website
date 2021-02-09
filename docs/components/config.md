@@ -281,4 +281,4 @@ end
 ART.run
 ```
 
-The [Cookbook](../cookbook/listeners#pagination) includes an example of how this can be used for pagination.
+The [Cookbook](/cookbook/listeners#pagination) includes an example of how this can be used for pagination.
