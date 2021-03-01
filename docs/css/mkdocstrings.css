@@ -1,33 +1,4 @@
-/* https://pawamoy.github.io/mkdocstrings/handlers/python/#recommended-style-material */
-
-div.doc-contents:not(.first) {
-  padding-left: 15px;
-  border-left: 4px solid rgba(230, 230, 230);
-}
-
-h5.doc-heading {
-  text-transform: none !important;
-}
-
-.hidden-toc::before {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-.hidden-toc a.headerlink {
-  display: none;
-}
-
-td code {
-  word-break: normal !important;
-}
-
-td p {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-/* https://oprypin.github.io/mkdocstrings-crystal/styling.html#recommended-styles */
+/* https://mkdocstrings.github.io/crystal/styling.html#recommended-styles */
 
 /* Indentation of sub-items */
 div.doc-contents:not(.first) {
@@ -35,26 +6,13 @@ div.doc-contents:not(.first) {
   border-left: 4px solid rgba(230, 230, 230);
 }
 
-/* Don't capitalize names */
-h5.doc-heading {
-  text-transform: none !important;
-}
-
 /* Additional Customizations */
-
-/* Increase heading margins & weight. */
-.doc > h3 { margin: 3em 0 .75em 0; }
-.md-typeset h3 { font-weight: 700; }
-.md-typeset h5 { margin-top: 3em; }
 
 /* Increased spacing between macro & instance methods. */
 .doc-macro + .doc-macro,
 .doc-instance_method + .doc-instance_method {
   margin-top: 3em;
 }
-
-/* Increase size of doc headings. */
-h4.doc-heading { font-size: 1.25em; }
 
 .md-typeset pre>code::-webkit-scrollbar {
   height: 0.4em;

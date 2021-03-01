@@ -1,7 +1,7 @@
 site_name: Athena Framework
 use_directory_urls: true
 repo_url: https://github.com/athena-framework/athena
-edit_uri: https://github.com/athena-framework/website/tree/master/docs/
+edit_uri: https://github.com/athena-framework/website/blob/master/docs/
 site_url: https://athenaframework.org/
 
 theme:
@@ -41,8 +41,15 @@ plugins:
             - lib/athena/src/athena.cr
             - lib/athena/src/spec.cr
             - lib/athena-negotiation/src/athena-negotiation.cr
-          rendering:
-            show_source_links: false
+          source_locations:
+            lib/athena-spec: https://github.com/athena-framework/spec/blob/v{shard_version}/{file}#L{line}
+            lib/athena-event_dispatcher: https://github.com/athena-framework/event-dispatcher/blob/v{shard_version}/{file}#L{line}
+            lib/athena-config: https://github.com/athena-framework/config/blob/v{shard_version}/{file}#L{line}
+            lib/athena-dependency_injection: https://github.com/athena-framework/dependency-injection/blob/v{shard_version}/{file}#L{line}
+            lib/athena-serializer: https://github.com/athena-framework/serializer/blob/v{shard_version}/{file}#L{line}
+            lib/athena-validator: https://github.com/athena-framework/validator/blob/v{shard_version}/{file}#L{line}
+            lib/athena: https://github.com/athena-framework/athena/blob/v{shard_version}/{file}#L{line}
+            lib/athena-negotiation: https://github.com/athena-framework/negotiation/blob/v{shard_version}/{file}#L{line}
 
 markdown_extensions:
   - admonition
@@ -51,6 +58,8 @@ markdown_extensions:
   - pymdownx.saneheaders
   - pymdownx.superfences
   - deduplicate-toc
+  - toc:
+      permalink: "#"
 
 google_analytics:
   - UA-184169799-1
