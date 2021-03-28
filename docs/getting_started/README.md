@@ -10,7 +10,7 @@ Add the dependency to your `shard.yml`:
 dependencies:
   athena:
     github: athena-framework/athena
-    version: ~> 0.13.0
+    version: ~> 0.14.0
 ```
 
 Run `shards install`.  This will install Athena and its required dependencies.
@@ -61,6 +61,7 @@ require "athena"
 
 class ExampleController < ART::Controller
   @[ARTA::Get("/add/:value1/:value2")]
+  @[ARTA::QueryParam("negative")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
     negative ? -sum : sum
@@ -120,7 +121,7 @@ ART.run
 
 #### Returning Raw Data
 
-An [ART::Response][Athena::Routing::Response] can be used to fully customize the response; such as returning a specific status code, adding some one-off headers.
+An [ART::Response][Athena::Routing::Response] can be used to fully customize the response; such as returning a specific status code, or adding some one-off headers.
 
 ```crystal
 require "athena"
