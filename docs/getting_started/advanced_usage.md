@@ -13,7 +13,7 @@ require "athena"
 @[ADI::Register]
 struct MultiplyConverter < ART::ParamConverterInterface
   # :inherit:
-  def apply(request : HTTP::Request, configuration : Configuration) : Nil
+  def apply(request : ART::Request, configuration : Configuration) : Nil
     arg_name = configuration.name
 
     return unless request.attributes.has? arg_name
