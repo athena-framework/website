@@ -26,7 +26,7 @@ shards:
 
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git
-    version: 0.2.5
+    version: 0.2.6
 
   athena-spec:
     git: https://github.com/athena-framework/spec.git
