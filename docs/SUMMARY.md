@@ -24,6 +24,7 @@
     * EventDispatcher/*
 * [Config](Config/index.md)
     * [Aliases](Config/aliases.md)
+    * [Environment](Config/environment.md)
     * Config/*
 * [Serializer](Serializer/index.md)
     * [Aliases](Serializer/aliases.md)
