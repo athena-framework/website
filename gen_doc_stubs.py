@@ -12,14 +12,6 @@ for typ in root.lookup("Athena").walk_types():
     with mkdocs_gen_files.open(filename, 'w') as f:
         f.write(f'# ::: {typ.abs_id}\n\n')
 
-    # Write the top level `Athena` module to its appropriate section.
-    if typ.abs_id == "Athena::Config":
-        # Athena -> Config/environment.md
-        filename = '/'.join([typ.abs_id.split('::')[1], 'environment.md'])
-
-        with mkdocs_gen_files.open(filename, 'a') as f:
-            f.write(f'# ::: Athena\n\n---\n\n')
-
     if typ.locations:
         mkdocs_gen_files.set_edit_path(filename, typ.locations[0].url)
 
@@ -31,3 +23,8 @@ for typ in root.types:
 
         with mkdocs_gen_files.open(filename, 'a') as f:
             f.write(f'::: {typ.abs_id}\n\n')
+
+# Write the top level `Athena` module to its appropriate section.
+# Athena -> Config/environment.md
+with mkdocs_gen_files.open('Config/environment.md', 'w') as f:
+    f.write(f'# ::: Athena\n\n')
