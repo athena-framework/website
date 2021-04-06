@@ -13,11 +13,27 @@
         * [Listeners](cookbook/listeners.md)
         * [Param Converters](cookbook/param_converters.md)
         * [Exclusion Strategies](cookbook/exclusion_strategies.md)
-* [Routing](Routing/)
-* [DependencyInjection](DependencyInjection/)
-* [EventDispatcher](EventDispatcher/)
-* [Config](Config/)
-* [Serializer](Serializer/)
-* [Validator](Validator/)
-* [Negotation](Negotiation/)
-* [Spec](Spec/)
+* [Routing](Routing/index.md)
+    * [Aliases](Routing/aliases.md)
+    * Routing/*
+* [DependencyInjection](DependencyInjection/index.md)
+    * [Aliases](DependencyInjection/aliases.md)
+    * DependencyInjection/*
+* [EventDispatcher](EventDispatcher/index.md)
+    * [Aliases](EventDispatcher/aliases.md)
+    * EventDispatcher/*
+* [Config](Config/index.md)
+    * [Aliases](Config/aliases.md)
+    * Config/*
+* [Serializer](Serializer/index.md)
+    * [Aliases](Serializer/aliases.md)
+    * Serializer/*
+* [Validator](Validator/index.md)
+    * [Aliases](Validator/aliases.md)
+    * Validator/*
+* [Negotiation](Negotiation/index.md)
+    * [Aliases](Negotiation/aliases.md)
+    * Negotiation/*
+* [Spec](Spec/index.md)
+    * [Aliases](Spec/aliases.md)
+    * Spec/*
