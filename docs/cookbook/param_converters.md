@@ -1,10 +1,143 @@
-[Param Converters][Athena::Routing::ParamConverterInterface] allow applying custom logic in order to convert one or more primitive request parameter into a more complex type.
+[Param Converters][Athena::Routing::ParamConverterInterface] allow applying custom logic in order to convert one or more primitive request arguments into a more complex type.
+
+## Request Body
+
+A core part of any API is consuming a request body in order to create/update some entity or to perform some action.  The [Getting Started](/getting_started#request-parameter) docs showed how this could be done by using the raw request object.  However a more robust approach would be to define a generic & reusable [Param Converter][Athena::Routing::ParamConverterInterface] that would be able to deserialize the request body into an object, run any validations defined on it, then provide the object to the controller action.
+
+Ideally this object would be a [DTO](https://en.wikipedia.org/wiki/Data_transfer_object), but could also be an `ORM` entity for simple use cases.
+
+```crystal
+require "athena"
+
+# Define our base type.
+# DTO objects are defined as structs as they
+# are more performant and should be immuatable.
+abstract struct DTO
+  include ASR::Model
+end
+
+# Define a User DTO object to represent the creation of a new user entity.
+struct UserCreate < DTO
+  # Include some modules to tell Athena this type can be deserialized
+  # via the Serializer component and validated via the Valdiator component.
+  include AVD::Validatable
+  include ASR::Serializable
+
+  # Assert the user's name is not blank.
+  @[Assert::NotBlank]
+  getter first_name : String
+
+  # Assert the user's name is not blank.
+  @[Assert::NotBlank]
+  getter last_name : String
+
+  # Assert the user's email is not blank and is valid.
+  @[Assert::NotBlank]
+  @[Assert::Email(:html5)]
+  getter email : String
+end
+
+# Create and register a param converter that'll allow our DTO object
+# to be provided directly as a controller action argument.
+@[ADI::Register]
+struct RequestBody < ART::ParamConverterInterface
+  # Allows specifying which DTO type should be
+  # deserialized via the ParamConvter annotation.
+  configuration type : DTO.class
+
+  # Inject the related services for deserialization and validation.
+  def initialize(
+    @serializer : ASR::SerializerInterface,
+    @validator : AVD::Validator::ValidatorInterface
+  ); end
+
+  # :inherit:
+  def apply(request : HTTP::Request, configuration : Configuration) : Nil
+    # Ensure the request body isn't empty.
+    raise ART::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
+
+    # Deserialize the request body into a DTO object.
+    object = @serializer.deserialize configuration.type, body, :json
+
+    # If the object is validatable, run its validations,
+    # raising a 422 if it is not.
+    if object.is_a? AVD::Validatable
+      errors = @validator.validate object
+      raise AVD::Exceptions::ValidationFailed.new errors unless errors.empty?
+    end
+
+    # All the desrialized object to be provided directly within the controller action.
+    request.attributes.set configuration.name, object, configuration.type
+  end
+end
+
+class UserController < ART::Controller
+  # Define a controller action that will be responsible for creating the new user record.
+  @[ARTA::Post("/user")]
+  @[ARTA::View(status: :created)]
+  @[ARTA::ParamConverter("user_create", converter: RequestBody, type: UserCreate)]
+  def new_user(user_create : UserCreate) : UserCreate
+    # Use the provided UserCreate instance to create an actual User DB record.
+    # For purposes of this example, just return the instance.
+
+    user_create
+  end
+end
+
+ART.run
+```
+
+Making a request to our `/user` endpoint with the following payload:
+
+```json
+{
+  "first_name": "George",
+  "last_name": "",
+  "email": "dietrich.app"
+}
+```
+
+Would return the response:
+
+```json
+{
+  "code": 422,
+  "message": "Validation failed",
+  "errors": [
+    {
+      "property": "last_name",
+      "message": "This value should not be blank.",
+      "code": "0d0c3254-3642-4cb0-9882-46ee5918e6e3"
+    },
+    {
+      "property": "email",
+      "message": "This value is not a valid email address.",
+      "code": "ad9d877d-9ad1-4dd7-b77b-e419934e5910"
+    }
+  ]
+}
+```
+
+While a valid request would return: 
+
+```json
+{
+  "first_name": "George",
+  "last_name": "Dietrich",
+  "email": "george@dietrich.app"
+}
+```
+
+The `RequestBody` converter provides a generic reusable way to convert the request body's `JSON` payload into objects that can have complex deserialization/validation logic via the [Serializer][Athena::Serializer] and [Validator][Athena::Validator] components respectively.
+
+The Serializer component also has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  Checkout the [cookbook](/cookbook/object_constructors#db) for how could be used when working with raw DB entities.
 
 ## DB
 
 In a REST API, endpoints usually contain a reference to the `id` of the object in question; e.x. `GET /user/10`.  A useful converter would be able to extract this ID from the path, lookup the related entity, and provide that object directly to the controller action.  This reduces the boilerplate associated with doing a DB lookup within every controller action.  It also makes testing easier as it abstract the logic of _how_ that object is resolved from what should be done to it.
 
-This example uses the `Granite` ORM, but should work with others.  Alternatively a [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) may be used to keep (de)serialization and validation logic separate from the actual models.
+!!!note
+    This example uses the `Granite` ORM, but should work with others.
 
 ```crystal
 # Define an register our param converter as a service.
@@ -59,113 +192,3 @@ ART.run
 ```
 
 Tada.  We now testable, reusable logic to provide database objects directly as arguments to our controller action.  Since the entity class is specified on the annotation, the actual converter can be reused for multiple actions and multiple entity classes.
-
-## Request Body
-
-Similar to the `DB` converter, another common practice is deserializing a request's body into an object.
-
-> **NOTE:** This examples uses the `Granite` ORM, but should work with others.
-
-```crystal
-# Define an register our param converter as a service.
-@[ADI::Register]
-struct RequestBody < ART::ParamConverterInterface
-  # Define a customer configuration for this converter.
-  # This allows us to provide a `entity` field within the annotation
-  # in order to define _what_ entity should be queried for.
-  configuration entity : Granite::Base.class
-
-  # Inject the serializer and validator into our converter.
-  def initialize(
-      @serializer : ASR::SerializerInterface,
-      @validator : AVD::Validator::ValidatorInterface,
-  ); end
-
-  # :inherit:
-  def apply(request : HTTP::Request, configuration : Configuration) : Nil
-    # Be sure to handle any possible exceptions here to return more helpful errors to the client.
-    raise ART::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
-
-    # Deserialize the object, based on the type provided in the annotation.
-    object = @serializer.deserialize configuration.entity, body, :json
-
-    # Validate the object if it is validatable.
-    if object.is_a? AVD::Validatable
-      errors = @validator.validate object
-      raise AVD::Exceptions::ValidationFailed.new errors unless errors.empty?
-    end
-
-    # Add the resolved object to the request's attributes.
-    request.attributes.set configuration.name, object, configuration.entity
-  end
-end
-
-# Make the compiler happy when we want to allow any Granite entity to be deserializable.
-class Granite::Base
-  include ASR::Model
-end
-
-class Article < Granite::Base
-  connection "default"
-  table "articles"
-
-  column id : Int64, primary: true
-  column title : String
-end
-
-@[ARTA::Prefix("article")]
-class ExampleController < ART::Controller
-  @[ARTA::Post(path: "")]
-  @[ARTA::View(status: :created)]
-  @[ARTA::ParamConverter("article", converter: RequestBody, model: Article)]
-  def new_article(article : Article) : Article
-    # Since we have an actual `Article` instance, we can simply save and return the article.
-    article.save
-    article
-  end
-end
-```
-
-We can now easily save new entities, and be assured they are valid by running validations as well within our converter.  However what about updating an entity?  The [Serializer][Athena::Serializer] component has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  This feature allows updated values to be *applied* to an existing object as opposed to either needing to create a whole new object from the request data or manually handle applying those changes.
-
-```crystal
-# Define a custom `ASR::ObjectConstructorInterface` to allow sourcing the model from the database
-# as part of `PUT` requests, and if the type is a `Granite::Base`.
-#
-# Alias our service to `ASR::ObjectConstructorInterface` so ours gets injected instead.
-@[ADI::Register(alias: ASR::ObjectConstructorInterface)]
-class DBObjectConstructor
-  include Athena::Serializer::ObjectConstructorInterface
-
-  # Inject `ART::RequestStore` in order to have access to the current request.
-  # Also inject `ASR::InstantiateObjectConstructor` to act as our fallback constructor.
-  def initialize(@request_store : ART::RequestStore, @fallback_constructor : ASR::InstantiateObjectConstructor); end
-
-  # :inherit:
-  def construct(navigator : ASR::Navigators::DeserializationNavigatorInterface, properties : Array(ASR::PropertyMetadataBase), data : ASR::Any, type)
-    # Fallback on the default object constructor if the type is not a `Granite` model.
-    unless type <= Granite::Base
-      return @fallback_constructor.construct navigator, properties, data, type
-    end
-
-    # Fallback on the default object constructor if the current request is not a `PUT`.
-    unless @request_store.request.method == "PUT"
-      return @fallback_constructor.construct navigator, properties, data, type
-    end
-
-    # Lookup the object from the database; assume the object has an `id` property.
-    entity = type.find data["id"].as_i64
-
-    # Return a `404` error if no record exists with the given ID.
-    raise ART::Exceptions::NotFound.new "An item with the provided ID could not be found." unless entity
-
-    # Apply the updated properties to the retrieved record
-    entity.apply navigator, properties, data
-
-    # Return the entity
-    entity
-  end
-end
-```
-
-The [Validator][Athena::Validator] component could also be injected into the param converter to run validations after deserialzing an object.
