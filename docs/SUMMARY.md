@@ -13,6 +13,7 @@
         * [Listeners](cookbook/listeners.md)
         * [Param Converters](cookbook/param_converters.md)
         * [Exclusion Strategies](cookbook/exclusion_strategies.md)
+        * [Object Constructors](cookbook/object_constructors.md)
 * [Routing](Routing/index.md)
     * [Aliases](Routing/aliases.md)
     * Routing/*

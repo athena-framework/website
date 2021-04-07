@@ -10,7 +10,7 @@ Steps 1 and 3 are handled via Crystal's [HTTP::Server](https://crystal-lang.org/
 
 ## Powered By Events
 
-Athena is an event based framework, meaning it emits various events via the [Event Dispatcher](./event_dispatcher.md) component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are dispatched, is depicted below in a visual format:
+Athena is an event based framework, meaning it emits various events via the [Event Dispatcher](/components/event_dispatcher) component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are dispatched, is depicted below in a visual format:
 
 ![High Level Request Life-cycle Flow](../img/Athena.png)
 
@@ -32,7 +32,7 @@ Another use case for this event is populating additional data into the request's
 
 ### 2. Action Event
 
-The next event to be dispatched is the [ART::Events::Action][Athena::Routing::Events::Action] event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action][Athena::Routing::Action]; such as reading custom annotations off of it via the [Config](./config.md) component.
+The next event to be dispatched is the [ART::Events::Action][Athena::Routing::Events::Action] event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action][Athena::Routing::Action]; such as reading custom annotations off of it via the [Config](/components/config) component.
 
 !!! example "Action event in Athena"
     This is the event that [ART::Listeners::ParamConverter][Athena::Routing::Listeners::ParamConverter] and [ART::Listeners::ParamFetcher][Athena::Routing::Listeners::ParamFetcher] listen on to apply custom conversion logic via an [ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface], or resolve request parameters such as [ARTA::QueryParam][Athena::Routing::Annotations::QueryParam]s.
@@ -100,10 +100,10 @@ If an exception is raised at anytime while a request is being handled, the [ART:
 
 It is also possible to handle specific error states differently by registering multiple exception listeners to handle each case.  An example of this could be to invoke some special logic only if the exception is of a specific type.
 
-See the [error handling](../getting_started/README.md#error-handling) section in the getting started docs for more details on how error handling works in Athena.
+See the [error handling](/getting_started#error-handling) section in the getting started docs for more details on how error handling works in Athena.
 
 ## Orchestrated via Dependency Injection
 
 All of the components have been designed with Dependency Injection (DI) in mind; even if it's not a requirement when using a component on its own.  Athena itself makes heavy use of DI as the means to orchestrate all the dependencies that do/may exist in an application.
 
-DI is used to allow for easier [testing](../getting_started/advanced_usage.md#testing), allowing for better reusability, and sharing state between types.  See the [Dependency Injection](./dependency_injection.md) component for more details on how to use it within Athena.
+DI is used to allow for easier [testing](/getting_started/advanced_usage#testing), allowing for better reusability, and sharing state between types.  See the [Dependency Injection](/components/dependency_injection) component for more details on how to use it within Athena.
