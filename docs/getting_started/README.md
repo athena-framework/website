@@ -97,10 +97,10 @@ ART.run
 
 #### Request Parameter
 
-Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.  This can be useful to access data directly off the request object, such consuming the request's body.  This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](/getting_started/advanced_usage#param-converters) to handle deserializing directly into an object.
+Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.  This can be useful to access data directly off the request object, such consuming the request's body.  This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
 
 !!!tip
-    See the [cookbook](/cookbook/param_converters#request-body) for an example of how to setup a generic request body deserialization/validation converter.
+    See the [cookbook](../cookbook/param_converters.md#request-body) for an example of how to setup a generic request body deserialization/validation converter.
 
 ```crystal
 require "athena"
@@ -168,7 +168,7 @@ ART.run
 
 #### Returning Files
 
-An [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] may be used to return [static files](../cookbook/listeners#static-files).  This response type handles caching, partial requests, and setting the relevant headers.  Athena also supports downloading of dynamically generated content by using an [ART::Response][Athena::Routing::Response] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header.  [ART::HeaderUtils.make_dispostion][Athena::Routing::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
+An [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] may be used to return [static files](../cookbook/listeners.md#static-files).  This response type handles caching, partial requests, and setting the relevant headers.  Athena also supports downloading of dynamically generated content by using an [ART::Response][Athena::Routing::Response] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header.  [ART::HeaderUtils.make_dispostion][Athena::Routing::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
 
 ```crystal
 require "athena"

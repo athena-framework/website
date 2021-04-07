@@ -54,7 +54,7 @@ class DBObjectConstructor
 end
 ```
 
-This object constructor could then be used with the [RequestBody](/cookbook/param_converters#request-body) param converter, assuming the `type` of the configuration value is `Granite::Base.class`.  For example:
+This object constructor could then be used with the [RequestBody](param_converters.md#request-body) param converter, assuming the `type` of the configuration value is `Granite::Base.class`.  For example:
 
 ```crystal
 @[ADI::Register]

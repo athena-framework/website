@@ -142,7 +142,7 @@ However, the recommended approach is to structure the types in such a way so tha
 
 ## Configuration
 
-Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime.  A more concrete example of the earlier [section](./#customizing-built-in-types) would be how [ART::Config::CORS][Athena::Routing::Config::CORS] can be used to control [ART::Listeners::CORS][Athena::Routing::Listeners::CORS].  Say we want to enable CORS for our application from our app URL, expose some custom headers, and allow credentials to be sent.  To do this we would want to redefine the configuration type's `self.configure` method.  This method should return an instance of `self`, configured how we wish.  Alternatively, it could return `nil` to disable the listener, which is the default.
+Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime.  A more concrete example of the earlier [section](#customizing-built-in-types) would be how [ART::Config::CORS][Athena::Routing::Config::CORS] can be used to control [ART::Listeners::CORS][Athena::Routing::Listeners::CORS].  Say we want to enable CORS for our application from our app URL, expose some custom headers, and allow credentials to be sent.  To do this we would want to redefine the configuration type's `self.configure` method.  This method should return an instance of `self`, configured how we wish.  Alternatively, it could return `nil` to disable the listener, which is the default.
 
 ```crystal
 def ART::Config::CORS.configure
@@ -206,7 +206,7 @@ end
 
 With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  
 
-It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](/components/dependency_injection) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
 
 ```crystal
 # Tell ADI what parameter we wish to inject as the `app_url` argument.
@@ -281,4 +281,4 @@ end
 ART.run
 ```
 
-The [Cookbook](/cookbook/listeners#pagination) includes an example of how this can be used for pagination.
+The [Cookbook](../cookbook/listeners.md#pagination) includes an example of how this can be used for pagination.
