@@ -2,7 +2,7 @@
 
 ## Request Body
 
-A core part of any API is consuming a request body in order to create/update some entity or to perform some action.  The [Getting Started](/getting_started#request-parameter) docs showed how this could be done by using the raw request object.  However a more robust approach would be to define a generic & reusable [Param Converter][Athena::Routing::ParamConverterInterface] that would be able to deserialize the request body into an object, run any validations defined on it, then provide the object to the controller action.
+A core part of any API is consuming a request body in order to create/update some entity or to perform some action.  The [Getting Started](../getting_started/README.md#request-parameter) docs showed how this could be done by using the raw request object.  However a more robust approach would be to define a generic & reusable [Param Converter][Athena::Routing::ParamConverterInterface] that would be able to deserialize the request body into an object, run any validations defined on it, then provide the object to the controller action.
 
 Ideally this object would be a [DTO](https://en.wikipedia.org/wiki/Data_transfer_object), but could also be an `ORM` entity for simple use cases.
 
@@ -130,7 +130,7 @@ While a valid request would return:
 
 The `RequestBody` converter provides a generic reusable way to convert the request body's `JSON` payload into objects that can have complex deserialization/validation logic via the [Serializer][Athena::Serializer] and [Validator][Athena::Validator] components respectively.
 
-The Serializer component also has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  Checkout the [cookbook](/cookbook/object_constructors#db) for how could be used when working with raw DB entities.
+The Serializer component also has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  Checkout the [cookbook](object_constructors.md#db) for how could be used when working with raw DB entities.
 
 ## DB
 

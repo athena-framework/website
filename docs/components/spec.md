@@ -1,5 +1,5 @@
 Athena strongly suggests following the [SOLID](https://en.wikipedia.org/wiki/SOLID) design principles;
-especially the [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) in order to create types that are easy to test.  See the [Dependency Injection](/components/dependency_injection) component for a more detailed look.
+especially the [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) in order to create types that are easy to test.  See the [Dependency Injection](../components/dependency_injection.md) component for a more detailed look.
 
 If these principles are followed then any controller/service can easily be unit tested on their own as you would any Crystal type, possibly utilizing [ASPEC::TestCase][Athena::Spec::TestCase] to provide helpful abstractions around common testing/helper logic for sets of common types.
 
