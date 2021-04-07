@@ -95,23 +95,28 @@ ART.run
 # GET /?page=5   # => {"code":422,"message":"Parameter 'page' of value '5' violated a constraint: 'Parameter 'page' value does not match requirements: (?-imsx:^(?-imsx:\\d{2})$)'\n"}
 ```
 
-Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.
-This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create
-a [Param Converter](./advanced_usage.md#param-converters) to handle deserializing directly into an object.  The [cookbook](../cookbook/param_converters/#request-body) contains an example of this.
+#### Request Parameter
+
+Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.  This can be useful to access data directly off the request object, such consuming the request's body.  This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](/getting_started/advanced_usage#param-converters) to handle deserializing directly into an object.
+
+!!!tip
+    See the [cookbook](/cookbook/param_converters#request-body) for an example of how to setup a generic request body deserialization/validation converter.
 
 ```crystal
 require "athena"
 
 class ExampleController < ART::Controller
   @[ARTA::Post("/data")]
-  def data(request : HTTP::Request) : String?
-    request.body.try &.gets_to_end
+  def data(request : HTTP::Request) : String
+    raise ART::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
+    
+    JSON.parse(body).as_h["name"].as_s
   end
 end
 
 ART.run
 
-# POST /data body: "foo--bar" # => "foo--bar"
+# POST /data body: {"id":1,"name":"Jim"} # => Jim
 ```
 
 #### Returning Raw Data
