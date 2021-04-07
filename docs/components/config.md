@@ -206,7 +206,7 @@ end
 
 With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  
 
-It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](./dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](/components/dependency_injection) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
 
 ```crystal
 # Tell ADI what parameter we wish to inject as the `app_url` argument.

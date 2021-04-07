@@ -1,8 +1,8 @@
-[Event Listeners](../components/README.md#powered-by-events) are a core part of Athena's architecture that allows tapping into specific events within the life-cycle of each request.  Custom events can also be defined, dispatched, and listened upon.  See the related [EventDispatcher](../components/event_dispatcher.md) component for more information.
+[Event Listeners](/components#powered-by-events) are a core part of Athena's architecture that allows tapping into specific events within the life-cycle of each request.  Custom events can also be defined, dispatched, and listened upon.  See the related [EventDispatcher](/components/event_dispatcher) component for more information.
 
 ## JWT Security
 
-Currently Athena does not have any built in abstractions related to authentication or authorization.  This feature is planned and will be implemented at some point in the future.  Until then however, we can define a security listener that implements our authentication logic via listening on the [action](../components/README.md#1-request-event) event which includes a reference to the original [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) object.
+Currently Athena does not have any built in abstractions related to authentication or authorization.  This feature is planned and will be implemented at some point in the future.  Until then however, we can define a security listener that implements our authentication logic via listening on the [action](/components#1-request-event) event which includes a reference to the original [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) object.
 
 ```crystal
 # Define and register a listener to handle authenticating requests.
@@ -75,14 +75,14 @@ struct SecurityListener
 end
 ```
 
-From here, it would be up to the developer to implement a way to authorize the user now that they have been authenticated and are accessible within the application.  One option could be to utilize the [Custom Annotations](../components/config.md#custom-annotations) as a means to "tag" controller actions with specific "levels" of security; then add another `#call` method to the security listener to listen on the [action](../components/README.md#2-action-event) event which exposes the [ART::Action][Athena::Routing::Action] related to the current request from which the annotations could be read off of.
+From here, it would be up to the developer to implement a way to authorize the user now that they have been authenticated and are accessible within the application.  One option could be to utilize the [Custom Annotations](/components/config#custom-annotations) as a means to "tag" controller actions with specific "levels" of security; then add another `#call` method to the security listener to listen on the [action](/components#2-action-event) event which exposes the [ART::Action][Athena::Routing::Action] related to the current request from which the annotations could be read off of.
 
 !!! page
     This example is a modified version of the one used as part of the [JSON API Blog Tutorial](https://dev.to/blacksmoke16/creating-a-json-api-with-athena--granite-510i) blog post.
 
 ## Pagination
 
-Generic pagination can be implemented via listening on the [view](../components/README.md#4-view-event) event which exposes the value returned via the related controller action.  We can then define a `Paginated` [Custom Annotation](../components/config.md#custom-annotations) that can be applied to controller actions to have them be paginated via the listener.
+Generic pagination can be implemented via listening on the [view](/components#4-view-event) event which exposes the value returned via the related controller action.  We can then define a `Paginated` [Custom Annotation](/components/config#custom-annotations) that can be applied to controller actions to have them be paginated via the listener.
 
 ```crystal
 # Define our configuration annotation with the default pagination values.
@@ -152,7 +152,7 @@ ART.run
 
 ## Static Files
 
-Static files can also be served from an Athena application.  This can be achieved by combining an [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] with the [request](../components/README.md#1-request-event) event; checking if the request's path represents a file/directory within the application's public directory and returning the file if so.
+Static files can also be served from an Athena application.  This can be achieved by combining an [ART::BinaryFileResponse][Athena::Routing::BinaryFileResponse] with the [request](/components#1-request-event) event; checking if the request's path represents a file/directory within the application's public directory and returning the file if so.
 
 ```crystal
 # Register a request event listener to handle returning static files.
