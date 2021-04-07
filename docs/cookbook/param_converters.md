@@ -11,7 +11,7 @@ require "athena"
 
 # Define our base type.
 # DTO objects are defined as structs as they
-# are more performant and should be immuatable.
+# are more performant and should be immutable.
 abstract struct DTO
   include ASR::Model
 end
@@ -178,7 +178,7 @@ class ExampleController < ART::Controller
   @[ARTA::Get("/:id")]
   @[ARTA::ParamConverter("article", converter: DBConverter, entity: Article)]
   def get_article(article : Article) : Article
-    # Nothing else to do except return the releated article.
+    # Nothing else to do except return the related article.
     article
   end
 end
