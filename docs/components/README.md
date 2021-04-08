@@ -67,6 +67,8 @@ The type of the value returned from the controller action determines what happen
 
 The [ART::Events::View][Athena::Routing::Events::View] event is only dispatched when the controller action does _NOT_ return an [ART::Response][Athena::Routing::Response].  The purpose of this event is to turn the controller action's return value into an [ART::Response][Athena::Routing::Response].
 
+An [ART::View][] may be used to customize the response, e.g. setting a custom response status and/or adding additional headers; while keeping the controller action response data intact.
+
 This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.).  See the [negotiation](/components/negotiation) component for more information on this feature.
 
 !!! example "View event in Athena"
