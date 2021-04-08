@@ -107,15 +107,10 @@ require "athena"
 
 class ExampleController < ART::Controller
   @[ARTA::Post("/data")]
-<<<<<<< master
-  def data(request : HTTP::Request) : String
+  def data(request : ART::Request) : String
     raise ART::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
     
     JSON.parse(body).as_h["name"].as_s
-=======
-  def data(request : ART::Request) : String?
-    request.body.try &.gets_to_end
->>>>>>> Update HTTP::Request references to ART::Request
   end
 end
 
