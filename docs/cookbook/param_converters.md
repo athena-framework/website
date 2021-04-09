@@ -61,7 +61,12 @@ struct RequestBody < ART::ParamConverterInterface
     end
 
     # Deserialize the request body into a DTO object.
-    object = @serializer.deserialize configuration.type, body, :json
+    begin
+      object = @serializer.deserialize configuration.type, body, :json
+    rescue ex : ASR::Exceptions::DeserializationException
+      # Rescue and reraise a better exception in the case of a desrialization error.
+      raise ART::Exceptions::BadRequest.new ex.message.not_nil!, cause: ex
+    end
 
     # If the object is validatable, run its validations,
     # raising a 422 if it is not.
