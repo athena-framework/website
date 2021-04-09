@@ -54,7 +54,11 @@ struct RequestBody < ART::ParamConverterInterface
   # :inherit:
   def apply(request : HTTP::Request, configuration : Configuration) : Nil
     # Ensure the request body isn't empty.
-    raise ART::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
+    body = request.body.try &.gets_to_end
+    
+    if !body || body.blank?
+      raise ART::Exceptions::BadRequest.new "Request body is empty."
+    end
 
     # Deserialize the request body into a DTO object.
     object = @serializer.deserialize configuration.type, body, :json
