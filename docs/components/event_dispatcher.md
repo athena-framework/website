@@ -34,8 +34,7 @@ ART.run
 # GET / # => Hello World (with `FOO => BAR` header)
 ```
 
-!!! tip
-    A single event listener may listen on multiple events.  Instance variables can be used to share state between the events.
+TIP: A single event listener may listen on multiple events.  Instance variables can be used to share state between the events.
 
 ## Custom Events
 

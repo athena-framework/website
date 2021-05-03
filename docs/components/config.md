@@ -4,8 +4,7 @@ Athena includes the [Athena::Config][] component as a means to configure an Athe
 
 Both configuration and parameters make use of the same high level implementation.  A type is used to "model" the structure and type of each value, whether it's a scalar value like a `String`, or another object.  These types are then added into the base types provided by `Athena::Config`.  This approach provides full compile time type safety both in the structure of the configuration/parameters, but also the type of each value.  It also allows for plenty of flexibility in _how_ each object is constructed.
 
-!!!tip
-    Structs are the preferred type to use, especially for parameters.
+TIP: Structs are the preferred type to use, especially for parameters.
 
 From an organizational standpoint, it is up to the user to determine how they wish to define/organize these configuration/parameter types.  However, the suggested way is to use a central file that should require the individual custom types, for example:
 
@@ -220,8 +219,7 @@ end
 
 To reiterate, the primary benefit of parameters is to centralize and decouple their values from the types that actually use them.  Another benefit is they offer full compile time safety, if for example, the type of `app_url` was mistakenly set to `Int32` or if the parameter's name was typo'd, e.g. `"%app.ap_url%"`; both would result in compile time errors.
 
-!!!note
-    The only valid usecases for accessing parameters directly via `ART.parameters` is within a configuration type, or a type outside of Athena's control/DI framework.
+NOTE: The only valid usecases for accessing parameters directly via `ART.parameters` is within a configuration type, or a type outside of Athena's control/DI framework.
 
 ## Custom Annotations
 

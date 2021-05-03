@@ -2,8 +2,7 @@
 
 The [Serializer][Athena::Serializer] component also has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  A use case could be retrieving the object from the database as part of a `PUT` request in order to apply the deserialized data onto it.  This would allow it to retain the PK, any timestamps, or [ASRA::ReadOnly][ASRA::ReadOnly] values.
 
-!!!note
-    This example uses the `Granite` ORM, but should work with others.
+NOTE: This example uses the `Granite` ORM, but should work with others.
 
 ```crystal
 # Define a custom `ASR::ObjectConstructorInterface` to allow

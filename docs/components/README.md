@@ -20,8 +20,7 @@ The very first event that is dispatched is the [ART::Events::Request][Athena::Ro
 
 In some cases the listener may have enough information to return an [ART::Response][Athena::Routing::Response] immediately.  An example of this would be the [ART::Listeners::CORS][Athena::Routing::Listeners::CORS] listener.  If enabled it is able to return a `CORS` preflight response even before routing is invoked.
 
-!!! warning
-    If an [ART::Response][Athena::Routing::Response] is returned at this stage, the flow of the request skips directly to the [response](#5-response-event) event.  Future `Request` event listeners will not be invoked either.
+WARNING: If an [ART::Response][Athena::Routing::Response] is returned at this stage, the flow of the request skips directly to the [response](#5-response-event) event.  Future `Request` event listeners will not be invoked either.
 
 Another use case for this event is populating additional data into the request's attributes; such as the locale or format of the request.
 
@@ -54,8 +53,7 @@ The default algorithm is as follows:
 
 Custom `ArgumentValueResolverInterface`s may be created & registered to extend this functionality.
 
-!!! todo
-    An additional event could possibly be added after the arguments have been resolved, but before invoking the controller action.
+TODO: An additional event could possibly be added after the arguments have been resolved, but before invoking the controller action.
 
 #### Execute the Controller Action
 

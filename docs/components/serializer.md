@@ -2,8 +2,7 @@ The [Serializer][Athena::Serializer] component adds enhanced (de)serialization f
 
 When an [ASR::Serializable][Athena::Serializer::Serializable] is returned from a controller action, that object will be serialized via the serializer component, as opposed to Crystal's standard libraries' `#to_json` method.
 
-!!! info
-    If an object implements _both_ `ASR::Serializable` and `JSON::Serializable`, the serializer component takes priority.
+INFO: If an object implements _both_ `ASR::Serializable` and `JSON::Serializable`, the serializer component takes priority.
 
 The [ARTA::View][Athena::Routing::Annotations::View] annotation can be used to configure serialization related options on a per route basis.
 
