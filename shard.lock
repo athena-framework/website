@@ -1,38 +1,38 @@
+# NOTICE: This lockfile contains some overrides from shard.dev.yml
 version: 2.0
 shards:
   amber_router:
     git: https://github.com/amberframework/amber-router.git
     version: 0.4.4
 
-  athena:
-    git: https://github.com/athena-framework/athena.git
-    version: 0.13.0
+  athena: # Overridden
+    path: ../athena
 
-  athena-config:
+  athena-config: # Overridden
     git: https://github.com/athena-framework/config.git
-    version: 0.2.1
+    version: 0.3.0+git.commit.edaf54000f10e355d3a27be164f223d3129ab1ac
 
-  athena-dependency_injection:
+  athena-dependency_injection: # Overridden
     git: https://github.com/athena-framework/dependency-injection.git
-    version: 0.2.6
+    version: 0.3.1+git.commit.d0f99ced3f48f46d4462e4e49aafa8c087c5726b
 
-  athena-event_dispatcher:
+  athena-event_dispatcher: # Overridden
     git: https://github.com/athena-framework/event-dispatcher.git
-    version: 0.1.3
+    version: 0.1.3+git.commit.35bac6d2bb01f07972aa0f09f20a80ba4e9df719
 
-  athena-negotiation:
+  athena-negotiation: # Overridden
     git: https://github.com/athena-framework/negotiation.git
-    version: 0.1.1
+    version: 0.1.1+git.commit.5fc45d1908ef3fc6428cdef2178d70832dc90379
 
-  athena-serializer:
+  athena-serializer: # Overridden
     git: https://github.com/athena-framework/serializer.git
-    version: 0.2.7
+    version: 0.2.7+git.commit.8938ce3941688bcdb6f1b4ba3d6054871131fb1e
 
-  athena-spec:
+  athena-spec: # Overridden
     git: https://github.com/athena-framework/spec.git
-    version: 0.2.4
+    version: 0.2.4+git.commit.c5257484be454b7f72c0164d16c2fcd1cabb9f2e
 
-  athena-validator:
+  athena-validator: # Overridden
     git: https://github.com/athena-framework/validator.git
-    version: 0.1.4
+    version: 0.1.4+git.commit.c439857690ad9b7f7bffcc1685268ac5939fca37
 

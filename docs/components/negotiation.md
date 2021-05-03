@@ -60,3 +60,107 @@ The implementation can be as simple/complex as needed for the given format.  Off
 ### Adding/Customizing Formats
 
 [ART::Request::FORMATS][] represents the formats supported by default.  However this list is not exhaustive and may need altered application to application; such as [registering][Athena::Routing::Request.register_format] new formats.
+
+## Example
+
+The following is a demonstration of how the various negotation features can be used inconjunction. The example includes:
+
+1. Defining a custom [ART::View::ViewHandler][] for the `csv` format.
+1. Enabling content negotation, supporting `json` and `csv` formats, falling back to `json`.
+1. An endpoint returning an [ART::View][] that sets a custom HTTP status.
+
+```crystal
+require "csv"
+
+# An interface to denote a type can provide its data in CSV format.
+#
+# An easier/more robust implementation can probably be thought of,
+# however this is mainly for demonstration purposes.
+module CSVRenderable
+  abstract def to_csv(builder : CSV::Builder) : Nil
+end
+
+# Define an example entity type.
+record User, id : Int64, name : String, email : String do
+  include CSVRenderable
+  include JSON::Serializable
+
+  # Define the headers this type has.
+  def self.headers : Enumerable(String)
+    {
+      "id",
+      "name",
+      "email",
+    }
+  end
+
+  def to_csv(builder : CSV::Builder) : Nil
+    # Add the related values based on `self.`
+    builder.row @id, @name, @email
+  end
+end
+
+# Register our handler as a service.
+@[ADI::Register]
+class CSVFormatHandler
+  # Implement the interface.
+  include Athena::Routing::View::FormatHandlerInterface
+
+  # :inherit:
+  def call(view_handler : ART::View::ViewHandlerInterface, view : ART::ViewBase, request : ART::Request, format : String) : ART::Response
+    view_data = view.data
+
+    headers = if view_data.is_a? Enumerable
+                typeof(view_data.first).headers
+              else
+                view_data.class.headers
+              end
+
+    data = if view_data.is_a? Enumerable
+             view_data
+           else
+             {view_data}
+           end
+
+    # Assume each item has the same headers.
+    content = CSV.build do |csv|
+      csv.row headers
+
+      data.each do |r|
+        r.to_csv csv
+      end
+    end
+
+    # Return an ART::Response with the rendered CSV content.
+    # Athena handles setting the proper content-type header based on the format.
+    # But could be overridden here if so desired.
+    ART::Response.new content
+  end
+
+  # :inherit:
+  def format : String
+    "csv"
+  end
+end
+
+# Configure the format listener.
+def ART::Config::ContentNegotiation.configure
+  new(
+    # Allow json and csv formats, falling back on json if an unsupported format is requested.
+    Rule.new(priorities: ["json", "csv"], fallback_format: "json"),
+  )
+end
+
+class ExampleController < ART::Controller
+  @[ARTA::Get("/users")]
+  def get_users : ART::View(Array(User))
+    self.view([
+      User.new(1, "Jim", "jim@example.com"),
+      User.new(2, "Bob", "bob@example.com"),
+      User.new(3, "Sally", "sally@example.com"),
+    ], status: :im_a_teapot)
+  end
+end
+
+ART.run
+```

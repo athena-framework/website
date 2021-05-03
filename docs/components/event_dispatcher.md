@@ -36,6 +36,9 @@ ART.run
 
 TIP: A single event listener may listen on multiple events.  Instance variables can be used to share state between the events.
 
+!!! warning
+    The "type" of the listener has an effect on its behavior!  When a `struct` service is retrieved or injected into a type, it will be a copy of the one in the SC (passed by value). This means that changes made to it in one type, will *NOT* be reflected in other types. A `class` service on the other hand will be a reference to the one in the SC. This allows it to share state between services.
+
 ## Custom Events
 
 Custom events can also be defined and dispatched; either within a listener, or in another service by injecting [AED::EventDispatcherInterface][Athena::EventDispatcher::EventDispatcherInterface] and calling `#dispatch`.
