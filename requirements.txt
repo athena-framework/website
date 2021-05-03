@@ -25,8 +25,11 @@ livereload==2.6.3
     # via mkdocs
 lunr[languages]==0.5.8
     # via mkdocs
+markdown-callouts==0.1.0
+    # via -r requirements.in
 markdown==3.3.4
     # via
+    #   markdown-callouts
     #   mkdocs
     #   mkdocs-autorefs
     #   mkdocs-material
