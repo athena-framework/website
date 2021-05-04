@@ -1,0 +1,3074 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://athenaframework.org/Routing/Params/ParamInterface/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>ParamInterface - Athena Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../css/mkdocstrings.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-184169799-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Athena::Routing::Params::ParamInterface" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Athena Framework" class="md-header__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Athena Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ParamInterface
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark theme" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light theme" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        Manual
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../" class="md-tabs__link md-tabs__link--active">
+      Routing
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DependencyInjection/" class="md-tabs__link">
+      DependencyInjection
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../EventDispatcher/" class="md-tabs__link">
+      EventDispatcher
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Config/" class="md-tabs__link">
+      Config
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Serializer/" class="md-tabs__link">
+      Serializer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Validator/" class="md-tabs__link">
+      Validator
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Negotiation/" class="md-tabs__link">
+      Negotiation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Spec/" class="md-tabs__link">
+      Spec
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Athena Framework" class="md-nav__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Athena Framework
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        <span class="md-nav__icon md-icon"></span>
+        
+          Manual
+        
+      </label>
+      <nav class="md-nav" aria-label="Manual" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            Manual
+          
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../../getting_started/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Getting Started
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../../getting_started/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Getting Started
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/advanced_usage/" class="md-nav__link">
+        Advanced Usage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_3">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../../components/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Components
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Components" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../../components/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Components
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/dependency_injection/" class="md-nav__link">
+        Dependency Injection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/event_dispatcher/" class="md-nav__link">
+        Event Dispatcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      <label class="md-nav__link" for="__nav_1_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../../cookbook/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Cookbook
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Cookbook" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../../cookbook/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Cookbook
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/listeners/" class="md-nav__link">
+        Listeners
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/param_converters/" class="md-nav__link">
+        Param Converters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/exclusion_strategies/" class="md-nav__link">
+        Exclusion Strategies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/object_constructors/" class="md-nav__link">
+        Object Constructors
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Routing
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Routing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Routing
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aliases/" class="md-nav__link">
+        Aliases
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Action/" class="md-nav__link">
+        Action
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ActionBase/" class="md-nav__link">
+        ActionBase
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Annotations/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Annotations
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Annotations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Annotations/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Annotations
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Delete/" class="md-nav__link">
+        Delete
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Get/" class="md-nav__link">
+        Get
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Head/" class="md-nav__link">
+        Head
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Link/" class="md-nav__link">
+        Link
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/ParamConverter/" class="md-nav__link">
+        ParamConverter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Patch/" class="md-nav__link">
+        Patch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Post/" class="md-nav__link">
+        Post
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Prefix/" class="md-nav__link">
+        Prefix
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Put/" class="md-nav__link">
+        Put
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/QueryParam/" class="md-nav__link">
+        QueryParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/RequestParam/" class="md-nav__link">
+        RequestParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Route/" class="md-nav__link">
+        Route
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/Unlink/" class="md-nav__link">
+        Unlink
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Annotations/View/" class="md-nav__link">
+        View
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      <label class="md-nav__link" for="__nav_2_5">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Arguments/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Arguments
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Arguments" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Arguments/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Arguments
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/ArgumentMetadata/" class="md-nav__link">
+        ArgumentMetadata
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/ArgumentResolver/" class="md-nav__link">
+        ArgumentResolver
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/ArgumentResolverInterface/" class="md-nav__link">
+        ArgumentResolverInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5_4" type="checkbox" id="__nav_2_5_4" >
+      
+      <label class="md-nav__link" for="__nav_2_5_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Arguments/Resolvers/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Resolvers
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Resolvers" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Arguments/Resolvers/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Resolvers
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/Resolvers/ArgumentValueResolverInterface/" class="md-nav__link">
+        ArgumentValueResolverInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/Resolvers/DefaultValue/" class="md-nav__link">
+        DefaultValue
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/Resolvers/Request/" class="md-nav__link">
+        Request
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Arguments/Resolvers/RequestAttribute/" class="md-nav__link">
+        RequestAttribute
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" >
+      
+      <label class="md-nav__link" for="__nav_2_6">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../BinaryFileResponse/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          BinaryFileResponse
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="BinaryFileResponse" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../BinaryFileResponse/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            BinaryFileResponse
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BinaryFileResponse/ContentDisposition/" class="md-nav__link">
+        ContentDisposition
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" type="checkbox" id="__nav_2_7" >
+      
+      <label class="md-nav__link" for="__nav_2_7">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Config/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Config
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Config" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Config/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Config
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Config/CORS/" class="md-nav__link">
+        CORS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7_2" type="checkbox" id="__nav_2_7_2" >
+      
+      <label class="md-nav__link" for="__nav_2_7_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Config/ContentNegotiation/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ContentNegotiation
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ContentNegotiation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Config/ContentNegotiation/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ContentNegotiation
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Config/ContentNegotiation/Rule/" class="md-nav__link">
+        Rule
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Config/ViewHandler/" class="md-nav__link">
+        ViewHandler
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Controller/" class="md-nav__link">
+        Controller
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ErrorRenderer/" class="md-nav__link">
+        ErrorRenderer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ErrorRendererInterface/" class="md-nav__link">
+        ErrorRendererInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_11" type="checkbox" id="__nav_2_11" >
+      
+      <label class="md-nav__link" for="__nav_2_11">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Events/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Events
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Events" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Events/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Events
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/Action/" class="md-nav__link">
+        Action
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/Exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/Request/" class="md-nav__link">
+        Request
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/RequestAware/" class="md-nav__link">
+        RequestAware
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/Response/" class="md-nav__link">
+        Response
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/SettableResponse/" class="md-nav__link">
+        SettableResponse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/Terminate/" class="md-nav__link">
+        Terminate
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Events/View/" class="md-nav__link">
+        View
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" type="checkbox" id="__nav_2_12" >
+      
+      <label class="md-nav__link" for="__nav_2_12">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Exceptions/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Exceptions
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Exceptions" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Exceptions/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Exceptions
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/BadGateway/" class="md-nav__link">
+        BadGateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/BadRequest/" class="md-nav__link">
+        BadRequest
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/Conflict/" class="md-nav__link">
+        Conflict
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/Forbidden/" class="md-nav__link">
+        Forbidden
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/Gone/" class="md-nav__link">
+        Gone
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/HTTPException/" class="md-nav__link">
+        HTTPException
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/InvalidParameter/" class="md-nav__link">
+        InvalidParameter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/LengthRequired/" class="md-nav__link">
+        LengthRequired
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/MethodNotAllowed/" class="md-nav__link">
+        MethodNotAllowed
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/NotAcceptable/" class="md-nav__link">
+        NotAcceptable
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/NotFound/" class="md-nav__link">
+        NotFound
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/NotImplemented/" class="md-nav__link">
+        NotImplemented
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/PreconditionFailed/" class="md-nav__link">
+        PreconditionFailed
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/ServiceUnavailable/" class="md-nav__link">
+        ServiceUnavailable
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/StopFormatListener/" class="md-nav__link">
+        StopFormatListener
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/TooManyRequests/" class="md-nav__link">
+        TooManyRequests
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/Unauthorized/" class="md-nav__link">
+        Unauthorized
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/UnprocessableEntity/" class="md-nav__link">
+        UnprocessableEntity
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/UnsupportedMediaType/" class="md-nav__link">
+        UnsupportedMediaType
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HeaderUtils/" class="md-nav__link">
+        HeaderUtils
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_14" type="checkbox" id="__nav_2_14" >
+      
+      <label class="md-nav__link" for="__nav_2_14">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Listeners/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Listeners
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Listeners" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_14">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Listeners/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Listeners
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/CORS/" class="md-nav__link">
+        CORS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/Error/" class="md-nav__link">
+        Error
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/Format/" class="md-nav__link">
+        Format
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/ParamConverter/" class="md-nav__link">
+        ParamConverter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/ParamFetcher/" class="md-nav__link">
+        ParamFetcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/Routing/" class="md-nav__link">
+        Routing
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Listeners/View/" class="md-nav__link">
+        View
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_15" type="checkbox" id="__nav_2_15" >
+      
+      <label class="md-nav__link" for="__nav_2_15">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../ParamConverterInterface/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ParamConverterInterface
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ParamConverterInterface" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_15">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../ParamConverterInterface/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ParamConverterInterface
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ParamConverterInterface/Configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ParamConverterInterface/ConfigurationInterface/" class="md-nav__link">
+        ConfigurationInterface
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ParameterBag/" class="md-nav__link">
+        ParameterBag
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Parameters/" class="md-nav__link">
+        Parameters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_18" type="checkbox" id="__nav_2_18" checked>
+      
+      <label class="md-nav__link" for="__nav_2_18">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Params
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Params" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_18">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Params
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Param/" class="md-nav__link">
+        Param
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParamFetcher/" class="md-nav__link">
+        ParamFetcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParamFetcherInterface/" class="md-nav__link">
+        ParamFetcherInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ParamInterface
+          </a>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ParamInterface
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#constraints" class="md-nav__link">
+    #constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#default" class="md-nav__link">
+    #default
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#description" class="md-nav__link">
+    #description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#extract_value(request,default)" class="md-nav__link">
+    #extract_value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#incompatibles" class="md-nav__link">
+    #incompatibles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#name" class="md-nav__link">
+    #name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#strict?" class="md-nav__link">
+    #strict?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QueryParam/" class="md-nav__link">
+        QueryParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RequestParam/" class="md-nav__link">
+        RequestParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ScalarParam/" class="md-nav__link">
+        ScalarParam
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RedirectResponse/" class="md-nav__link">
+        RedirectResponse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Request/" class="md-nav__link">
+        Request
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RequestMatcherInterface/" class="md-nav__link">
+        RequestMatcherInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RequestStore/" class="md-nav__link">
+        RequestStore
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_23" type="checkbox" id="__nav_2_23" >
+      
+      <label class="md-nav__link" for="__nav_2_23">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Response/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Response
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Response" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_23">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Response/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Response
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Response/DirectWriter/" class="md-nav__link">
+        DirectWriter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Response/Headers/" class="md-nav__link">
+        Headers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Response/Writer/" class="md-nav__link">
+        Writer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RouteCollection/" class="md-nav__link">
+        RouteCollection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RouteHandler/" class="md-nav__link">
+        RouteHandler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Router/" class="md-nav__link">
+        Router
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RouterInterface/" class="md-nav__link">
+        RouterInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_28" type="checkbox" id="__nav_2_28" >
+      
+      <label class="md-nav__link" for="__nav_2_28">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Spec/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Spec
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Spec" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_28">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Spec/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Spec
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/APITestCase/" class="md-nav__link">
+        APITestCase
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/AbstractBrowser/" class="md-nav__link">
+        AbstractBrowser
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/HTTPBrowser/" class="md-nav__link">
+        HTTPBrowser
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/MockRouteCollection/" class="md-nav__link">
+        MockRouteCollection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/WebTestCase/" class="md-nav__link">
+        WebTestCase
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../StreamedResponse/" class="md-nav__link">
+        StreamedResponse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_30" type="checkbox" id="__nav_2_30" >
+      
+      <label class="md-nav__link" for="__nav_2_30">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../TimeConverter/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          TimeConverter
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="TimeConverter" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_30">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../TimeConverter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            TimeConverter
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TimeConverter/Configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../URLGenerator/" class="md-nav__link">
+        URLGenerator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_32" type="checkbox" id="__nav_2_32" >
+      
+      <label class="md-nav__link" for="__nav_2_32">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../URLGeneratorInterface/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          URLGeneratorInterface
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="URLGeneratorInterface" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_32">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../URLGeneratorInterface/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            URLGeneratorInterface
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../URLGeneratorInterface/ReferenceType/" class="md-nav__link">
+        ReferenceType
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_33" type="checkbox" id="__nav_2_33" >
+      
+      <label class="md-nav__link" for="__nav_2_33">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../View/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          View
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="View" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_33">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../View/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            View
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../View/ConfigurableViewHandlerInterface/" class="md-nav__link">
+        ConfigurableViewHandlerInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../View/Context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../View/FormatHandlerInterface/" class="md-nav__link">
+        FormatHandlerInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../View/FormatNegotiator/" class="md-nav__link">
+        FormatNegotiator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../View/ViewHandler/" class="md-nav__link">
+        ViewHandler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_33_6" type="checkbox" id="__nav_2_33_6" >
+      
+      <label class="md-nav__link" for="__nav_2_33_6">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../View/ViewHandlerInterface/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ViewHandlerInterface
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ViewHandlerInterface" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_33_6">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../View/ViewHandlerInterface/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ViewHandlerInterface
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../View/ViewHandlerInterface/HandlerType/" class="md-nav__link">
+        HandlerType
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ViewBase/" class="md-nav__link">
+        ViewBase
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DependencyInjection/" class="md-nav__link">
+        DependencyInjection
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../EventDispatcher/" class="md-nav__link">
+        EventDispatcher
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#constraints" class="md-nav__link">
+    #constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#default" class="md-nav__link">
+    #default
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#description" class="md-nav__link">
+    #description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#extract_value(request,default)" class="md-nav__link">
+    #extract_value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#incompatibles" class="md-nav__link">
+    #incompatibles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#name" class="md-nav__link">
+    #name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Params::ParamInterface#strict?" class="md-nav__link">
+    #strict?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L4" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <div class="doc doc-object doc-type module">
+<h1 id="Athena::Routing::Params::ParamInterface" class="doc doc-heading">module <code>Athena::Routing::Params::ParamInterface</code>
+<a href="#Athena::Routing::Params::ParamInterface" class="headerlink" title="Permanent link">#</a></h1>
+  <div class="doc doc-contents first">
+<p>Represents a request parameter; e.x. query param, form data, a file, etc.</p>
+<p>See <a href="../../Annotations/QueryParam/#Athena::Routing::Annotations::QueryParam"><code>ARTA::QueryParam</code></a> and <a href="../../Annotations/RequestParam/#Athena::Routing::Annotations::RequestParam"><code>ARTA::RequestParam</code></a>.</p>
+      <div class="doc doc-children">
+
+            <h2>Direct including types</h2>
+              <code>Athena::Routing::Params::QueryParam(T)</code>
+              <code>Athena::Routing::Params::RequestParam(T)</code>
+
+
+<h2 id="Athena::Routing::Params::ParamInterface-methods">Methods<a href="#Athena::Routing::Params::ParamInterface-methods" class="headerlink" title="Permanent link">#</a></h2>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#constraints" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #constraints<span style="font-weight: normal"> <code class="highlight language-crystal"><span class="p">:</span> <span class="n">Array</span><span class="p">(</span><a href="../../../Validator/Constraint/#Athena::Validator::Constraint">AVD::Constraint</a><span class="p">)</span></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#constraints" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns the <a href="../../../Validator/Constraint/#Athena::Validator::Constraint"><code>AVD::Constraint</code></a>s that should be used to validate the parameter's value.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L19">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#default" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #default<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#default" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns the value that should be used if <a href="#Athena::Routing::Params::ParamInterface#strict?"><code>#strict?</code></a> is false and the parameter was not provided, defaulting to <code>nil</code>.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L9">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#description" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #description<span style="font-weight: normal"> <code class="highlight language-crystal"><span class="p">:</span> <span class="n">String?</span></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#description" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns a human readable summary of what the parameter is used for.
+In the future this may be used to supplement auto generated endpoint documentation.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L13">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#extract_value(request,default)" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #extract_value<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">request</span> <span class="p">:</span> <a href="../../Request/#Athena::Routing::Request">ART::Request</a><span class="p">,</span> <span class="n">default</span> <span class="p">:</span> <span class="n">_</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#extract_value(request,default)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns the <code>self</code>'s value from the provided <em>request</em>, or <em>default</em> if it was not present.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L25">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#incompatibles" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #incompatibles<span style="font-weight: normal"> <code class="highlight language-crystal"><span class="p">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">String</span><span class="p">)?</span></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#incompatibles" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns the parameters that may not be present at the same time as <code>self</code>.  See the "Incompatibilities" section of <a href="../../Annotations/QueryParam/#Athena::Routing::Annotations::QueryParam"><code>ARTA::QueryParam</code></a>.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L16">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#name" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #name<span style="font-weight: normal"> <code class="highlight language-crystal"><span class="p">:</span> <span class="n">String</span></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#name" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns the name of the parameter, maps to the controller action argument name.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L6">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Params::ParamInterface#strict?" class="doc doc-heading"><small style="font-weight: normal">abstract</small>     <code>
+      #strict?<span style="font-weight: normal"> <code class="highlight language-crystal"><span class="p">:</span> <span class="n">Bool</span></code></span>
+    </code>
+<a href="#Athena::Routing::Params::ParamInterface#strict?" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Denotes whether <code>self</code> should be processed strictly.  See the "Strict" section of <a href="../../Annotations/QueryParam/#Athena::Routing::Annotations::QueryParam"><code>ARTA::QueryParam</code></a>.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/params/param_interface.cr#L22">View source</a>
+</div>      </div>
+  </div>
+
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../ParamFetcherInterface/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              ParamFetcherInterface
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../QueryParam/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              QueryParam
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/athena-framework" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://gitter.im/athena-frameworkcr/community" target="_blank" rel="noopener" title="gitter.im" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>

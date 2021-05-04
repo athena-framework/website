@@ -1,0 +1,1095 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://athenaframework.org/components/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Components - Athena Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../css/mkdocstrings.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-184169799-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#powered-by-events" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Athena Framework" class="md-header__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Athena Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Components
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark theme" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light theme" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link md-tabs__link--active">
+        Manual
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../Routing/" class="md-tabs__link">
+      Routing
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../DependencyInjection/" class="md-tabs__link">
+      DependencyInjection
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../EventDispatcher/" class="md-tabs__link">
+      EventDispatcher
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../Config/" class="md-tabs__link">
+      Config
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../Serializer/" class="md-tabs__link">
+      Serializer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../Validator/" class="md-tabs__link">
+      Validator
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../Negotiation/" class="md-tabs__link">
+      Negotiation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../Spec/" class="md-tabs__link">
+      Spec
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Athena Framework" class="md-nav__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Athena Framework
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      <label class="md-nav__link" for="__nav_1">
+        <span class="md-nav__icon md-icon"></span>
+        
+          Manual
+        
+      </label>
+      <nav class="md-nav" aria-label="Manual" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            Manual
+          
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../getting_started/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Getting Started
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../getting_started/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Getting Started
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/advanced_usage/" class="md-nav__link">
+        Advanced Usage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+      
+      <label class="md-nav__link" for="__nav_1_3">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="./" class="md-nav__link md-nav__link--active"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Components
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Components" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Components
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dependency_injection/" class="md-nav__link">
+        Dependency Injection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event_dispatcher/" class="md-nav__link">
+        Event Dispatcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      <label class="md-nav__link" for="__nav_1_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../cookbook/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Cookbook
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Cookbook" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../cookbook/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Cookbook
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookbook/listeners/" class="md-nav__link">
+        Listeners
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookbook/param_converters/" class="md-nav__link">
+        Param Converters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookbook/exclusion_strategies/" class="md-nav__link">
+        Exclusion Strategies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookbook/object_constructors/" class="md-nav__link">
+        Object Constructors
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Routing/" class="md-nav__link">
+        Routing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DependencyInjection/" class="md-nav__link">
+        DependencyInjection
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EventDispatcher/" class="md-nav__link">
+        EventDispatcher
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#powered-by-events" class="md-nav__link">
+    Powered By Events
+  </a>
+  
+    <nav class="md-nav" aria-label="Powered By Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-request-event" class="md-nav__link">
+    1. Request Event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-action-event" class="md-nav__link">
+    2. Action Event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-invoke-the-controller-action" class="md-nav__link">
+    3. Invoke the Controller Action
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Invoke the Controller Action">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#argument-resolution" class="md-nav__link">
+    Argument Resolution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-the-controller-action" class="md-nav__link">
+    Execute the Controller Action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle-the-response" class="md-nav__link">
+    Handle the Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-view-event" class="md-nav__link">
+    4. View Event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-response-event" class="md-nav__link">
+    5. Response Event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-return-the-response" class="md-nav__link">
+    6. Return the Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-terminate-event" class="md-nav__link">
+    7. Terminate Event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-exception-handling" class="md-nav__link">
+    8. Exception Handling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orchestrated-via-dependency-injection" class="md-nav__link">
+    Orchestrated via Dependency Injection
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/athena-framework/website/blob/master/docs/components/README.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Components</h1>
+                
+                <p>This section will focus on how each component is integrated into Athena, as well an overview of the overall design of Athena.</p>
+<p>At a high level Athena's job is <em>to interpret a request and create the appropriate response based on your application logic</em>.  Conceptually this could be broken down into three steps:</p>
+<ol>
+<li>Consume the request</li>
+<li>Apply application logic to determine what the response should be</li>
+<li>Return the response</li>
+</ol>
+<p>Steps 1 and 3 are handled via Crystal's <a href="https://crystal-lang.org/api/HTTP/Server.html">HTTP::Server</a>, while step 2 is where Athena fits in.</p>
+<h2 id="powered-by-events">Powered By Events<a class="headerlink" href="#powered-by-events" title="Permanent link">#</a></h2>
+<p>Athena is an event based framework, meaning it emits various events via the <a href="event_dispatcher/">Event Dispatcher</a> component during the life-cycle of a request.  These events are listened on internally in order to handle each request; custom listeners on these events can also be registered.  The flow of a request, and the related events that are dispatched, is depicted below in a visual format:</p>
+<p><img alt="High Level Request Life-cycle Flow" src="../img/Athena.png" /></p>
+<h3 id="1-request-event">1. Request Event<a class="headerlink" href="#1-request-event" title="Permanent link">#</a></h3>
+<p>The very first event that is dispatched is the <a href="../Routing/Events/Request/#Athena::Routing::Events::Request">ART::Events::Request</a> event and can have a variety of listeners.  The primary purpose of this event is to create an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via <a href="../Routing/Request/#Athena::Routing::Request#attributes">ART::Request#attributes</a>.</p>
+<p>In some cases the listener may have enough information to return an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> immediately.  An example of this would be the <a href="../Routing/Listeners/CORS/#Athena::Routing::Listeners::CORS">ART::Listeners::CORS</a> listener.  If enabled it is able to return a <code>CORS</code> preflight response even before routing is invoked.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> is returned at this stage, the flow of the request skips directly to the <a href="#5-response-event">response</a> event.  Future <code>Request</code> event listeners will not be invoked either.</p>
+</div>
+<p>Another use case for this event is populating additional data into the request's attributes; such as the locale or format of the request.</p>
+<div class="admonition example">
+<p class="admonition-title">Request event in Athena</p>
+<p>This is the event that <a href="../Routing/Listeners/Routing/#Athena::Routing::Listeners::Routing">ART::Listeners::Routing</a> listens on to determine which <a href="../Routing/Controller/#Athena::Routing::Controller">ART::Controller</a>/<a href="../Routing/Action/#Athena::Routing::Action">ART::Action</a> pair should handle the request.</p>
+<p>See <a href="../Routing/Controller/#Athena::Routing::Controller">ART::Controller</a> for more details on routing.</p>
+</div>
+<h3 id="2-action-event">2. Action Event<a class="headerlink" href="#2-action-event" title="Permanent link">#</a></h3>
+<p>The next event to be dispatched is the <a href="../Routing/Events/Action/#Athena::Routing::Events::Action">ART::Events::Action</a> event, assuming a response was not already returned within the <a href="#1-request-event">request</a> event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related <a href="../Routing/Action/#Athena::Routing::Action">ART::Action</a>; such as reading custom annotations off of it via the <a href="config/">Config</a> component.</p>
+<div class="admonition example">
+<p class="admonition-title">Action event in Athena</p>
+<p>This is the event that <a href="../Routing/Listeners/ParamConverter/#Athena::Routing::Listeners::ParamConverter">ART::Listeners::ParamConverter</a> and <a href="../Routing/Listeners/ParamFetcher/#Athena::Routing::Listeners::ParamFetcher">ART::Listeners::ParamFetcher</a> listen on to apply custom conversion logic via an <a href="../Routing/ParamConverterInterface/#Athena::Routing::ParamConverterInterface">ART::ParamConverterInterface</a>, or resolve request parameters such as <a href="../Routing/Annotations/QueryParam/#Athena::Routing::Annotations::QueryParam">ARTA::QueryParam</a>s.</p>
+</div>
+<h3 id="3-invoke-the-controller-action">3. Invoke the Controller Action<a class="headerlink" href="#3-invoke-the-controller-action" title="Permanent link">#</a></h3>
+<p>This next step is not an event, but a important concept within Athena nonetheless; executing the controller action related to the current request.</p>
+<h4 id="argument-resolution">Argument Resolution<a class="headerlink" href="#argument-resolution" title="Permanent link">#</a></h4>
+<p>Before Athena can call the controller action, it first needs to determine what arguments, if any, should be passed to it.  This is achieved via an <a href="../Routing/Arguments/ArgumentResolverInterface/#Athena::Routing::Arguments::ArgumentResolverInterface">ART::Arguments::ArgumentResolverInterface</a> that facilitates gathering all the arguments.  One or more <a href="../Routing/Arguments/Resolvers/ArgumentValueResolverInterface/#Athena::Routing::Arguments::Resolvers::ArgumentValueResolverInterface">ART::Arguments::Resolvers::ArgumentValueResolverInterface</a> will then be used to resolve each specific argument's value.</p>
+<p>The default algorithm is as follows:</p>
+<ol>
+<li>Check the request's attributes for a key that matches the name of the argument; such as as a path param or something set via a listener (either built-in or custom)</li>
+<li>Check if the type of the argument is <a href="../Routing/Request/#Athena::Routing::Request">ART::Request</a>, if so use the current request object</li>
+<li>Check if the argument has a default value, or use <code>nil</code> if it is nilable</li>
+<li>Raise an exception if an argument's value could be not resolved</li>
+</ol>
+<p>Custom <code>ArgumentValueResolverInterface</code>s may be created &amp; registered to extend this functionality.</p>
+<div class="admonition todo">
+<p class="admonition-title">Todo</p>
+<p>An additional event could possibly be added after the arguments have been resolved, but before invoking the controller action.</p>
+</div>
+<h4 id="execute-the-controller-action">Execute the Controller Action<a class="headerlink" href="#execute-the-controller-action" title="Permanent link">#</a></h4>
+<p>The job of a controller action is to apply business/application logic to build a response for the related request; such as an HTML page, a JSON string, or anything else.  How/what exactly this should be is up to the developer creating the application.</p>
+<h4 id="handle-the-response">Handle the Response<a class="headerlink" href="#handle-the-response" title="Permanent link">#</a></h4>
+<p>The type of the value returned from the controller action determines what happens next.  If the value is an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a>, then it is used as is, skipping directly to the <a href="#5-response-event">response</a> event.  However, if the value is <em>NOT</em> an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a>, then the <a href="#4-view-event">view</a> is dispatched (since Athena <em>needs</em> an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> in order to have something to send back to the client).</p>
+<h3 id="4-view-event">4. View Event<a class="headerlink" href="#4-view-event" title="Permanent link">#</a></h3>
+<p>The <a href="../Routing/Events/View/#Athena::Routing::Events::View">ART::Events::View</a> event is only dispatched when the controller action does <em>NOT</em> return an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a>.  The purpose of this event is to turn the controller action's return value into an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a>.</p>
+<p>An <a href="../Routing/View/#Athena::Routing::View">ART::View</a> may be used to customize the response, e.g. setting a custom response status and/or adding additional headers; while keeping the controller action response data intact.</p>
+<p>This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.).  See the <a href="/components/negotiation">negotiation</a> component for more information on this feature.</p>
+<div class="admonition example">
+<p class="admonition-title">View event in Athena</p>
+<p>By default Athena will JSON serialize any non <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> values.</p>
+</div>
+<h3 id="5-response-event">5. Response Event<a class="headerlink" href="#5-response-event" title="Permanent link">#</a></h3>
+<p>The end goal of Athena is to return an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> back to the client; which might be created within the <a href="#1-request-event">request</a> event, returned from the related controller action, or set within the <a href="#4-view-event">view</a> event.  Regardless of how the response was created, the <a href="../Routing/Events/Response/#Athena::Routing::Events::Response">ART::Events::Response</a> event is dispatched directly after.</p>
+<p>The intended use case for this event is to allow for modifying the response object in some manner.  Common examples include: add/edit headers, add cookies, change/compress the response body.</p>
+<h3 id="6-return-the-response">6. Return the Response<a class="headerlink" href="#6-return-the-response" title="Permanent link">#</a></h3>
+<p>The raw <a href="https://crystal-lang.org/api/HTTP/Server/Response.html">HTTP::Server::Response</a> object is never directly exposed.  The reasoning for this is to allow listeners to mutate the response before it is returned as mentioned in the <a href="#5-response-event">response</a> event section.  If the raw response object was exposed, whenever any data is written to it it'll immediately be sent to the client and the status/headers will be locked; as mentioned in the Crystal API docs:</p>
+<blockquote>
+<p>The response <code>#status</code> and <code>#headers</code> must be configured before writing the response body. Once response output is written, changing the <code>#status</code> and <code>#headers</code> properties has no effect.</p>
+</blockquote>
+<p>Each <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a> has a <a href="../Routing/Response/Writer/#Athena::Routing::Response::Writer">ART::Response::Writer</a> instance that determines <em>how</em> the response should be written to the raw response's IO.  By default it is written directly, but can be customized via the <a href="#5-response-event">response</a>, such as for compression.</p>
+<h3 id="7-terminate-event">7. Terminate Event<a class="headerlink" href="#7-terminate-event" title="Permanent link">#</a></h3>
+<p>The final event to be dispatched is the <a href="../Routing/Events/Terminate/#Athena::Routing::Events::Terminate">ART::Events::Terminate</a> event.  This is event is dispatched <em>after</em> the response has been sent to the user.</p>
+<p>The intended use case for this event is to perform some "heavy" action after the user has received the response; as to not affect the response time of the request.  E.x. queuing up emails or logs to be sent/written after a successful request.</p>
+<h3 id="8-exception-handling">8. Exception Handling<a class="headerlink" href="#8-exception-handling" title="Permanent link">#</a></h3>
+<p>If an exception is raised at anytime while a request is being handled, the <a href="../Routing/Events/Exception/#Athena::Routing::Events::Exception">ART::Events::Exception</a> is dispatched.  The purpose of this event is to convert the exception into an <a href="../Routing/Response/#Athena::Routing::Response">ART::Response</a>.  This is globally handled via an <a href="../Routing/ErrorRendererInterface/#Athena::Routing::ErrorRendererInterface">ART::ErrorRendererInterface</a>, with the default being to JSON serialize the exception.</p>
+<p>It is also possible to handle specific error states differently by registering multiple exception listeners to handle each case.  An example of this could be to invoke some special logic only if the exception is of a specific type.</p>
+<p>See the <a href="../getting_started/#error-handling">error handling</a> section in the getting started docs for more details on how error handling works in Athena.</p>
+<h2 id="orchestrated-via-dependency-injection">Orchestrated via Dependency Injection<a class="headerlink" href="#orchestrated-via-dependency-injection" title="Permanent link">#</a></h2>
+<p>All of the components have been designed with Dependency Injection (DI) in mind; even if it's not a requirement when using a component on its own.  Athena itself makes heavy use of DI as the means to orchestrate all the dependencies that do/may exist in an application.</p>
+<p>DI is used to allow for easier <a href="../getting_started/advanced_usage/#testing">testing</a>, allowing for better reusability, and sharing state between types.  See the <a href="dependency_injection/">Dependency Injection</a> component for more details on how to use it within Athena.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../getting_started/advanced_usage/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Advanced Usage
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="dependency_injection/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Dependency Injection
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/athena-framework" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://gitter.im/athena-frameworkcr/community" target="_blank" rel="noopener" title="gitter.im" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>

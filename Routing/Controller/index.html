@@ -1,0 +1,4014 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://athenaframework.org/Routing/Controller/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Controller - Athena Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/mkdocstrings.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-184169799-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Athena::Routing::Controller" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Athena Framework" class="md-header__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Athena Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Controller
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark theme" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light theme" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Manual
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../" class="md-tabs__link md-tabs__link--active">
+      Routing
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../DependencyInjection/" class="md-tabs__link">
+      DependencyInjection
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../EventDispatcher/" class="md-tabs__link">
+      EventDispatcher
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../Config/" class="md-tabs__link">
+      Config
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../Serializer/" class="md-tabs__link">
+      Serializer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../Validator/" class="md-tabs__link">
+      Validator
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../Negotiation/" class="md-tabs__link">
+      Negotiation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../Spec/" class="md-tabs__link">
+      Spec
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Athena Framework" class="md-nav__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Athena Framework
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        <span class="md-nav__icon md-icon"></span>
+        
+          Manual
+        
+      </label>
+      <nav class="md-nav" aria-label="Manual" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            Manual
+          
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../getting_started/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Getting Started
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../getting_started/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Getting Started
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/advanced_usage/" class="md-nav__link">
+        Advanced Usage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_3">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../components/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Components
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Components" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../components/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Components
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/dependency_injection/" class="md-nav__link">
+        Dependency Injection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/event_dispatcher/" class="md-nav__link">
+        Event Dispatcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      <label class="md-nav__link" for="__nav_1_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../cookbook/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Cookbook
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Cookbook" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../cookbook/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Cookbook
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/listeners/" class="md-nav__link">
+        Listeners
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/param_converters/" class="md-nav__link">
+        Param Converters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/exclusion_strategies/" class="md-nav__link">
+        Exclusion Strategies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/object_constructors/" class="md-nav__link">
+        Object Constructors
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Routing
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Routing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Routing
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aliases/" class="md-nav__link">
+        Aliases
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Action/" class="md-nav__link">
+        Action
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ActionBase/" class="md-nav__link">
+        ActionBase
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Annotations/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Annotations
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Annotations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Annotations/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Annotations
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Delete/" class="md-nav__link">
+        Delete
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Get/" class="md-nav__link">
+        Get
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Head/" class="md-nav__link">
+        Head
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Link/" class="md-nav__link">
+        Link
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/ParamConverter/" class="md-nav__link">
+        ParamConverter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Patch/" class="md-nav__link">
+        Patch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Post/" class="md-nav__link">
+        Post
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Prefix/" class="md-nav__link">
+        Prefix
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Put/" class="md-nav__link">
+        Put
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/QueryParam/" class="md-nav__link">
+        QueryParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/RequestParam/" class="md-nav__link">
+        RequestParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Route/" class="md-nav__link">
+        Route
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/Unlink/" class="md-nav__link">
+        Unlink
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Annotations/View/" class="md-nav__link">
+        View
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      <label class="md-nav__link" for="__nav_2_5">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Arguments/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Arguments
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Arguments" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Arguments/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Arguments
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/ArgumentMetadata/" class="md-nav__link">
+        ArgumentMetadata
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/ArgumentResolver/" class="md-nav__link">
+        ArgumentResolver
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/ArgumentResolverInterface/" class="md-nav__link">
+        ArgumentResolverInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5_4" type="checkbox" id="__nav_2_5_4" >
+      
+      <label class="md-nav__link" for="__nav_2_5_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Arguments/Resolvers/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Resolvers
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Resolvers" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Arguments/Resolvers/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Resolvers
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/Resolvers/ArgumentValueResolverInterface/" class="md-nav__link">
+        ArgumentValueResolverInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/Resolvers/DefaultValue/" class="md-nav__link">
+        DefaultValue
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/Resolvers/Request/" class="md-nav__link">
+        Request
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Arguments/Resolvers/RequestAttribute/" class="md-nav__link">
+        RequestAttribute
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" >
+      
+      <label class="md-nav__link" for="__nav_2_6">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../BinaryFileResponse/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          BinaryFileResponse
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="BinaryFileResponse" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../BinaryFileResponse/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            BinaryFileResponse
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BinaryFileResponse/ContentDisposition/" class="md-nav__link">
+        ContentDisposition
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" type="checkbox" id="__nav_2_7" >
+      
+      <label class="md-nav__link" for="__nav_2_7">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Config/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Config
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Config" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Config/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Config
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Config/CORS/" class="md-nav__link">
+        CORS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7_2" type="checkbox" id="__nav_2_7_2" >
+      
+      <label class="md-nav__link" for="__nav_2_7_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Config/ContentNegotiation/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ContentNegotiation
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ContentNegotiation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Config/ContentNegotiation/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ContentNegotiation
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Config/ContentNegotiation/Rule/" class="md-nav__link">
+        Rule
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Config/ViewHandler/" class="md-nav__link">
+        ViewHandler
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Controller
+          </a>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Controller
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#generate_url(route,params,reference_type)" class="md-nav__link">
+    #generate_url
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#redirect(url,status)" class="md-nav__link">
+    #redirect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#redirect_to_route(route,params,status)" class="md-nav__link">
+    #redirect_to_route
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#redirect_view(url,status,headers)" class="md-nav__link">
+    #redirect_view
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#route_redirect_view(route,params,status,headers)" class="md-nav__link">
+    #route_redirect_view
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#view(data,status,headers)" class="md-nav__link">
+    #view
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller-macros" class="md-nav__link">
+    Macros
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:delete(path,*,**,&)" class="md-nav__link">
+    delete
+  </a>
+  
+    <nav class="md-nav" aria-label="delete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:delete(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:delete(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:get(path,*,**,&)" class="md-nav__link">
+    get
+  </a>
+  
+    <nav class="md-nav" aria-label="get">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:get(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:get(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:head(path,*,**,&)" class="md-nav__link">
+    head
+  </a>
+  
+    <nav class="md-nav" aria-label="head">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:head(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:head(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:link(path,*,**,&)" class="md-nav__link">
+    link
+  </a>
+  
+    <nav class="md-nav" aria-label="link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:link(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:link(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:patch(path,*,**,&)" class="md-nav__link">
+    patch
+  </a>
+  
+    <nav class="md-nav" aria-label="patch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:patch(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:patch(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:post(path,*,**,&)" class="md-nav__link">
+    post
+  </a>
+  
+    <nav class="md-nav" aria-label="post">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:post(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:post(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:put(path,*,**,&)" class="md-nav__link">
+    put
+  </a>
+  
+    <nav class="md-nav" aria-label="put">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:put(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:put(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:render(template)" class="md-nav__link">
+    render
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:unlink(path,*,**,&)" class="md-nav__link">
+    unlink
+  </a>
+  
+    <nav class="md-nav" aria-label="unlink">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:unlink(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:unlink(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ErrorRenderer/" class="md-nav__link">
+        ErrorRenderer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ErrorRendererInterface/" class="md-nav__link">
+        ErrorRendererInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_11" type="checkbox" id="__nav_2_11" >
+      
+      <label class="md-nav__link" for="__nav_2_11">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Events/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Events
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Events" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Events/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Events
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/Action/" class="md-nav__link">
+        Action
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/Exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/Request/" class="md-nav__link">
+        Request
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/RequestAware/" class="md-nav__link">
+        RequestAware
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/Response/" class="md-nav__link">
+        Response
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/SettableResponse/" class="md-nav__link">
+        SettableResponse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/Terminate/" class="md-nav__link">
+        Terminate
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Events/View/" class="md-nav__link">
+        View
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" type="checkbox" id="__nav_2_12" >
+      
+      <label class="md-nav__link" for="__nav_2_12">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Exceptions/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Exceptions
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Exceptions" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Exceptions/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Exceptions
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/BadGateway/" class="md-nav__link">
+        BadGateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/BadRequest/" class="md-nav__link">
+        BadRequest
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/Conflict/" class="md-nav__link">
+        Conflict
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/Forbidden/" class="md-nav__link">
+        Forbidden
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/Gone/" class="md-nav__link">
+        Gone
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/HTTPException/" class="md-nav__link">
+        HTTPException
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/InvalidParameter/" class="md-nav__link">
+        InvalidParameter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/LengthRequired/" class="md-nav__link">
+        LengthRequired
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/MethodNotAllowed/" class="md-nav__link">
+        MethodNotAllowed
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/NotAcceptable/" class="md-nav__link">
+        NotAcceptable
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/NotFound/" class="md-nav__link">
+        NotFound
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/NotImplemented/" class="md-nav__link">
+        NotImplemented
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/PreconditionFailed/" class="md-nav__link">
+        PreconditionFailed
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/ServiceUnavailable/" class="md-nav__link">
+        ServiceUnavailable
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/StopFormatListener/" class="md-nav__link">
+        StopFormatListener
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/TooManyRequests/" class="md-nav__link">
+        TooManyRequests
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/Unauthorized/" class="md-nav__link">
+        Unauthorized
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/UnprocessableEntity/" class="md-nav__link">
+        UnprocessableEntity
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exceptions/UnsupportedMediaType/" class="md-nav__link">
+        UnsupportedMediaType
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HeaderUtils/" class="md-nav__link">
+        HeaderUtils
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_14" type="checkbox" id="__nav_2_14" >
+      
+      <label class="md-nav__link" for="__nav_2_14">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Listeners/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Listeners
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Listeners" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_14">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Listeners/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Listeners
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/CORS/" class="md-nav__link">
+        CORS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/Error/" class="md-nav__link">
+        Error
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/Format/" class="md-nav__link">
+        Format
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/ParamConverter/" class="md-nav__link">
+        ParamConverter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/ParamFetcher/" class="md-nav__link">
+        ParamFetcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/Routing/" class="md-nav__link">
+        Routing
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Listeners/View/" class="md-nav__link">
+        View
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_15" type="checkbox" id="__nav_2_15" >
+      
+      <label class="md-nav__link" for="__nav_2_15">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../ParamConverterInterface/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ParamConverterInterface
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ParamConverterInterface" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_15">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../ParamConverterInterface/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ParamConverterInterface
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParamConverterInterface/Configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParamConverterInterface/ConfigurationInterface/" class="md-nav__link">
+        ConfigurationInterface
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParameterBag/" class="md-nav__link">
+        ParameterBag
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Parameters/" class="md-nav__link">
+        Parameters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_18" type="checkbox" id="__nav_2_18" >
+      
+      <label class="md-nav__link" for="__nav_2_18">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Params/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Params
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Params" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_18">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Params/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Params
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/Param/" class="md-nav__link">
+        Param
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/ParamFetcher/" class="md-nav__link">
+        ParamFetcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/ParamFetcherInterface/" class="md-nav__link">
+        ParamFetcherInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/ParamInterface/" class="md-nav__link">
+        ParamInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/QueryParam/" class="md-nav__link">
+        QueryParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/RequestParam/" class="md-nav__link">
+        RequestParam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Params/ScalarParam/" class="md-nav__link">
+        ScalarParam
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RedirectResponse/" class="md-nav__link">
+        RedirectResponse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Request/" class="md-nav__link">
+        Request
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RequestMatcherInterface/" class="md-nav__link">
+        RequestMatcherInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RequestStore/" class="md-nav__link">
+        RequestStore
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_23" type="checkbox" id="__nav_2_23" >
+      
+      <label class="md-nav__link" for="__nav_2_23">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Response/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Response
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Response" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_23">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Response/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Response
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Response/DirectWriter/" class="md-nav__link">
+        DirectWriter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Response/Headers/" class="md-nav__link">
+        Headers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Response/Writer/" class="md-nav__link">
+        Writer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RouteCollection/" class="md-nav__link">
+        RouteCollection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RouteHandler/" class="md-nav__link">
+        RouteHandler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Router/" class="md-nav__link">
+        Router
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RouterInterface/" class="md-nav__link">
+        RouterInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_28" type="checkbox" id="__nav_2_28" >
+      
+      <label class="md-nav__link" for="__nav_2_28">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Spec/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Spec
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Spec" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_28">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Spec/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Spec
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spec/APITestCase/" class="md-nav__link">
+        APITestCase
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spec/AbstractBrowser/" class="md-nav__link">
+        AbstractBrowser
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spec/HTTPBrowser/" class="md-nav__link">
+        HTTPBrowser
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spec/MockRouteCollection/" class="md-nav__link">
+        MockRouteCollection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spec/WebTestCase/" class="md-nav__link">
+        WebTestCase
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StreamedResponse/" class="md-nav__link">
+        StreamedResponse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_30" type="checkbox" id="__nav_2_30" >
+      
+      <label class="md-nav__link" for="__nav_2_30">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../TimeConverter/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          TimeConverter
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="TimeConverter" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_30">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../TimeConverter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            TimeConverter
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TimeConverter/Configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../URLGenerator/" class="md-nav__link">
+        URLGenerator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_32" type="checkbox" id="__nav_2_32" >
+      
+      <label class="md-nav__link" for="__nav_2_32">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../URLGeneratorInterface/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          URLGeneratorInterface
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="URLGeneratorInterface" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_32">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../URLGeneratorInterface/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            URLGeneratorInterface
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../URLGeneratorInterface/ReferenceType/" class="md-nav__link">
+        ReferenceType
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_33" type="checkbox" id="__nav_2_33" >
+      
+      <label class="md-nav__link" for="__nav_2_33">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../View/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          View
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="View" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_33">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../View/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            View
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../View/ConfigurableViewHandlerInterface/" class="md-nav__link">
+        ConfigurableViewHandlerInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../View/Context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../View/FormatHandlerInterface/" class="md-nav__link">
+        FormatHandlerInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../View/FormatNegotiator/" class="md-nav__link">
+        FormatNegotiator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../View/ViewHandler/" class="md-nav__link">
+        ViewHandler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_33_6" type="checkbox" id="__nav_2_33_6" >
+      
+      <label class="md-nav__link" for="__nav_2_33_6">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../View/ViewHandlerInterface/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ViewHandlerInterface
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ViewHandlerInterface" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_33_6">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../View/ViewHandlerInterface/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ViewHandlerInterface
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../View/ViewHandlerInterface/HandlerType/" class="md-nav__link">
+        HandlerType
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ViewBase/" class="md-nav__link">
+        ViewBase
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DependencyInjection/" class="md-nav__link">
+        DependencyInjection
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EventDispatcher/" class="md-nav__link">
+        EventDispatcher
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#generate_url(route,params,reference_type)" class="md-nav__link">
+    #generate_url
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#redirect(url,status)" class="md-nav__link">
+    #redirect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#redirect_to_route(route,params,status)" class="md-nav__link">
+    #redirect_to_route
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#redirect_view(url,status,headers)" class="md-nav__link">
+    #redirect_view
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#route_redirect_view(route,params,status,headers)" class="md-nav__link">
+    #route_redirect_view
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller#view(data,status,headers)" class="md-nav__link">
+    #view
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller-macros" class="md-nav__link">
+    Macros
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:delete(path,*,**,&)" class="md-nav__link">
+    delete
+  </a>
+  
+    <nav class="md-nav" aria-label="delete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:delete(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:delete(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:get(path,*,**,&)" class="md-nav__link">
+    get
+  </a>
+  
+    <nav class="md-nav" aria-label="get">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:get(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:get(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:head(path,*,**,&)" class="md-nav__link">
+    head
+  </a>
+  
+    <nav class="md-nav" aria-label="head">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:head(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:head(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:link(path,*,**,&)" class="md-nav__link">
+    link
+  </a>
+  
+    <nav class="md-nav" aria-label="link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:link(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:link(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:patch(path,*,**,&)" class="md-nav__link">
+    patch
+  </a>
+  
+    <nav class="md-nav" aria-label="patch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:patch(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:patch(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:post(path,*,**,&)" class="md-nav__link">
+    post
+  </a>
+  
+    <nav class="md-nav" aria-label="post">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:post(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:post(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:put(path,*,**,&)" class="md-nav__link">
+    put
+  </a>
+  
+    <nav class="md-nav" aria-label="put">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:put(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:put(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:render(template)" class="md-nav__link">
+    render
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:unlink(path,*,**,&)" class="md-nav__link">
+    unlink
+  </a>
+  
+    <nav class="md-nav" aria-label="unlink">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:unlink(path,*,**,&)--optional-named-arguments" class="md-nav__link">
+    Optional Named Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Routing::Controller:unlink(path,*,**,&)--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L129" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <div class="doc doc-object doc-type class">
+<h1 id="Athena::Routing::Controller" class="doc doc-heading">abstract class <code>Athena::Routing::Controller</code>
+      <br/><small>inherits <code>Reference</code></small>
+<a href="#Athena::Routing::Controller" class="headerlink" title="Permanent link">#</a></h1>
+  <div class="doc doc-contents first">
+<p>The core of any framework is routing; how a route is tied to an action.  Athena takes an annotation based approach; an annotation, such as <a href="../Annotations/Get/#Athena::Routing::Annotations::Get"><code>ARTA::Get</code></a> is applied to an instance method of a controller class,
+which will be executed when that endpoint receives a request.  The annotation includes the path as well as any constraints that a parameter must meet in order for the route to be invoked.</p>
+<p>Additional annotations also exist for setting a query param or a param converter.  See <a href="../Annotations/QueryParam/#Athena::Routing::Annotations::QueryParam"><code>ARTA::QueryParam</code></a> and <a href="../Annotations/ParamConverter/#Athena::Routing::Annotations::ParamConverter"><code>ARTA::ParamConverter</code></a> respectively.</p>
+<p>Child controllers must inherit from <a href="#Athena::Routing::Controller"><code>ART::Controller</code></a> (or an abstract child of it).  Each request gets its own instance of the controller to better allow for DI via <a href="../../DependencyInjection/#Athena::DependencyInjection"><code>Athena::DependencyInjection</code></a>.</p>
+<p>A route action can either return an <a href="../Response/#Athena::Routing::Response"><code>ART::Response</code></a>, or some other type.  If an <a href="../Response/#Athena::Routing::Response"><code>ART::Response</code></a> is returned, then it is used directly.  Otherwise an <a href="../Events/View/#Athena::Routing::Events::View"><code>ART::Events::View</code></a> is emitted to convert
+the action result into an <a href="../Response/#Athena::Routing::Response"><code>ART::Response</code></a>.  By default, <a href="../Listeners/View/#Athena::Routing::Listeners::View"><code>ART::Listeners::View</code></a> will JSON encode the value if it is not handled earlier by another listener.</p>
+<h4 id="Athena::Routing::Controller--example">Example<a class="headerlink" href="#Athena::Routing::Controller--example" title="Permanent link">#</a></h4>
+<p>The following controller shows examples of the various routing features of Athena.  <a href="#Athena::Routing::Controller"><code>ART::Controller</code></a> also defines various macro DSLs, such as <a href="#Athena::Routing::Controller:get(path,*,**,&amp;)"><code>ART::Controller.get</code></a> to make defining routes
+seem more Sinatra/Kemal like.  See the documentation on the macros for more details.</p>
+<div class="highlight"><pre><span></span><code><span class="k">require</span> <span class="s2">&quot;athena&quot;</span>
+<span class="k">require</span> <span class="s2">&quot;mime&quot;</span>
+
+<span class="c1"># The `ARTA::Prefix` annotation can be applied to a controller to define a prefix to use for all routes within `self`.</span>
+<span class="o">@[</span><span class="nd">ARTA::Prefix</span><span class="p">(</span><span class="s2">&quot;athena&quot;</span><span class="p">)</span><span class="o">]</span>
+<span class="k">class</span> <span class="nc">TestController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="c1"># A GET endpoint returning an `ART::Response`.</span>
+  <span class="c1"># Can be used to return raw data, such as HTML or CSS etc, in a one-off manor.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="ss">path</span><span class="p">:</span> <span class="s2">&quot;/index&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">index</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">Response</span>
+    <span class="n">ART</span><span class="o">::</span><span class="n">Response</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;&lt;h1&gt;Welcome to my website!&lt;/h1&gt;&quot;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span><span class="p">{</span><span class="s2">&quot;content-type&quot;</span> <span class="o">=&gt;</span> <span class="n">MIME</span><span class="o">.</span><span class="n">from_extension</span><span class="p">(</span><span class="s2">&quot;.html&quot;</span><span class="p">)}</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint returning an `ART::StreamedResponse`.</span>
+  <span class="c1"># Can be used to stream the response content to the client; useful if the content is too large to fit into memory.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="ss">path</span><span class="p">:</span> <span class="s2">&quot;/users&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">users</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">Response</span>
+    <span class="n">ART</span><span class="o">::</span><span class="n">StreamedResponse</span><span class="o">.</span><span class="n">new</span> <span class="ss">headers</span><span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span><span class="p">{</span><span class="s2">&quot;content-type&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;application/json; charset=UTF-8&quot;</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">io</span><span class="o">|</span>
+      <span class="n">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">to_json</span> <span class="n">io</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint using a param converter to render a template.</span>
+  <span class="c1">#</span>
+  <span class="c1"># Assumes there is a `User` object that exposes their name, and an `ART::ParamConverterInterface` to provide the user with the provided *id*.</span>
+  <span class="c1"># ```</span>
+  <span class="c1"># # user.ecr</span>
+  <span class="c1"># Morning, &lt;%= user.name %&gt; it is currently &lt;%= time %&gt;.</span>
+  <span class="c1"># ```</span>
+  <span class="o">@[</span><span class="nd">ARTA::ParamConverter</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">converter</span><span class="p">:</span> <span class="n">SomeConverter</span><span class="p">)</span><span class="o">]</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/wakeup/:id&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">wakeup</span><span class="p">(</span><span class="n">user</span> <span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">Response</span>
+    <span class="c1"># Template variables not supplied in the action&#39;s arguments must be defined manually</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">Time</span><span class="o">.</span><span class="n">utc</span>
+
+    <span class="c1"># Creates an `ART::Response` with the content of rendering the template, also sets the content type to `text/html`.</span>
+    <span class="n">render</span> <span class="s2">&quot;user.ecr&quot;</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint with no params returning a `String`.</span>
+  <span class="c1">#</span>
+  <span class="c1"># Action return type restrictions are required.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/me&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">get_me</span> <span class="p">:</span> <span class="n">String</span>
+    <span class="s2">&quot;Jim&quot;</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint with no params returning `Nil`.</span>
+  <span class="c1"># `Nil` return types are returned with a status</span>
+  <span class="c1"># of 204 no content</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/no_content&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">get_no_content</span> <span class="p">:</span> <span class="n">Nil</span>
+    <span class="c1"># Do stuff</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint with two `Int32` params returning an `Int32`.</span>
+  <span class="c1">#</span>
+  <span class="c1"># The parameters of a route _MUST_ match the arguments of the action.</span>
+  <span class="c1"># Type restrictions on action arguments are required.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/add/:val1/:val2&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">val1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">val2</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">)</span> <span class="p">:</span> <span class="n">Int32</span>
+    <span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint with an `String` route param, and a required string query param that must match the given pattern; returning a `String`.</span>
+  <span class="c1">#</span>
+  <span class="c1"># A non-nilable type denotes it as required.  If the parameter is not supplied, and no default value is assigned, an `ART::Exceptions::BadRequest` exception is raised.</span>
+  <span class="o">@[</span><span class="nd">ARTA::QueryParam</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="sr">/\d:\d:\d/</span><span class="p">)</span><span class="o">]</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/event/:event_name/&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">event_time</span><span class="p">(</span><span class="n">event_name</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">time</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">String</span>
+    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">event_name</span><span class="si">}</span><span class="s2"> occurred at </span><span class="si">#{</span><span class="n">time</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint with an optional query parameter and optional path param with a default value; returning a `NamedTuple(user_id : Int32?, page : Int32)`.</span>
+  <span class="c1">#</span>
+  <span class="c1"># A nilable type denotes it as optional.  If the parameter is not supplied (or could not be converted), and no default value is assigned, it is `nil`.</span>
+  <span class="o">@[</span><span class="nd">ARTA::QueryParam</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/events/(:page)&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">events</span><span class="p">(</span><span class="n">user_id</span> <span class="p">:</span> <span class="n">Int32?</span><span class="p">,</span> <span class="n">page</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="n">NamedTuple</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">Int32?</span><span class="p">,</span> <span class="ss">page</span><span class="p">:</span> <span class="n">Int32</span><span class="p">)</span>
+    <span class="p">{</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="ss">page</span><span class="p">:</span> <span class="n">page</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A GET endpoint with param constraints.  The param must match the supplied Regex or it will not match and return a 404 error.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/time/:time/&quot;</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d{2}:\d{2}:\d{2}/</span><span class="p">})</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">get_constraint</span><span class="p">(</span><span class="n">time</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">String</span>
+    <span class="n">time</span>
+  <span class="k">end</span>
+
+  <span class="c1"># A POST endpoint with a route param and accessing the request body; returning a `Bool`.</span>
+  <span class="c1">#</span>
+  <span class="c1"># It is recommended to use param converters to pass an actual object representing the data (assuming the body is JSON)</span>
+  <span class="c1"># to the route&#39;s action; however the raw request body can be accessed by typing an action argument as `ART::Request`.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Post</span><span class="p">(</span><span class="s2">&quot;/test/:expected&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">post_body</span><span class="p">(</span><span class="n">expected</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">request</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">Request</span><span class="p">)</span> <span class="p">:</span> <span class="n">Bool</span>
+    <span class="n">expected</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">try</span> <span class="o">&amp;.</span><span class="n">gets_to_end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">ART</span><span class="o">.</span><span class="n">run</span>
+
+<span class="c1"># GET /athena/index&quot;                   # =&gt; &lt;h1&gt;Welcome to my website!&lt;/h1&gt;</span>
+<span class="c1"># GET /athena/users&quot;                   # =&gt; [{&quot;id&quot;:1,...},...]</span>
+<span class="c1"># GET /athena/wakeup/17&quot;               # =&gt; Morning, Allison it is currently 2020-02-01 18:38:12 UTC.</span>
+<span class="c1"># GET /athena/me&quot;                      # =&gt; &quot;Jim&quot;</span>
+<span class="c1"># GET /athena/add/50/25&quot;               # =&gt; 75</span>
+<span class="c1"># GET /athena/event/foobar?time=1:1:1&quot; # =&gt; &quot;foobar occurred at 1:1:1&quot;</span>
+<span class="c1"># GET /athena/events&quot;                  # =&gt; {&quot;user_id&quot;:null,&quot;page&quot;:1}</span>
+<span class="c1"># GET /athena/events/17?user_id=19&quot;    # =&gt; {&quot;user_id&quot;:19,&quot;page&quot;:17}</span>
+<span class="c1"># GET /athena/time/12:45:30&quot;           # =&gt; &quot;12:45:30&quot;</span>
+<span class="c1"># GET /athena/time/12:aa:30&quot;           # =&gt; 404 not found</span>
+<span class="c1"># GET /athena/no_content&quot;              # =&gt; 204 no content</span>
+<span class="c1"># POST /athena/test/foo&quot;, body: &quot;foo&quot;  # =&gt; true</span>
+</code></pre></div>
+      <div class="doc doc-children">
+
+
+
+<h2 id="Athena::Routing::Controller-methods">Methods<a href="#Athena::Routing::Controller-methods" class="headerlink" title="Permanent link">#</a></h2>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#generate_url(route,params,reference_type)" class="doc doc-heading">    <code>
+      #generate_url<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">route</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">params</span> <span class="p">:</span> <span class="n">Hash</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">_</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">reference_type</span> <span class="p">:</span> <a href="../URLGeneratorInterface/ReferenceType/#Athena::Routing::URLGeneratorInterface::ReferenceType">ART::URLGeneratorInterface::ReferenceType</a> <span class="o">=</span> <span class="ss">:absolute_path</span><span class="p">)</span> <span class="p">:</span> <span class="n">String</span></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#generate_url(route,params,reference_type)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Generates a URL to the provided <em>route</em> with the provided <em>params</em>.</p>
+<p>See <a href="../URLGeneratorInterface/#Athena::Routing::URLGeneratorInterface#generate(route,params,reference_type)"><code>ART::URLGeneratorInterface#generate</code></a>.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L133">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#generate_url(route,reference_type,**)" class="doc doc-heading">    <code>
+      #generate_url<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">route</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">reference_type</span> <span class="p">:</span> <a href="../URLGeneratorInterface/ReferenceType/#Athena::Routing::URLGeneratorInterface::ReferenceType">ART::URLGeneratorInterface::ReferenceType</a> <span class="o">=</span> <span class="ss">:absolute_path</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#generate_url(route,reference_type,**)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Generates a URL to the provided <em>route</em> with the provided <em>params</em>.</p>
+<p>See <a href="../URLGeneratorInterface/#Athena::Routing::URLGeneratorInterface#generate(route,params,reference_type)"><code>ART::URLGeneratorInterface#generate</code></a>.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L140">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#redirect(url,status)" class="doc doc-heading">    <code>
+      #redirect<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">url</span> <span class="p">:</span> <span class="n">String</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">status</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span> <span class="o">=</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="no">FOUND</span><span class="p">)</span> <span class="p">:</span> <a href="../RedirectResponse/#Athena::Routing::RedirectResponse">ART::RedirectResponse</a></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#redirect(url,status)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns an <a href="../RedirectResponse/#Athena::Routing::RedirectResponse"><code>ART::RedirectResponse</code></a> to the provided <em>url</em>, optionally with the provided <em>status</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;redirect/google&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">redirect_to_google</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">RedirectResponse</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">redirect</span> <span class="s2">&quot;https://google.com&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L212">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#redirect_to_route(route,params,status)" class="doc doc-heading">    <code>
+      #redirect_to_route<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">route</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">params</span> <span class="p">:</span> <span class="n">Hash</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">_</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">status</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span> <span class="o">=</span> <span class="ss">:found</span><span class="p">)</span> <span class="p">:</span> <a href="../RedirectResponse/#Athena::Routing::RedirectResponse">ART::RedirectResponse</a></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#redirect_to_route(route,params,status)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns an <a href="../RedirectResponse/#Athena::Routing::RedirectResponse"><code>ART::RedirectResponse</code></a> to the provided <em>route</em> with the provided <em>params</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">require</span> <span class="s2">&quot;athena&quot;</span>
+
+<span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="c1"># Define a route to redirect to, explicitly naming this route `add`.</span>
+  <span class="c1"># The default route name is controller + method down snake-cased; e.x. `example_controller_add`.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/add/:value1/:value2&quot;</span><span class="p">,</span> <span class="ss">name</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">negative</span> <span class="p">:</span> <span class="n">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="p">:</span> <span class="n">Int32</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">value1</span> <span class="o">+</span> <span class="n">value2</span>
+    <span class="n">negative</span> <span class="p">?</span> <span class="o">-</span><span class="n">sum</span> <span class="p">:</span> <span class="n">sum</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Define a route that redirects to the `add` route with fixed parameters.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">redirect</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">RedirectResponse</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">redirect_to_route</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">ART</span><span class="o">.</span><span class="n">run</span>
+
+<span class="c1"># GET / # =&gt; 10</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L169">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#redirect_to_route(route,status,**)" class="doc doc-heading">    <code>
+      #redirect_to_route<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">route</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">status</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span> <span class="o">=</span> <span class="ss">:found</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="p">:</span> <a href="../RedirectResponse/#Athena::Routing::RedirectResponse">ART::RedirectResponse</a></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#redirect_to_route(route,status,**)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns an <a href="../RedirectResponse/#Athena::Routing::RedirectResponse"><code>ART::RedirectResponse</code></a> to the provided <em>route</em> with the provided <em>params</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">require</span> <span class="s2">&quot;athena&quot;</span>
+
+<span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="c1"># Define a route to redirect to, explicitly naming this route `add`.</span>
+  <span class="c1"># The default route name is controller + method down snake-cased; e.x. `example_controller_add`.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/add/:value1/:value2&quot;</span><span class="p">,</span> <span class="ss">name</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">negative</span> <span class="p">:</span> <span class="n">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="p">:</span> <span class="n">Int32</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">value1</span> <span class="o">+</span> <span class="n">value2</span>
+    <span class="n">negative</span> <span class="p">?</span> <span class="o">-</span><span class="n">sum</span> <span class="p">:</span> <span class="n">sum</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Define a route that redirects to the `add` route with fixed parameters.</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">redirect</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">RedirectResponse</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">redirect_to_route</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="ss">value1</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="ss">value2</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">ART</span><span class="o">.</span><span class="n">run</span>
+
+<span class="c1"># GET / # =&gt; 10</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L198">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#redirect_view(url,status,headers)" class="doc doc-heading">    <code>
+      #redirect_view<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">url</span> <span class="p">:</span> <span class="n">Status</span><span class="p">,</span> <span class="n">status</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span> <span class="o">=</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="no">FOUND</span><span class="p">,</span> <span class="n">headers</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span> <span class="o">=</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span><span class="o">.</span><span class="n">new</span><span class="p">)</span> <span class="p">:</span> <a href="../View/#Athena::Routing::View">ART::View</a></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#redirect_view(url,status,headers)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns an <a href="../View/#Athena::Routing::View"><code>ART::View</code></a> that'll redirect to the provided <em>url</em>, optionally with the provided <em>status</em> and <em>headers</em>.</p>
+<p>Is essentially the same as <a href="#Athena::Routing::Controller#redirect(url,status)"><code>#redirect</code></a>, but invokes the <a href="/components#4-view-event">view</a> layer.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L219">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#route_redirect_view(route,params,status,headers)" class="doc doc-heading">    <code>
+      #route_redirect_view<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">route</span> <span class="p">:</span> <span class="n">Status</span><span class="p">,</span> <span class="n">params</span> <span class="p">:</span> <span class="n">Hash</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">_</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">status</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span> <span class="o">=</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="no">CREATED</span><span class="p">,</span> <span class="n">headers</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span> <span class="o">=</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span><span class="o">.</span><span class="n">new</span><span class="p">)</span> <span class="p">:</span> <a href="../View/#Athena::Routing::View">ART::View</a></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#route_redirect_view(route,params,status,headers)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns an <a href="../View/#Athena::Routing::View"><code>ART::View</code></a> that'll redirect to the provided <em>route</em>, optionally with the provided <em>params</em>, <em>status</em>, and <em>headers</em>.</p>
+<p>Is essentially the same as <a href="#Athena::Routing::Controller#redirect_to_route(route,params,status)"><code>#redirect_to_route</code></a>, but invokes the <a href="/components#4-view-event">view</a> layer.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L226">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Routing::Controller#view(data,status,headers)" class="doc doc-heading">    <code>
+      #view<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">status</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Status?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">headers</span> <span class="p">:</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span> <span class="o">=</span> <span class="n">HTTP</span><span class="o">::</span><span class="n">Headers</span><span class="o">.</span><span class="n">new</span><span class="p">)</span> <span class="p">:</span> <a href="../View/#Athena::Routing::View">ART::View</a></code></span>
+    </code>
+<a href="#Athena::Routing::Controller#view(data,status,headers)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns an <a href="../View/#Athena::Routing::View"><code>ART::View</code></a> with the provided <em>data</em>, and optionally <em>status</em> and <em>headers</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/:name&quot;</span><span class="p">)</span><span class="o">]</span>
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">View</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">(</span><span class="ss">greeting</span><span class="p">:</span> <span class="n">String</span><span class="p">))</span>
+  <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="p">({</span><span class="ss">greeting</span><span class="p">:</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span> <span class="ss">:im_a_teapot</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L238">View source</a>
+</div><h2 id="Athena::Routing::Controller-macros">Macros<a href="#Athena::Routing::Controller-macros" class="headerlink" title="Permanent link">#</a></h2>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:delete(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      delete<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:delete(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>DELETE</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:delete(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:delete(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:delete(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:delete(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">delete</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:get(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      get<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:get(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>GET</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:get(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:get(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:get(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:get(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">get</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:head(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      head<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:head(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>HEAD</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:head(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:head(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:head(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:head(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">head</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:link(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      link<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:link(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>LINK</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:link(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:link(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:link(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:link(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">link</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:patch(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      patch<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:patch(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>PATCH</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:patch(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:patch(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:patch(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:patch(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">patch</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:post(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      post<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:post(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>POST</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:post(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:post(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:post(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:post(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">post</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:put(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      put<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:put(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>PUT</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:put(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:put(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:put(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:put(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">put</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:render(template)" class="doc doc-heading">    <code>
+      render<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">template</span><span class="p">)</span></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:render(template)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Renders a template.</p>
+<p>Uses <code>ECR</code> to render the <em>template</em>, creating an <a href="../Response/#Athena::Routing::Response"><code>ART::Response</code></a> with its rendered content and adding a <code>text/html</code> <code>content-type</code> header.</p>
+<p>The response can be modified further before returning it if needed.</p>
+<p>Variables used within the template must be defined within the action's body manually if they are not provided within the action's arguments.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># greeting.ecr</span>
+<span class="n">Greetings</span><span class="p">,</span> <span class="o">&lt;%=</span> <span class="n">name</span> <span class="o">%&gt;!</span>
+
+<span class="c1"># example_controller.cr</span>
+<span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="o">@[</span><span class="nd">ARTA::Get</span><span class="p">(</span><span class="s2">&quot;/:name&quot;</span><span class="p">)</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">ART</span><span class="o">::</span><span class="n">Response</span>
+    <span class="n">render</span> <span class="s2">&quot;greeting.ecr&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">ART</span><span class="o">.</span><span class="n">run</span>
+
+<span class="c1"># GET /Fred # =&gt; Greetings, Fred!</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L299">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:render(template,layout)" class="doc doc-heading">    <code>
+      render<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:render(template,layout)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Renders a template within a layout.
+<div class="highlight"><pre><span></span><code><span class="c1"># layout.ecr</span>
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="ss">Content</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/h1&gt; &lt;%= content -%&gt;</span>
+
+<span class="sr"># greeting.ecr</span>
+<span class="sr">Greetings, &lt;%= name %&gt;!</span>
+
+<span class="sr"># example_controller.cr</span>
+<span class="sr">class ExampleController &lt; ART::Controller</span>
+<span class="sr">  @[ARTA::Get(&quot;/</span><span class="ss">:name</span><span class="s2">&quot;)]</span>
+<span class="s2">  def greet(name : String) : ART::Response</span>
+<span class="s2">    render &quot;</span><span class="n">greeting</span><span class="o">.</span><span class="n">ecr</span><span class="s2">&quot;, &quot;</span><span class="n">layout</span><span class="o">.</span><span class="n">ecr</span><span class="s2">&quot;</span>
+<span class="s2">  end</span>
+<span class="s2">end</span>
+
+<span class="s2">ART.run</span>
+
+<span class="s2"># GET /Fred # =&gt; &lt;h1&gt;Content:&lt;/h1&gt; Greetings, Fred!</span>
+</code></pre></div></p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L323">View source</a>
+</div>
+
+<div class="doc doc-object doc-method doc-macro">
+<h3 id="Athena::Routing::Controller:unlink(path,*,**,&amp;)" class="doc doc-heading">    <code>
+      unlink<span style="font-weight: normal"><code class="highlight language-crystal"></code></span>
+    </code>
+<a href="#Athena::Routing::Controller:unlink(path,*,**,&amp;)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Helper DSL macro for creating <code>UNLINK</code> actions.</p>
+<p>The first argument is the path that the action should handle; which maps to path on the HTTP method annotation.
+The second argument is a variable amount of arguments with a syntax similar to Crystal's <code>record</code>.
+There are also a few optional named arguments that map to the corresponding field on the HTTP method annotation.</p>
+<p>The macro simply defines a method based on the options passed to it.  Additional annotations, such as for query params
+or a param converter can simply be added on top of the macro.</p>
+<h6 id="Athena::Routing::Controller:unlink(path,*,**,&amp;)--optional-named-arguments">Optional Named Arguments<a class="headerlink" href="#Athena::Routing::Controller:unlink(path,*,**,&amp;)--optional-named-arguments" title="Permanent link">#</a></h6>
+<ul>
+<li><code>return_type</code> - The return type to set for the action.  Defaults to <code>String</code> if not provided.</li>
+<li><code>constraints</code> - Any constraints that should be applied to the route.</li>
+</ul>
+<h6 id="Athena::Routing::Controller:unlink(path,*,**,&amp;)--example">Example<a class="headerlink" href="#Athena::Routing::Controller:unlink(path,*,**,&amp;)--example" title="Permanent link">#</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExampleController</span> <span class="o">&lt;</span> <span class="n">ART</span><span class="o">::</span><span class="n">Controller</span>
+  <span class="n">unlink</span> <span class="s2">&quot;values/:value1/:value2&quot;</span><span class="p">,</span> <span class="n">value1</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">value2</span> <span class="p">:</span> <span class="n">Float64</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value1&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+/</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span> <span class="o">=&gt;</span> <span class="sr">/\d+\.\d+/</span><span class="p">}</span> <span class="k">do</span>
+    <span class="s2">&quot;Value1: </span><span class="si">#{</span><span class="n">value1</span><span class="si">}</span><span class="s2"> - Value2: </span><span class="si">#{</span><span class="n">value2</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/athena/blob/v0.14.0/src/controller.cr#L242">View source</a>
+</div>      </div>
+  </div>
+
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Config/ViewHandler/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              ViewHandler
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../ErrorRenderer/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              ErrorRenderer
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/athena-framework" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://gitter.im/athena-frameworkcr/community" target="_blank" rel="noopener" title="gitter.im" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>

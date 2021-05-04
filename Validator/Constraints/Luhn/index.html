@@ -1,0 +1,3598 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://athenaframework.org/Validator/Constraints/Luhn/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Luhn - Athena Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../css/mkdocstrings.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-184169799-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Athena::Validator::Constraints::Luhn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Athena Framework" class="md-header__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Athena Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Luhn
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark theme" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light theme" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        Manual
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Routing/" class="md-tabs__link">
+      Routing
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DependencyInjection/" class="md-tabs__link">
+      DependencyInjection
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../EventDispatcher/" class="md-tabs__link">
+      EventDispatcher
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Config/" class="md-tabs__link">
+      Config
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Serializer/" class="md-tabs__link">
+      Serializer
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../" class="md-tabs__link md-tabs__link--active">
+      Validator
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Negotiation/" class="md-tabs__link">
+      Negotiation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../Spec/" class="md-tabs__link">
+      Spec
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Athena Framework" class="md-nav__button md-logo" aria-label="Athena Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Athena Framework
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/athena-framework/athena/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        <span class="md-nav__icon md-icon"></span>
+        
+          Manual
+        
+      </label>
+      <nav class="md-nav" aria-label="Manual" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            Manual
+          
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../../getting_started/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Getting Started
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../../getting_started/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Getting Started
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/advanced_usage/" class="md-nav__link">
+        Advanced Usage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_3">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../../components/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Components
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Components" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../../components/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Components
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/dependency_injection/" class="md-nav__link">
+        Dependency Injection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/event_dispatcher/" class="md-nav__link">
+        Event Dispatcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../components/spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      <label class="md-nav__link" for="__nav_1_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../../cookbook/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Cookbook
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Cookbook" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../../cookbook/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Cookbook
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/listeners/" class="md-nav__link">
+        Listeners
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/param_converters/" class="md-nav__link">
+        Param Converters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/exclusion_strategies/" class="md-nav__link">
+        Exclusion Strategies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/object_constructors/" class="md-nav__link">
+        Object Constructors
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Routing/" class="md-nav__link">
+        Routing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DependencyInjection/" class="md-nav__link">
+        DependencyInjection
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../EventDispatcher/" class="md-nav__link">
+        EventDispatcher
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Serializer/" class="md-nav__link">
+        Serializer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Validator
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Validator" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Validator
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aliases/" class="md-nav__link">
+        Aliases
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Constraint/" class="md-nav__link">
+        Constraint
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ConstraintValidator/" class="md-nav__link">
+        ConstraintValidator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ConstraintValidatorFactory/" class="md-nav__link">
+        ConstraintValidatorFactory
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ConstraintValidatorFactoryInterface/" class="md-nav__link">
+        ConstraintValidatorFactoryInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ConstraintValidatorInterface/" class="md-nav__link">
+        ConstraintValidatorInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7_7">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Constraints
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Constraints" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Constraints
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractComparison/" class="md-nav__link">
+        AbstractComparison
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_2" type="checkbox" id="__nav_7_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_7_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../All/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          All
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="All" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../All/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            All
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../All/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_3" type="checkbox" id="__nav_7_7_3" >
+      
+      <label class="md-nav__link" for="__nav_7_7_3">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../AtLeastOneOf/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          AtLeastOneOf
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="AtLeastOneOf" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../AtLeastOneOf/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            AtLeastOneOf
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AtLeastOneOf/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_4" type="checkbox" id="__nav_7_7_4" >
+      
+      <label class="md-nav__link" for="__nav_7_7_4">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Blank/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Blank
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Blank" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Blank/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Blank
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Blank/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_5" type="checkbox" id="__nav_7_7_5" >
+      
+      <label class="md-nav__link" for="__nav_7_7_5">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Callback/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Callback
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Callback" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Callback/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Callback
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Callback/CallbackProc/" class="md-nav__link">
+        CallbackProc
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Callback/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Callback/Value/" class="md-nav__link">
+        Value
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_6" type="checkbox" id="__nav_7_7_6" >
+      
+      <label class="md-nav__link" for="__nav_7_7_6">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Choice/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Choice
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Choice" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_6">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Choice/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Choice
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Choice/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ComparisonValidator/" class="md-nav__link">
+        ComparisonValidator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Composite/" class="md-nav__link">
+        Composite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_9" type="checkbox" id="__nav_7_7_9" >
+      
+      <label class="md-nav__link" for="__nav_7_7_9">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Compound/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Compound
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Compound" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_9">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Compound/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Compound
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Compound/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_10" type="checkbox" id="__nav_7_7_10" >
+      
+      <label class="md-nav__link" for="__nav_7_7_10">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Email/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Email
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Email" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_10">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Email/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Email
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email/Mode/" class="md-nav__link">
+        Mode
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_11" type="checkbox" id="__nav_7_7_11" >
+      
+      <label class="md-nav__link" for="__nav_7_7_11">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../EqualTo/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          EqualTo
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="EqualTo" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_11">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../EqualTo/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            EqualTo
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EqualTo/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_12" type="checkbox" id="__nav_7_7_12" >
+      
+      <label class="md-nav__link" for="__nav_7_7_12">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../GreaterThan/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          GreaterThan
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="GreaterThan" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_12">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../GreaterThan/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            GreaterThan
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GreaterThan/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_13" type="checkbox" id="__nav_7_7_13" >
+      
+      <label class="md-nav__link" for="__nav_7_7_13">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../GreaterThanOrEqual/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          GreaterThanOrEqual
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="GreaterThanOrEqual" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_13">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../GreaterThanOrEqual/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            GreaterThanOrEqual
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GreaterThanOrEqual/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_14" type="checkbox" id="__nav_7_7_14" >
+      
+      <label class="md-nav__link" for="__nav_7_7_14">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../GroupSequence/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          GroupSequence
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="GroupSequence" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_14">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../GroupSequence/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            GroupSequence
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GroupSequence/Provider/" class="md-nav__link">
+        Provider
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_15" type="checkbox" id="__nav_7_7_15" >
+      
+      <label class="md-nav__link" for="__nav_7_7_15">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../IP/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          IP
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="IP" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_15">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../IP/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            IP
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP/Version/" class="md-nav__link">
+        Version
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_16" type="checkbox" id="__nav_7_7_16" >
+      
+      <label class="md-nav__link" for="__nav_7_7_16">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../ISBN/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ISBN
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ISBN" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_16">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../ISBN/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ISBN
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ISBN/Type/" class="md-nav__link">
+        Type
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ISBN/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_17" type="checkbox" id="__nav_7_7_17" >
+      
+      <label class="md-nav__link" for="__nav_7_7_17">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../ISIN/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ISIN
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ISIN" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_17">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../ISIN/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ISIN
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ISIN/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_18" type="checkbox" id="__nav_7_7_18" >
+      
+      <label class="md-nav__link" for="__nav_7_7_18">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../ISSN/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ISSN
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ISSN" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_18">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../ISSN/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ISSN
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ISSN/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_19" type="checkbox" id="__nav_7_7_19" >
+      
+      <label class="md-nav__link" for="__nav_7_7_19">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../IsFalse/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          IsFalse
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="IsFalse" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_19">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../IsFalse/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            IsFalse
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsFalse/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_20" type="checkbox" id="__nav_7_7_20" >
+      
+      <label class="md-nav__link" for="__nav_7_7_20">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../IsNil/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          IsNil
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="IsNil" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_20">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../IsNil/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            IsNil
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsNil/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_21" type="checkbox" id="__nav_7_7_21" >
+      
+      <label class="md-nav__link" for="__nav_7_7_21">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../IsTrue/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          IsTrue
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="IsTrue" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_21">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../IsTrue/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            IsTrue
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsTrue/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_22" type="checkbox" id="__nav_7_7_22" >
+      
+      <label class="md-nav__link" for="__nav_7_7_22">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../LessThan/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          LessThan
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="LessThan" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_22">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../LessThan/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            LessThan
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LessThan/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_23" type="checkbox" id="__nav_7_7_23" >
+      
+      <label class="md-nav__link" for="__nav_7_7_23">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../LessThanOrEqual/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          LessThanOrEqual
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="LessThanOrEqual" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_23">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../LessThanOrEqual/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            LessThanOrEqual
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LessThanOrEqual/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_24" type="checkbox" id="__nav_7_7_24" checked>
+      
+      <label class="md-nav__link" for="__nav_7_7_24">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="./" class="md-nav__link md-nav__link--active"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Luhn
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Luhn" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_24">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Luhn
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Negative/" class="md-nav__link">
+        Negative
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NegativeOrZero/" class="md-nav__link">
+        NegativeOrZero
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_27" type="checkbox" id="__nav_7_7_27" >
+      
+      <label class="md-nav__link" for="__nav_7_7_27">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../NotBlank/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          NotBlank
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="NotBlank" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_27">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../NotBlank/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            NotBlank
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NotBlank/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_28" type="checkbox" id="__nav_7_7_28" >
+      
+      <label class="md-nav__link" for="__nav_7_7_28">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../NotEqualTo/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          NotEqualTo
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="NotEqualTo" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_28">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../NotEqualTo/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            NotEqualTo
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NotEqualTo/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_29" type="checkbox" id="__nav_7_7_29" >
+      
+      <label class="md-nav__link" for="__nav_7_7_29">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../NotNil/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          NotNil
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="NotNil" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_29">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../NotNil/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            NotNil
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NotNil/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Positive/" class="md-nav__link">
+        Positive
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PositiveOrZero/" class="md-nav__link">
+        PositiveOrZero
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_32" type="checkbox" id="__nav_7_7_32" >
+      
+      <label class="md-nav__link" for="__nav_7_7_32">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Range/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Range
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Range" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_32">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Range/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Range
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Range/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_33" type="checkbox" id="__nav_7_7_33" >
+      
+      <label class="md-nav__link" for="__nav_7_7_33">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Regex/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Regex
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Regex" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_33">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Regex/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Regex
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Regex/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_34" type="checkbox" id="__nav_7_7_34" >
+      
+      <label class="md-nav__link" for="__nav_7_7_34">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Sequentially/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Sequentially
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Sequentially" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_34">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Sequentially/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Sequentially
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Sequentially/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_35" type="checkbox" id="__nav_7_7_35" >
+      
+      <label class="md-nav__link" for="__nav_7_7_35">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Size/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Size
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Size" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_35">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Size/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Size
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Size/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_36" type="checkbox" id="__nav_7_7_36" >
+      
+      <label class="md-nav__link" for="__nav_7_7_36">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../URL/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          URL
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="URL" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_36">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../URL/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            URL
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../URL/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_37" type="checkbox" id="__nav_7_7_37" >
+      
+      <label class="md-nav__link" for="__nav_7_7_37">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Unique/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Unique
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Unique" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_37">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Unique/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Unique
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Unique/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7_38" type="checkbox" id="__nav_7_7_38" >
+      
+      <label class="md-nav__link" for="__nav_7_7_38">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../Valid/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Valid
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Valid" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_38">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../Valid/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Valid
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Valid/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_8" type="checkbox" id="__nav_7_8" >
+      
+      <label class="md-nav__link" for="__nav_7_8">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Exceptions/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Exceptions
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Exceptions" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Exceptions/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Exceptions
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/UnexpectedValueError/" class="md-nav__link">
+        UnexpectedValueError
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/ValidationFailed/" class="md-nav__link">
+        ValidationFailed
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exceptions/ValidatorError/" class="md-nav__link">
+        ValidatorError
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ExecutionContext/" class="md-nav__link">
+        ExecutionContext
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ExecutionContextInterface/" class="md-nav__link">
+        ExecutionContextInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_11" type="checkbox" id="__nav_7_11" >
+      
+      <label class="md-nav__link" for="__nav_7_11">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Metadata/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Metadata
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Metadata" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_11">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Metadata/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Metadata
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/CascadingStrategy/" class="md-nav__link">
+        CascadingStrategy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/ClassMetadata/" class="md-nav__link">
+        ClassMetadata
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/GenericMetadata/" class="md-nav__link">
+        GenericMetadata
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/GetterMetadata/" class="md-nav__link">
+        GetterMetadata
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/MetadataFactory/" class="md-nav__link">
+        MetadataFactory
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/MetadataFactoryInterface/" class="md-nav__link">
+        MetadataFactoryInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/MetadataInterface/" class="md-nav__link">
+        MetadataInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/PropertyMetadata/" class="md-nav__link">
+        PropertyMetadata
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Metadata/PropertyMetadataInterface/" class="md-nav__link">
+        PropertyMetadataInterface
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PropertyPath/" class="md-nav__link">
+        PropertyPath
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ServiceConstraintValidator/" class="md-nav__link">
+        ServiceConstraintValidator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14" type="checkbox" id="__nav_7_14" >
+      
+      <label class="md-nav__link" for="__nav_7_14">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Spec/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Spec
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Spec" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_14">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Spec/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Spec
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/ComparisonConstraintValidatorTestCase/" class="md-nav__link">
+        ComparisonConstraintValidatorTestCase
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14_2" type="checkbox" id="__nav_7_14_2" >
+      
+      <label class="md-nav__link" for="__nav_7_14_2">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Spec/ConstraintValidatorTestCase/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          ConstraintValidatorTestCase
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="ConstraintValidatorTestCase" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_14_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Spec/ConstraintValidatorTestCase/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            ConstraintValidatorTestCase
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/ConstraintValidatorTestCase/Assertion/" class="md-nav__link">
+        Assertion
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/EntityGroupSequenceProvider/" class="md-nav__link">
+        EntityGroupSequenceProvider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/EntitySequenceProvider/" class="md-nav__link">
+        EntitySequenceProvider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14_5" type="checkbox" id="__nav_7_14_5" >
+      
+      <label class="md-nav__link" for="__nav_7_14_5">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Spec/FailingConstraint/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          FailingConstraint
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="FailingConstraint" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_14_5">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Spec/FailingConstraint/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            FailingConstraint
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/FailingConstraint/Validator/" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/MockContextualValidator/" class="md-nav__link">
+        MockContextualValidator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/MockMetadataFactory/" class="md-nav__link">
+        MockMetadataFactory
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Spec/MockValidator/" class="md-nav__link">
+        MockValidator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Validatable/" class="md-nav__link">
+        Validatable
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_16" type="checkbox" id="__nav_7_16" >
+      
+      <label class="md-nav__link" for="__nav_7_16">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Validator/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Validator
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Validator" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_16">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Validator/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Validator
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Validator/ContextualValidatorInterface/" class="md-nav__link">
+        ContextualValidatorInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Validator/RecursiveContextualValidator/" class="md-nav__link">
+        RecursiveContextualValidator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Validator/RecursiveValidator/" class="md-nav__link">
+        RecursiveValidator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Validator/ValidatorInterface/" class="md-nav__link">
+        ValidatorInterface
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_17" type="checkbox" id="__nav_7_17" >
+      
+      <label class="md-nav__link" for="__nav_7_17">
+        <span class="md-nav__icon md-icon"></span>
+        
+          <a href="../../Violation/" class="md-nav__link"
+            style="margin: initial; padding: initial; pointer-events: initial">
+        
+          Violation
+        </a>
+      </label>
+      <nav class="md-nav" aria-label="Violation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_17">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../Violation/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            Violation
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Violation/ConstraintViolation/" class="md-nav__link">
+        ConstraintViolation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Violation/ConstraintViolationBuilder/" class="md-nav__link">
+        ConstraintViolationBuilder
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Violation/ConstraintViolationBuilderInterface/" class="md-nav__link">
+        ConstraintViolationBuilderInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Violation/ConstraintViolationInterface/" class="md-nav__link">
+        ConstraintViolationInterface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Violation/ConstraintViolationList/" class="md-nav__link">
+        ConstraintViolationList
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Violation/ConstraintViolationListInterface/" class="md-nav__link">
+        ConstraintViolationListInterface
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Negotiation/" class="md-nav__link">
+        Negotiation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Spec/" class="md-nav__link">
+        Spec
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn--configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn--optional-arguments" class="md-nav__link">
+    Optional Arguments
+  </a>
+  
+    <nav class="md-nav" aria-label="Optional Arguments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn--message" class="md-nav__link">
+    message
+  </a>
+  
+    <nav class="md-nav" aria-label="message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn--placeholders" class="md-nav__link">
+    Placeholders
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn--groups" class="md-nav__link">
+    groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn--payload" class="md-nav__link">
+    payload
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn-constants" class="md-nav__link">
+    Constants
+  </a>
+  
+    <nav class="md-nav" aria-label="Constants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn::CHECKSUM_FAILED_ERROR" class="md-nav__link">
+    CHECKSUM_FAILED_ERROR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn::INVALID_CHARACTERS_ERROR" class="md-nav__link">
+    INVALID_CHARACTERS_ERROR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn-class-methods" class="md-nav__link">
+    Class methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Class methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn.new(message,groups,payload)" class="md-nav__link">
+    .new
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Athena::Validator::Constraints::Luhn#validated_by" class="md-nav__link">
+    #validated_by
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/athena-framework/validator/blob/v0.1.4/src/constraints/luhn.cr#L36" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <div class="doc doc-object doc-type class">
+<h1 id="Athena::Validator::Constraints::Luhn" class="doc doc-heading">class <code>Athena::Validator::Constraints::Luhn</code>
+      <br/><small>inherits <code><a href="../../Constraint/#Athena::Validator::Constraint">Athena::Validator::Constraint</a></code></small>
+<a href="#Athena::Validator::Constraints::Luhn" class="headerlink" title="Permanent link">#</a></h1>
+  <div class="doc doc-contents first">
+<p>Validates that a credit card number passes the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a>; a useful first step to validating a credit card.
+The underlying value is converted to a string via <code>#to_s</code> before being validated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As with most other constraints, <code>nil</code> and empty strings are considered valid values, in order to allow the value to be optional.
+If the value is required, consider combining this constraint with <a href="../NotBlank/#Athena::Validator::Constraints::NotBlank"><code>AVD::Constraints::NotBlank</code></a>.</p>
+</div>
+<h3 id="Athena::Validator::Constraints::Luhn--configuration">Configuration<a class="headerlink" href="#Athena::Validator::Constraints::Luhn--configuration" title="Permanent link">#</a></h3>
+<h4 id="Athena::Validator::Constraints::Luhn--optional-arguments">Optional Arguments<a class="headerlink" href="#Athena::Validator::Constraints::Luhn--optional-arguments" title="Permanent link">#</a></h4>
+<h5 id="Athena::Validator::Constraints::Luhn--message">message<a class="headerlink" href="#Athena::Validator::Constraints::Luhn--message" title="Permanent link">#</a></h5>
+<p><strong>Type:</strong> <code>String</code> <strong>Default:</strong> <code>This value is not a valid credit card number.</code></p>
+<p>The message that will be shown if the value is not pass the Luhn check.</p>
+<h6 id="Athena::Validator::Constraints::Luhn--placeholders">Placeholders<a class="headerlink" href="#Athena::Validator::Constraints::Luhn--placeholders" title="Permanent link">#</a></h6>
+<p>The following placeholders can be used in this message:</p>
+<ul>
+<li><code>{{ value }}</code> - The current (invalid) value.</li>
+</ul>
+<h5 id="Athena::Validator::Constraints::Luhn--groups">groups<a class="headerlink" href="#Athena::Validator::Constraints::Luhn--groups" title="Permanent link">#</a></h5>
+<p><strong>Type:</strong> <code>Array(String) | String | Nil</code> <strong>Default:</strong> <code>nil</code></p>
+<p>The <a href="../../Constraint/#Athena::Validator::Constraint--validation-groups">validation groups</a> this constraint belongs to.
+<a href="../../Constraint/#Athena::Validator::Constraint::DEFAULT_GROUP"><code>AVD::Constraint::DEFAULT_GROUP</code></a> is assumed if <code>nil</code>.</p>
+<h5 id="Athena::Validator::Constraints::Luhn--payload">payload<a class="headerlink" href="#Athena::Validator::Constraints::Luhn--payload" title="Permanent link">#</a></h5>
+<p><strong>Type:</strong> <code>Hash(String, String)?</code> <strong>Default:</strong> <code>nil</code></p>
+<p>Any arbitrary domain-specific data that should be stored with this constraint.
+The <a href="../../Constraint/#Athena::Validator::Constraint--payload">payload</a> is not used by <a href="../../#Athena::Validator"><code>Athena::Validator</code></a>, but its processing is completely up to you.</p>
+      <div class="doc doc-children">
+
+
+<h2 id="Athena::Validator::Constraints::Luhn-constants">Constants<a href="#Athena::Validator::Constraints::Luhn-constants" class="headerlink" title="Permanent link">#</a></h2>
+
+<div class="doc doc-object doc-constant">
+<h3 id="Athena::Validator::Constraints::Luhn::CHECKSUM_FAILED_ERROR" class="doc doc-heading">    <code>
+      CHECKSUM_FAILED_ERROR = <span style="font-weight: normal"><code class="highlight language-crystal"><span class="s2">&quot;a4f089dd-fd63-4d50-ac30-34ed2a8dc9dd&quot;</span></code></span>
+    </code>
+<a href="#Athena::Validator::Constraints::Luhn::CHECKSUM_FAILED_ERROR" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+  </div>
+</div>
+
+<div class="doc doc-object doc-constant">
+<h3 id="Athena::Validator::Constraints::Luhn::INVALID_CHARACTERS_ERROR" class="doc doc-heading">    <code>
+      INVALID_CHARACTERS_ERROR = <span style="font-weight: normal"><code class="highlight language-crystal"><span class="s2">&quot;c42b8d36-d9e9-4f5f-aad6-5190e27a1102&quot;</span></code></span>
+    </code>
+<a href="#Athena::Validator::Constraints::Luhn::INVALID_CHARACTERS_ERROR" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+  </div>
+</div>
+<h2 id="Athena::Validator::Constraints::Luhn-class-methods">Class methods<a href="#Athena::Validator::Constraints::Luhn-class-methods" class="headerlink" title="Permanent link">#</a></h2>
+
+<div class="doc doc-object doc-method doc-class_method">
+<h3 id="Athena::Validator::Constraints::Luhn.new(message,groups,payload)" class="doc doc-heading">    <code>
+      .new<span style="font-weight: normal"><code class="highlight language-crystal"><span class="p">(</span><span class="n">message</span> <span class="p">:</span> <span class="n">String</span> <span class="o">=</span> <span class="s2">&#34;This value is not a valid credit card number.&#34;</span><span class="p">,</span> <span class="n">groups</span> <span class="p">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="o">|</span> <span class="n">String</span> <span class="o">|</span> <span class="n">Nil</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">payload</span> <span class="p">:</span> <span class="n">Hash</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></span>
+    </code>
+<a href="#Athena::Validator::Constraints::Luhn.new(message,groups,payload)" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/validator/blob/v0.1.4/src/constraints/luhn.cr#L45">View source</a>
+</div><h2 id="Athena::Validator::Constraints::Luhn-methods">Methods<a href="#Athena::Validator::Constraints::Luhn-methods" class="headerlink" title="Permanent link">#</a></h2>
+
+<div class="doc doc-object doc-method doc-instance_method">
+<h3 id="Athena::Validator::Constraints::Luhn#validated_by" class="doc doc-heading">    <code>
+      #validated_by<span style="font-weight: normal"> <code class="highlight language-crystal"><span class="p">:</span> <span class="n">AVD</span><span class="o">::</span><span class="n">ConstraintValidator</span><span class="o">.</span><span class="n">class</span></code></span>
+    </code>
+<a href="#Athena::Validator::Constraints::Luhn#validated_by" class="headerlink" title="Permanent link">#</a></h3>
+  <div class="doc doc-contents ">
+<p>Returns the <code>AVD::ConstraintValidator.class</code> that should handle validating <code>self</code>.</p>  </div>
+
+    <a class="doc-source-link" href="https://github.com/athena-framework/validator/blob/v0.1.4/src/constraints/luhn.cr#L36">View source</a>
+</div>      </div>
+  </div>
+
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../LessThanOrEqual/Validator/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Validator
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="Validator/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Validator
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/athena-framework" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://gitter.im/athena-frameworkcr/community" target="_blank" rel="noopener" title="gitter.im" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>
