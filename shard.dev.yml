@@ -2,7 +2,8 @@
 # $ SHARDS_OVERRIDE=shard.dev.yml shards update
 dependencies:
   athena:
-    path: ../athena
+    github: athena-framework/athena
+    branch: master
   athena-config:
     github: athena-framework/config
     branch: master
