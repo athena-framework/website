@@ -98,12 +98,12 @@ class ExampleController < ART::Controller
   def initialize(@serializer : ASR::SerializerInterface); end
 
   @[ARTA::Post("/article")]
-  def new_article(request : HTTP::Request) : Article
+  def new_article(request : ART::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end
 
   @[ARTA::Put("/article")]
-  def update_article(request : HTTP::Request) : Article
+  def update_article(request : ART::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end
 end

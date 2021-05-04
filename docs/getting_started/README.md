@@ -10,7 +10,7 @@ Add the dependency to your `shard.yml`:
 dependencies:
   athena:
     github: athena-framework/athena
-    version: ~> 0.13.0
+    version: ~> 0.14.0
 ```
 
 Run `shards install`.  This will install Athena and its required dependencies.
@@ -61,6 +61,7 @@ require "athena"
 
 class ExampleController < ART::Controller
   @[ARTA::Get("/add/:value1/:value2")]
+  @[ARTA::QueryParam("negative")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
     negative ? -sum : sum
@@ -97,7 +98,7 @@ ART.run
 
 #### Request Parameter
 
-Restricting an action argument to [HTTP::Request](https://crystal-lang.org/api/HTTP/Request.html) will provide the raw request object.  This can be useful to access data directly off the request object, such consuming the request's body.  This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
+Restricting an action argument to [ART::Request][] will provide the raw request object.  This can be useful to access data directly off the request object, such consuming the request's body.  This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
 
 TIP: See the [cookbook](../cookbook/param_converters.md#request-body) for an example of how to setup a generic request body deserialization/validation converter.
 
@@ -106,7 +107,7 @@ require "athena"
 
 class ExampleController < ART::Controller
   @[ARTA::Post("/data")]
-  def data(request : HTTP::Request) : String
+  def data(request : ART::Request) : String
     raise ART::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
     
     JSON.parse(body).as_h["name"].as_s
@@ -120,7 +121,7 @@ ART.run
 
 #### Returning Raw Data
 
-An [ART::Response][Athena::Routing::Response] can be used to fully customize the response; such as returning a specific status code, adding some one-off headers.
+An [ART::Response][Athena::Routing::Response] can be used to fully customize the response; such as returning a specific status code, or adding some one-off headers.
 
 ```crystal
 require "athena"

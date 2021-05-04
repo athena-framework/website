@@ -52,7 +52,7 @@ struct RequestBody < ART::ParamConverterInterface
   ); end
 
   # :inherit:
-  def apply(request : HTTP::Request, configuration : Configuration) : Nil
+  def apply(request : ART::Request, configuration : Configuration) : Nil
     # Ensure the request body isn't empty.
     body = request.body.try &.gets_to_end
     
@@ -159,7 +159,7 @@ struct DBConverter < ART::ParamConverterInterface
   # :inherit:
   #
   # Be sure to handle any possible exceptions here to return more helpful errors to the client.
-  def apply(request : HTTP::Request, configuration : Configuration) : Nil
+  def apply(request : ART::Request, configuration : Configuration) : Nil
     # Grab the `id` path parameter from the request's attributes as an Int32.
     primary_key = request.attributes.get "id", Int32
 

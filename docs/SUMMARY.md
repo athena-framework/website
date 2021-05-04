@@ -6,6 +6,7 @@
         * [Dependency Injection](components/dependency_injection.md)
         * [Event Dispatcher](components/event_dispatcher.md)
         * [Config](components/config.md)
+        * [Negotiation](components/negotiation.md)
         * [Serializer](components/serializer.md)
         * [Validator](components/validator.md)
         * [Spec](components/spec.md)

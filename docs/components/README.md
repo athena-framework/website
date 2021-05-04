@@ -16,7 +16,7 @@ Athena is an event based framework, meaning it emits various events via the [Eve
 
 ### 1. Request Event
 
-The very first event that is dispatched is the [ART::Events::Request][Athena::Routing::Events::Request] event and can have a variety of listeners.  The primary purpose of this event is to create an [ART::Response][Athena::Routing::Response] directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via `HTTP::Request#attributes`.
+The very first event that is dispatched is the [ART::Events::Request][Athena::Routing::Events::Request] event and can have a variety of listeners.  The primary purpose of this event is to create an [ART::Response][Athena::Routing::Response] directly, or to add information to the requests' attributes; a simple key/value store tied to request instance accessible via [ART::Request#attributes][].
 
 In some cases the listener may have enough information to return an [ART::Response][Athena::Routing::Response] immediately.  An example of this would be the [ART::Listeners::CORS][Athena::Routing::Listeners::CORS] listener.  If enabled it is able to return a `CORS` preflight response even before routing is invoked.
 
@@ -47,7 +47,7 @@ Before Athena can call the controller action, it first needs to determine what a
 The default algorithm is as follows:
 
 1. Check the request's attributes for a key that matches the name of the argument; such as as a path param or something set via a listener (either built-in or custom)
-1. Check if the type of the argument is `HTTP::Request`, if so use the current request object
+1. Check if the type of the argument is [ART::Request][], if so use the current request object
 1. Check if the argument has a default value, or use `nil` if it is nilable
 1. Raise an exception if an argument's value could be not resolved
 
@@ -67,7 +67,9 @@ The type of the value returned from the controller action determines what happen
 
 The [ART::Events::View][Athena::Routing::Events::View] event is only dispatched when the controller action does _NOT_ return an [ART::Response][Athena::Routing::Response].  The purpose of this event is to turn the controller action's return value into an [ART::Response][Athena::Routing::Response].
 
-This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.).
+An [ART::View][] may be used to customize the response, e.g. setting a custom response status and/or adding additional headers; while keeping the controller action response data intact.
+
+This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.).  See the [negotiation](/components/negotiation) component for more information on this feature.
 
 !!! example "View event in Athena"
     By default Athena will JSON serialize any non [ART::Response][Athena::Routing::Response] values.

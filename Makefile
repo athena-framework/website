@@ -37,3 +37,4 @@ clean: ## Remove build directory
 .PHONY: clean_deps
 clean_deps: ## Remove .venv directory
 	rm -rf .venv
+	rm -rf ./lib

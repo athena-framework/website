@@ -6,15 +6,15 @@ shards:
 
   athena:
     git: https://github.com/athena-framework/athena.git
-    version: 0.13.0
+    version: 0.14.0
 
   athena-config:
     git: https://github.com/athena-framework/config.git
-    version: 0.2.1
+    version: 0.3.0
 
   athena-dependency_injection:
     git: https://github.com/athena-framework/dependency-injection.git
-    version: 0.2.6
+    version: 0.3.1
 
   athena-event_dispatcher:
     git: https://github.com/athena-framework/event-dispatcher.git

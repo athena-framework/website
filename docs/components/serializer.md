@@ -21,11 +21,11 @@ class Article
   getter id : Int32
   getter name : String
   
-  @[ASR::Groups("default")]
+  @[ASRA::Groups("default")]
   property? published : Bool = false
   
   # This property is not exposed since it is not part of the `default` group.
-  @[ASR::Groups("detailed")]
+  @[ASRA::Groups("detailed")]
   getter body : String = "BODY"
   
   def initialize(@id : Int32, @name : String); end

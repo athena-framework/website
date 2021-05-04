@@ -153,29 +153,13 @@ def ART::Config::CORS.configure
 end
 ```
 
-### Configuration Resolver
-
-The config component also defines the [ACF::ConfigurationResolverInterface][Athena::Config::ConfigurationResolverInterface] type, which is wired up as a service automatically in order to inject it as a dependency in other services.  This type is the preferred way to access configuration, as opposed to directly via `ACF.config`.  See the [ACFA::Resolvable][Athena::Config::Annotations::Resolvable] annotation as well.
-
-```crystal
-@[ADI::Register]
-class MyService
-  def initialize(@configuration_resolver : ACF::ConfigurationResolverInterface); end
-  
-  def execute : Nil
-    # `config` would be the configured `MyServiceConfig` instance, or `nil` if it optional and not configured.
-    config = @configuration_resolver.resolve(MyServiceConfig)
-    
-    # ...
-  end
-end
-```
+Configuration objects may also be injected as you would any other service.  This can be especially helpful for Athena extensions created by third parties whom services should be configurable by the end use.  See the [Configuration][Athena::DependencyInjection::Register--configuration] section in the DI component API documentation for details.
 
 ## Parameters
 
 Parameters represent reusable values that are used to control the application's behavior, e.g. used within its configuration, or directly within the application's services.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
 
-Parameters should _NOT_ be used for values that rarely change, such as the max amount of items to return per page.  These types of values are better suited to being a [constant](https://crystal-lang.org/reference/syntax_and_semantics/constants.html) within the related type.  Similarly, infrastructure related values that change from one machine to another, e.g. development machine to production server, should be defined using environmental variables.
+Parameters should _NOT_ be used for values that rarely change, such as the max amount of items to return per page.  These types of values are better suited to being a [constant](https://crystal-lang.org/reference/syntax_and_semantics/constants.html) within the related type.  Similarly, infrastructure related values that change from one machine to another, e.g. development machine to production server, should be defined using environmental variables.  However, these values may still be exposed as parameters.
 
 Parameters are intended for values that do not change between machines, and control the application's behavior, e.g. the sender of notification emails, what features are enabled, or other high level application level values.
 
