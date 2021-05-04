@@ -11,7 +11,7 @@ The content negotiation logic is disabled by default, but can be easily enabled 
 For example, say we configured things like:
 
 ```crystal
-def ART::Config::ContentNegotiation.configure : ART::Config::ContentNegotiation?
+def ART::Config::ContentNegotiation.configure
   new(
     # Setting fallback_format to json means that instead of considering
     # the next rule in case of a priority mismatch, json will be used.
@@ -63,13 +63,14 @@ The implementation can be as simple/complex as needed for the given format.  Off
 
 ## Example
 
-The following is a demonstration of how the various negotation features can be used inconjunction. The example includes:
+The following is a demonstration of how the various negotiation features can be used in conjunction. The example includes:
 
 1. Defining a custom [ART::View::ViewHandler][] for the `csv` format.
-1. Enabling content negotation, supporting `json` and `csv` formats, falling back to `json`.
+1. Enabling content negotiation, supporting `json` and `csv` formats, falling back to `json`.
 1. An endpoint returning an [ART::View][] that sets a custom HTTP status.
 
 ```crystal
+require "athena"
 require "csv"
 
 # An interface to denote a type can provide its data in CSV format.
