@@ -94,7 +94,7 @@ class ExampleController < ART::Controller
   # Inject the serializer into the controller to test with.
   #
   # I'm using a controller because it's simpler, but this would
-  # most likely be a part of an `ART::ParamConverterInterface`.
+  # most likely be a part of an `ART::ParamConverter`.
   def initialize(@serializer : ASR::SerializerInterface); end
 
   @[ARTA::Post("/article")]

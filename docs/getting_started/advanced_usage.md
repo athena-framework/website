@@ -3,7 +3,7 @@ These features may not be required for a simple application; however as the appl
 
 ## Param Converters
 
-[ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface] s allow complex types to be supplied to an action via its arguments.
+[ART::ParamConverter][Athena::Routing::ParamConverter] s allow complex types to be supplied to an action via its arguments.
 An example of this could be extracting the id from `/users/10`, doing a DB query to lookup the user with the PK of `10`, then providing the full user object to the action.
 Param converters abstract any custom parameter handling that would otherwise have to be done in each action.
 
@@ -11,7 +11,7 @@ Param converters abstract any custom parameter handling that would otherwise hav
 require "athena"
 
 @[ADI::Register]
-struct MultiplyConverter < ART::ParamConverterInterface
+class MultiplyConverter < ART::ParamConverter
   # :inherit:
   def apply(request : ART::Request, configuration : Configuration) : Nil
     arg_name = configuration.name
@@ -19,6 +19,7 @@ struct MultiplyConverter < ART::ParamConverterInterface
     return unless request.attributes.has? arg_name
 
     value = request.attributes.get arg_name, Int32
+
     request.attributes.set arg_name, value * 2, Int32
   end
 end
@@ -33,7 +34,7 @@ end
 
 ART.run
 
-# GET / multiply/3 # => 6
+# GET /multiply/3 # => 6
 ```
 
 ## Middleware

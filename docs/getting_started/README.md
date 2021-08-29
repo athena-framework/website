@@ -100,7 +100,7 @@ ART.run
 
 Restricting an action argument to [ART::Request][] will provide the raw request object.  This can be useful to access data directly off the request object, such consuming the request's body.  This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
 
-TIP: See the [cookbook](../cookbook/param_converters.md#request-body) for an example of how to setup a generic request body deserialization/validation converter.
+TIP: Checkout [Athena::Routing::RequestBodyConverter][Athena::Routing::RequestBodyConverter] for a better way to handle this.
 
 ```crystal
 require "athena"

@@ -34,7 +34,7 @@ Another use case for this event is populating additional data into the request's
 The next event to be dispatched is the [ART::Events::Action][Athena::Routing::Events::Action] event, assuming a response was not already returned within the [request](#1-request-event) event.  This event is dispatched after the related controller/action pair is determined, but before it is executed.  This event is intended to be used when a listener requires information from the related [ART::Action][Athena::Routing::Action]; such as reading custom annotations off of it via the [Config](config.md) component.
 
 !!! example "Action event in Athena"
-    This is the event that [ART::Listeners::ParamConverter][Athena::Routing::Listeners::ParamConverter] and [ART::Listeners::ParamFetcher][Athena::Routing::Listeners::ParamFetcher] listen on to apply custom conversion logic via an [ART::ParamConverterInterface][Athena::Routing::ParamConverterInterface], or resolve request parameters such as [ARTA::QueryParam][Athena::Routing::Annotations::QueryParam]s.
+    This is the event that [ART::Listeners::ParamConverter][Athena::Routing::Listeners::ParamConverter] and [ART::Listeners::ParamFetcher][Athena::Routing::Listeners::ParamFetcher] listen on to apply custom conversion logic via an [ART::ParamConverter][Athena::Routing::ParamConverter], or resolve request parameters such as [ARTA::QueryParam][Athena::Routing::Annotations::QueryParam]s.
 
 ### 3. Invoke the Controller Action
 
