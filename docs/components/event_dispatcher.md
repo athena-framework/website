@@ -2,7 +2,7 @@ As mentiond in the [architecture](README.md) section, Athena is an event based f
 
 ## Basic Usage
 
-An event listener is defined by registering a service that includes [AED::EventListenerInterface][Athena::EventDispatcher::EventListenerInterface].  The type should also define a `self.subscribed_events` method that represents what [events][Athena::Routing::Events] it should be listening on.
+An event listener is defined by registering a service that includes [AED::EventListenerInterface][Athena::EventDispatcher::EventListenerInterface]. The type should also define a `self.subscribed_events` method that represents what [events][Athena::Framework::Events] it should be listening on.
 
 ```crystal
 require "athena"
@@ -15,15 +15,15 @@ class CustomListener
   # The value of the hash represents this listener's priority;
   # the higher the value the sooner it gets executed.
   def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{ART::Events::Response => 25}
+    AED::SubscribedEvents{ATH::Events::Response => 25}
   end
 
-  def call(event : ART::Events::Response, dispatcher : AED::EventDispatcherInterface) : Nil
+  def call(event : ATH::Events::Response, dispatcher : AED::EventDispatcherInterface) : Nil
     event.response.headers["FOO"] = "BAR"
   end
 end
 
-class ExampleController < ART::Controller
+class ExampleController < ATH::Controller
   get "/" do
     "Hello World"
   end
@@ -34,7 +34,7 @@ ART.run
 # GET / # => Hello World (with `FOO => BAR` header)
 ```
 
-TIP: A single event listener may listen on multiple events.  Instance variables can be used to share state between the events.
+TIP: A single event listener may listen on multiple events. Instance variables can be used to share state between the events.
 
 WARNING: The "type" of the listener has an effect on its behavior!
 When a `struct` service is retrieved or injected into a type, it will be a copy of the one in the SC (passed by value).
@@ -72,10 +72,10 @@ end
 # Register a controller as a service,
 # injecting the event dispatcher to handle processing our value.
 @[ADI::Register(public: true)]
-class ExampleController < ART::Controller
+class ExampleController < ATH::Controller
   def initialize(@event_dispatcher : AED::EventDispatcherInterface); end
   
-  @[ARTA::Get("/:value")]
+  @[ATHA::Get("/:value")]
   def get_value(value : Int32) : Int32
     event = MyEvent.new value
     

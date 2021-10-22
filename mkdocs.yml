@@ -1,4 +1,4 @@
-site_name: Athena Framework
+site_name: Athena
 use_directory_urls: true
 repo_url: https://github.com/athena-framework/athena
 edit_uri: https://github.com/athena-framework/website/blob/master/docs/

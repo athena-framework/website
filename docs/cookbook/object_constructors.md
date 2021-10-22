@@ -1,6 +1,6 @@
 ## DB
 
-The [Serializer][Athena::Serializer] component also has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization.  A use case could be retrieving the object from the database as part of a `PUT` request in order to apply the deserialized data onto it.  This would allow it to retain the PK, any timestamps, or [ASRA::ReadOnly][ASRA::ReadOnly] values.
+The [Serializer][Athena::Serializer] component also has the concept of [Object Constructors][Athena::Serializer::ObjectConstructorInterface] that determine how a new object is constructed during deserialization. A use case could be retrieving the object from the database as part of a `PUT` request in order to apply the deserialized data onto it. This would allow it to retain the PK, any timestamps, or [ASRA::ReadOnly][ASRA::ReadOnly] values.
 
 NOTE: This example uses the `Granite` ORM, but should work with others.
 
@@ -15,11 +15,11 @@ NOTE: This example uses the `Granite` ORM, but should work with others.
 class DBObjectConstructor
   include Athena::Serializer::ObjectConstructorInterface
 
-  # Inject `ART::RequestStore` in order to have access to
+  # Inject `ATH::RequestStore` in order to have access to
   # the current request. Also inject `ASR::InstantiateObjectConstructor`
   # to act as our fallback constructor.
   def initialize(
-    @request_store : ART::RequestStore,
+    @request_store : ATH::RequestStore,
     @fallback_constructor : ASR::InstantiateObjectConstructor
   ); end
 
@@ -42,7 +42,7 @@ class DBObjectConstructor
     entity = type.find data["id"].as_i64
 
     # Return a `404` error if no record exists with the given ID.
-    raise ART::Exceptions::NotFound.new "An item with the provided ID could not be found." unless entity
+    raise ATH::Exceptions::NotFound.new "An item with the provided ID could not be found." unless entity
 
     # Apply the updated properties to the retrieved record
     entity.apply navigator, properties, data
@@ -53,7 +53,7 @@ class DBObjectConstructor
 end
 ```
 
-This object constructor could then be used with `ART::RequestBodyConverter` to support seamless model updates:
+This object constructor could then be used with `ATH::RequestBodyConverter` to support seamless model updates:
 
 ```crystal
 @[ASRA::ExclusionPolicy(:all)]
@@ -70,10 +70,10 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ARTA::Prefix("article")]
-class ExampleController < ART::Controller
-  @[ARTA::Put(path: "")]
-  @[ARTA::ParamConverter("article", converter: ART::RequestBodyConverter)]
+@[ATHA::Prefix("article")]
+class ExampleController < ATH::Controller
+  @[ATHA::Put(path: "")]
+  @[ATHA::ParamConverter("article", converter: ATH::RequestBodyConverter)]
   def update_article(article : Article) : Article
     # Since we have an actual `Article` instance with the updates
     # from the JSON payload already applied,

@@ -1,4 +1,4 @@
-As mentioned in the [view event](/components/#4-view-event) documentation; this event is emitted whenever a controller action does _NOT_ return an `ART::Response`, with this value being JSON serialized by default.  The [Negotiation][Athena::Negotiation] component enhances the view layer of Athena by enabling [content negotiation](https://tools.ietf.org/html/rfc7231#section-5.3) support; making it possible to write format agnostic controllers by placing a layer of abstraction between the controller and generation of the final response content.  Or in other words allow having the same controller action be rendered based on the request's [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) `HTTP` header and the format priority configuration.
+As mentioned in the [view event](/components/#4-view-event) documentation; this event is emitted whenever a controller action does _NOT_ return an `ATH::Response`, with this value being JSON serialized by default. The [Negotiation][Athena::Negotiation] component enhances the view layer of Athena by enabling [content negotiation](https://tools.ietf.org/html/rfc7231#section-5.3) support; making it possible to write format agnostic controllers by placing a layer of abstraction between the controller and generation of the final response content. Or in other words allow having the same controller action be rendered based on the request's [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) `HTTP` header and the format priority configuration.
 
 ## Configuration
 
@@ -6,12 +6,12 @@ See the [config](config.md) component documentation for an overview on how confi
 
 ### Negotiation
 
-The content negotiation logic is disabled by default, but can be easily enabled by redefining [ART::Config::ContentNegotiation.configure][] with the desired configuration.  Content negotiation configuration is represented by an array of [Rules][ART::Config::ContentNegotiation::Rule] used to describe allowed formats, their priorities, and how things should function if a unsupported format is requested.
+The content negotiation logic is disabled by default, but can be easily enabled by redefining [ATH::Config::ContentNegotiation.configure][] with the desired configuration. Content negotiation configuration is represented by an array of [Rules][ATH::Config::ContentNegotiation::Rule] used to describe allowed formats, their priorities, and how things should function if a unsupported format is requested.
 
 For example, say we configured things like:
 
 ```crystal
-def ART::Config::ContentNegotiation.configure
+def ATH::Config::ContentNegotiation.configure
   new(
     # Setting fallback_format to json means that instead of considering
     # the next rule in case of a priority mismatch, json will be used.
@@ -28,14 +28,14 @@ def ART::Config::ContentNegotiation.configure
 end
 ```
 
-Assuming an `accept` header with the value `text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json`: a request made to `/foo` from the `api.example.com` hostname; the request format would be `json`.  If the request was not made from that hostname; the request format would be `html`.  The rules can be as complex or as simple as needed depending on the use case of your application.
+Assuming an `accept` header with the value `text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json`: a request made to `/foo` from the `api.example.com` hostname; the request format would be `json`. If the request was not made from that hostname; the request format would be `html`. The rules can be as complex or as simple as needed depending on the use case of your application.
 
 ### View Handler
 
-The [ART::View::ViewHandler][] is responsible for generating an [ART::Response][] in the format determined by the [ART::Listeners::Format][], otherwise falling back on the request's [format][ART::Request#request_format], defaulting to `json`.  The view handler has a few configurable options that can be customized if so desired.  This can be achieved via redefining [Athena::Routing::Config::ViewHandler.configure][].
+The [ATH::View::ViewHandler][] is responsible for generating an [ATH::Response][] in the format determined by the [ATH::Listeners::Format][], otherwise falling back on the request's [format][ATH::Request#request_format], defaulting to `json`. The view handler has a few configurable options that can be customized if so desired. This can be achieved via redefining [Athena::Framework::Config::ViewHandler.configure][].
 
 ```crystal
-def ART::Config::ViewHandler.configure : ART::Config::ViewHandler
+def ATH::Config::ViewHandler.configure : ATH::Config::ViewHandler
   new(
     # The HTTP::Status to use if there is no response body, defaults to 204.
     empty_content_status: :im_a_teapot,
@@ -49,25 +49,25 @@ end
 
 ### Views
 
-An [ART::View][] is intended to act as an in between returning raw data and an [ART::Response][]. In other words, it still invokes the [view](README.md#4-view-event) event, but allows customizing the response's status and headers.  Convenience methods are defined in the base controller type to make creating views easier.  E.g. [ART::Controller#view][].
+An [ATH::View][] is intended to act as an in between returning raw data and an [ATH::Response][]. In other words, it still invokes the [view](README.md#4-view-event) event, but allows customizing the response's status and headers. Convenience methods are defined in the base controller type to make creating views easier. E.g. [ATH::Controller#view][].
 
 ### View Format Handlers
 
-By default Athena uses `json` as the default response format.  However it is possible to extend the [ART::View::ViewHandler][] to support additional, and even custom, formats.  This is achieved by creating an [ART::View::FormatHandlerInterface][] instance that defines the logic needed to turn an [ART::View][] into an [ART::Response][].
+By default Athena uses `json` as the default response format. However it is possible to extend the [ATH::View::ViewHandler][] to support additional, and even custom, formats. This is achieved by creating an [ATH::View::FormatHandlerInterface][] instance that defines the logic needed to turn an [ATH::View][] into an [ATH::Response][].
 
-The implementation can be as simple/complex as needed for the given format.  Official handlers could be provided in the future for common formats such as `html`, probably via an integration with some form of tempting engine utilizing [custom annotations](config.md#custom-annotations) to specify the format.
+The implementation can be as simple/complex as needed for the given format. Official handlers could be provided in the future for common formats such as `html`, probably via an integration with some form of tempting engine utilizing [custom annotations](config.md#custom-annotations) to specify the format.
 
 ### Adding/Customizing Formats
 
-[ART::Request::FORMATS][] represents the formats supported by default.  However this list is not exhaustive and may need altered application to application; such as [registering][Athena::Routing::Request.register_format] new formats.
+[ATH::Request::FORMATS][] represents the formats supported by default. However this list is not exhaustive and may need altered application to application; such as [registering][Athena::Framework::Request.register_format] new formats.
 
 ## Example
 
 The following is a demonstration of how the various negotiation features can be used in conjunction. The example includes:
 
-1. Defining a custom [ART::View::ViewHandler][] for the `csv` format.
+1. Defining a custom [ATH::View::ViewHandler][] for the `csv` format.
 1. Enabling content negotiation, supporting `json` and `csv` formats, falling back to `json`.
-1. An endpoint returning an [ART::View][] that sets a custom HTTP status.
+1. An endpoint returning an [ATH::View][] that sets a custom HTTP status.
 
 ```crystal
 require "athena"
@@ -105,10 +105,10 @@ end
 @[ADI::Register]
 class CSVFormatHandler
   # Implement the interface.
-  include Athena::Routing::View::FormatHandlerInterface
+  include Athena::Framework::View::FormatHandlerInterface
 
   # :inherit:
-  def call(view_handler : ART::View::ViewHandlerInterface, view : ART::ViewBase, request : ART::Request, format : String) : ART::Response
+  def call(view_handler : ATH::View::ViewHandlerInterface, view : ATH::ViewBase, request : ATH::Request, format : String) : ATH::Response
     view_data = view.data
 
     headers = if view_data.is_a? Enumerable
@@ -132,10 +132,10 @@ class CSVFormatHandler
       end
     end
 
-    # Return an ART::Response with the rendered CSV content.
+    # Return an ATH::Response with the rendered CSV content.
     # Athena handles setting the proper content-type header based on the format.
     # But could be overridden here if so desired.
-    ART::Response.new content
+    ATH::Response.new content
   end
 
   # :inherit:
@@ -145,16 +145,16 @@ class CSVFormatHandler
 end
 
 # Configure the format listener.
-def ART::Config::ContentNegotiation.configure
+def ATH::Config::ContentNegotiation.configure
   new(
     # Allow json and csv formats, falling back on json if an unsupported format is requested.
     Rule.new(priorities: ["json", "csv"], fallback_format: "json"),
   )
 end
 
-class ExampleController < ART::Controller
-  @[ARTA::Get("/users")]
-  def get_users : ART::View(Array(User))
+class ExampleController < ATH::Controller
+  @[ATHA::Get("/users")]
+  def get_users : ATH::View(Array(User))
     self.view([
       User.new(1, "Jim", "jim@example.com"),
       User.new(2, "Bob", "bob@example.com"),

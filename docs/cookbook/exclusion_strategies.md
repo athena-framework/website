@@ -2,7 +2,7 @@
 
 ## Request Method
 
-In a web framework, being able to exclude a property based on the request method can be a handy tool.  I.e. imagine having `IgnoreOnUpdate`, `IgnoreOnCreate`, and `IgnoreOnRead` annotations to specify how a specific property should behave as part of a `PUT`, `POST`, and `GET` request respectively.  For example, allow a property to be set when an object is created, a `POST` request, but prevent it from being altered when it is updated, a `PUT` request.
+In a web framework, being able to exclude a property based on the request method can be a handy tool. I.e. imagine having `IgnoreOnUpdate`, `IgnoreOnCreate`, and `IgnoreOnRead` annotations to specify how a specific property should behave as part of a `PUT`, `POST`, and `GET` request respectively. For example, allow a property to be set when an object is created, a `POST` request, but prevent it from being altered when it is updated, a `PUT` request.
 
 ```crystal
 # Define and register our exclusion strategy
@@ -10,9 +10,9 @@ In a web framework, being able to exclude a property based on the request method
 struct IgnoreOnMethodExclusionStrategy
   include Athena::Serializer::ExclusionStrategies::ExclusionStrategyInterface
 
-  # Inject the `ART::RequestStore` in order to have access
+  # Inject the `ATH::RequestStore` in order to have access
   # to the current request, and its method.
-  def initialize(@request_store : ART::RequestStore); end
+  def initialize(@request_store : ATH::RequestStore); end
 
   # :inherit:
   def skip_property?(metadata : ASR::PropertyMetadataBase, context : ASR::Context) : Bool
@@ -37,11 +37,11 @@ end
 #
 # This step is mainly to globally enable our exclusion strategy.
 # An alternate solution would be to have some global context factory
-# method that would return a new `ART::Context` object with or without
+# method that would return a new `ATH::Context` object with or without
 # the exclusion strategy applied to it that could be provided to the default serializer.
 #
 # This implementation was also chosen to demonstrate how default services can be extended by wrapping
-# them in customer logic.  In the future the Decorator pattern could also be added to the DI component.
+# them in customer logic. In the future the Decorator pattern could also be added to the DI component.
 @[ADI::Register(alias: Athena::Serializer::SerializerInterface)]
 struct CustomSerializer
   include ASR::SerializerInterface
@@ -90,20 +90,20 @@ end
 # Register our controller as a service,
 # be sure to define it as public.
 @[ADI::Register(public: true)]
-class ExampleController < ART::Controller
+class ExampleController < ATH::Controller
   # Inject the serializer into the controller to test with.
   #
   # I'm using a controller because it's simpler, but this would
-  # most likely be a part of an `ART::ParamConverter`.
+  # most likely be a part of an `ATH::ParamConverter`.
   def initialize(@serializer : ASR::SerializerInterface); end
 
-  @[ARTA::Post("/article")]
-  def new_article(request : ART::Request) : Article
+  @[ATHA::Post("/article")]
+  def new_article(request : ATH::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end
 
-  @[ARTA::Put("/article")]
-  def update_article(request : ART::Request) : Article
+  @[ATHA::Put("/article")]
+  def update_article(request : ATH::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end
 end
@@ -117,4 +117,4 @@ ART.run
 
 Since we marked `author_id` as `IgnoreOnCreate`, the default value is used during the `POST /article` request, while the user provided value is used for the `PUT /article` request.
 
-A similar concept could also be applied to allow for ACL based exclusions.  I.e. exclude properties if the current user doesn't have the required roles/permissions to view it.
+A similar concept could also be applied to allow for ACL based exclusions. I.e. exclude properties if the current user doesn't have the required roles/permissions to view it.

@@ -2,26 +2,18 @@
 # $ SHARDS_OVERRIDE=shard.dev.yml shards update
 dependencies:
   athena:
-    github: athena-framework/athena
-    branch: master
+    path: ../athena
   athena-config:
-    github: athena-framework/config
-    branch: master
+    path: ../config
   athena-dependency_injection:
-    github: athena-framework/dependency-injection
-    branch: master
+    path: ../dependency-injection
   athena-event_dispatcher:
-    github: athena-framework/event-dispatcher
-    branch: master
+    path: ../event-dispatcher
   athena-negotiation:
-    github: athena-framework/negotiation
-    branch: master
+    path: ../negotiation
   athena-serializer:
-    github: athena-framework/serializer
-    branch: master
+    path: ../serializer
   athena-spec:
-    github: athena-framework/spec
-    branch: master
+    path: ../spec
   athena-validator:
-    github: athena-framework/validator
-    branch: master
+    path: ../validator
