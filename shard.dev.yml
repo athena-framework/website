@@ -5,6 +5,8 @@ dependencies:
     path: ../athena
   athena-config:
     path: ../config
+  athena-console:
+    path: ../console
   athena-dependency_injection:
     path: ../dependency-injection
   athena-event_dispatcher:

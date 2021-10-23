@@ -5,6 +5,8 @@ dependencies:
     github: athena-framework/athena
   athena-config:
     github: athena-framework/config
+  athena-console:
+    github: athena-framework/console
   athena-dependency_injection:
     github: athena-framework/dependency-injection
   athena-event_dispatcher:
