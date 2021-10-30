@@ -15,9 +15,9 @@
         * [Param Converters](cookbook/param_converters.md)
         * [Exclusion Strategies](cookbook/exclusion_strategies.md)
         * [Object Constructors](cookbook/object_constructors.md)
-* [Routing](Routing/index.md)
-    * [Aliases](Routing/aliases.md)
-    * Routing/*
+* [Framework](Framework/index.md)
+    * [Aliases](Framework/aliases.md)
+    * Framework/*
 * [DependencyInjection](DependencyInjection/index.md)
     * [Aliases](DependencyInjection/aliases.md)
     * DependencyInjection/*
@@ -28,6 +28,9 @@
     * [Aliases](Config/aliases.md)
     * [Environment](Config/environment.md)
     * Config/*
+* [Console](Console/index.md)
+    * [Aliases](Console/aliases.md)
+    * Console/*
 * [Serializer](Serializer/index.md)
     * [Aliases](Serializer/aliases.md)
     * Serializer/*

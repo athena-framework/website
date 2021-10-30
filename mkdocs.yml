@@ -1,4 +1,4 @@
-site_name: Athena Framework
+site_name: Athena
 use_directory_urls: true
 repo_url: https://github.com/athena-framework/athena
 edit_uri: https://github.com/athena-framework/website/blob/master/docs/
@@ -44,6 +44,8 @@ plugins:
           crystal_docs_flags:
             - lib/athena-spec/src/athena-spec.cr
             - lib/athena-event_dispatcher/src/athena-event_dispatcher.cr
+            - lib/athena-console/src/athena-console.cr
+            - lib/athena-console/src/spec.cr
             - lib/athena-config/src/athena-config.cr
             - lib/athena-dependency_injection/src/athena-dependency_injection.cr
             - lib/athena-serializer/src/athena-serializer.cr
@@ -54,6 +56,7 @@ plugins:
             - lib/athena/src/spec.cr
           source_locations:
             lib/athena-config: https://github.com/athena-framework/config/blob/v{shard_version}/{file}#L{line}
+            lib/athena-console: https://github.com/athena-framework/console/blob/v{shard_version}/{file}#L{line}
             lib/athena-dependency_injection: https://github.com/athena-framework/dependency-injection/blob/v{shard_version}/{file}#L{line}
             lib/athena-event_dispatcher: https://github.com/athena-framework/event-dispatcher/blob/v{shard_version}/{file}#L{line}
             lib/athena-negotiation: https://github.com/athena-framework/negotiation/blob/v{shard_version}/{file}#L{line}
@@ -82,3 +85,5 @@ extra:
       link: https://github.com/athena-framework
     - icon: fontawesome/brands/gitter
       link: https://gitter.im/athena-frameworkcr/community
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/TmDVPb3dmr

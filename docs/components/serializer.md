@@ -1,10 +1,10 @@
-The [Serializer][Athena::Serializer] component adds enhanced (de)serialization features.  This component is mostly optional, but is integrated into the default view layer of Athena.
+The [Serializer][Athena::Serializer] component adds enhanced (de)serialization features. This component is mostly optional, but is integrated into the default view layer of Athena.
 
 When an [ASR::Serializable][Athena::Serializer::Serializable] is returned from a controller action, that object will be serialized via the serializer component, as opposed to Crystal's standard libraries' `#to_json` method.
 
 INFO: If an object implements _both_ `ASR::Serializable` and `JSON::Serializable`, the serializer component takes priority.
 
-The [ARTA::View][Athena::Routing::Annotations::View] annotation can be used to configure serialization related options on a per route basis.
+The [ATHA::View][Athena::Framework::Annotations::View] annotation can be used to configure serialization related options on a per route basis.
 
 ```crystal
 require "athena"
@@ -31,9 +31,9 @@ class Article
   def initialize(@id : Int32, @name : String); end
 end
 
-class ArticleController < ART::Controller
-  @[ARTA::Post(path: "/publish/:id")]
-  @[ARTA::View(status: :accepted, serialization_groups: ["default"])]
+class ArticleController < ATH::Controller
+  @[ATHA::Post(path: "/publish/:id")]
+  @[ATHA::View(status: :accepted, serialization_groups: ["default"])]
   def publish(id : Int32) : Article
     article = Article.find id
     article.published = true

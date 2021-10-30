@@ -1,12 +1,12 @@
-Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [ACF::Base][Athena::Config::Base] and [ACF::Parameters][Athena::Config::Parameters]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener][Athena::Routing::Listeners::CORS].  `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
+Athena includes the [Athena::Config][] component as a means to configure an Athena application, which consists of two main aspects: [ACF::Base][Athena::Config::Base] and [ACF::Parameters][Athena::Config::Parameters]. `ACF::Base` relates to _how_ a specific feature/component functions, e.g. the [CORS Listener][Athena::Framework::Listeners::CORS]. `ACF::Parameters` represent reusable configuration values, e.g. a partner API URL for the current environment.
 
 ## Basics
 
-Both configuration and parameters make use of the same high level implementation.  A type is used to "model" the structure and type of each value, whether it's a scalar value like a `String`, or another object.  These types are then added into the base types provided by `Athena::Config`.  This approach provides full compile time type safety both in the structure of the configuration/parameters, but also the type of each value.  It also allows for plenty of flexibility in _how_ each object is constructed.
+Both configuration and parameters make use of the same high level implementation. A type is used to "model" the structure and type of each value, whether it's a scalar value like a `String`, or another object. These types are then added into the base types provided by `Athena::Config`. This approach provides full compile time type safety both in the structure of the configuration/parameters, but also the type of each value. It also allows for plenty of flexibility in _how_ each object is constructed.
 
 TIP: Structs are the preferred type to use, especially for parameters.
 
-From an organizational standpoint, it is up to the user to determine how they wish to define/organize these configuration/parameter types.  However, the suggested way is to use a central file that should require the individual custom types, for example:
+From an organizational standpoint, it is up to the user to determine how they wish to define/organize these configuration/parameter types. However, the suggested way is to use a central file that should require the individual custom types, for example:
 
 ```crystal
 # config/config_one.cr
@@ -48,9 +48,9 @@ class ACF::Base
 end
 ```
 
-The parameters and configuration can be accessed directly via `ACF.parameters` and `ACF.config` respectively.  However there are better ways; direct access is (mostly) discouraged.
+The parameters and configuration can be accessed directly via `ACF.parameters` and `ACF.config` respectively. However there are better ways; direct access is (mostly) discouraged.
 
-By default both `ACF::Base` and `ACF::Parameters` types are instantiated by calling `.new` on them without any arguments.  However, `ACF.load_configuration` and/or `ACF.load_parameters` methods can be redefined to change _how_ each object is created.  An example of this could be deserializing a `YAML`, or other configuration type, file into the type itself.
+By default both `ACF::Base` and `ACF::Parameters` types are instantiated by calling `.new` on them without any arguments. However, `ACF.load_configuration` and/or `ACF.load_parameters` methods can be redefined to change _how_ each object is created. An example of this could be deserializing a `YAML`, or other configuration type, file into the type itself.
 
 ```crystal
 # Overload the method that supplies the `ACF::Base` object to create it from a configuration file.
@@ -67,7 +67,7 @@ end
 
 ### Customizing Built-in Types
 
-While the process for defining/using custom configuration/parameter types is straightforward enough, an extra step is required to customize types owned by a third party shard, or Athena itself.  The suggested approach is that customizable types expose a `self.configure` method that: returns `nil` (if the feature is optional), some preconfigured object (as an alias to `.new` with defaults), or not define one at all (if it should require the user implement it).  This method would then be used in place of `.new`.
+While the process for defining/using custom configuration/parameter types is straightforward enough, an extra step is required to customize types owned by a third party shard, or Athena itself. The suggested approach is that customizable types expose a `self.configure` method that: returns `nil` (if the feature is optional), some preconfigured object (as an alias to `.new` with defaults), or not define one at all (if it should require the user implement it). This method would then be used in place of `.new`.
 
 ```crystal
 struct ThirdPartyParameters
@@ -86,7 +86,7 @@ class Athena::Config::Parameters
 end
 ```
 
-By default the `some_extension.email` parameter would be `george@dietrich.app`.  However if the user wanted to customize this value they could redefine the `.configure` method and supply their own values.  Having a dedicated method to override allows the type to retain custom initializer logic without forcing the user to determine if they need to use `previous_def`.
+By default the `some_extension.email` parameter would be `george@dietrich.app`. However if the user wanted to customize this value they could redefine the `.configure` method and supply their own values. Having a dedicated method to override allows the type to retain custom initializer logic without forcing the user to determine if they need to use `previous_def`.
 
 ```crystal
 def ThirdPartyParameters.configure
@@ -94,7 +94,7 @@ def ThirdPartyParameters.configure
 end
 ```
 
-The user is free to use environmental variables or whatever other type of logic they wish to provide the custom values.  The initializer of the type can also be referenced, such as to see what the configurable values are, their types, and any extra documentation provided by the owner.
+The user is free to use environmental variables or whatever other type of logic they wish to provide the custom values. The initializer of the type can also be referenced, such as to see what the configurable values are, their types, and any extra documentation provided by the owner.
 
 ### Using Parent Values
 
@@ -141,10 +141,10 @@ However, the recommended approach is to structure the types in such a way so tha
 
 ## Configuration
 
-Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime.  A more concrete example of the earlier [section](#customizing-built-in-types) would be how [ART::Config::CORS][Athena::Routing::Config::CORS] can be used to control [ART::Listeners::CORS][Athena::Routing::Listeners::CORS].  Say we want to enable CORS for our application from our app URL, expose some custom headers, and allow credentials to be sent.  To do this we would want to redefine the configuration type's `self.configure` method.  This method should return an instance of `self`, configured how we wish.  Alternatively, it could return `nil` to disable the listener, which is the default.
+Configuration in Athena is mainly focused on "configuring" _how_ specific features/components provided by Athena itself, or third parties, function at runtime. A more concrete example of the earlier [section](#customizing-built-in-types) would be how [ATH::Config::CORS][Athena::Framework::Config::CORS] can be used to control [ATH::Listeners::CORS][Athena::Framework::Listeners::CORS]. Say we want to enable CORS for our application from our app URL, expose some custom headers, and allow credentials to be sent. To do this we would want to redefine the configuration type's `self.configure` method. This method should return an instance of `self`, configured how we wish. Alternatively, it could return `nil` to disable the listener, which is the default.
 
 ```crystal
-def ART::Config::CORS.configure
+def ATH::Config::CORS.configure
   new(
     allow_credentials: true,
     allow_origin: %(https://app.example.com),
@@ -153,13 +153,13 @@ def ART::Config::CORS.configure
 end
 ```
 
-Configuration objects may also be injected as you would any other service.  This can be especially helpful for Athena extensions created by third parties whom services should be configurable by the end use.  See the [Configuration][Athena::DependencyInjection::Register--configuration] section in the DI component API documentation for details.
+Configuration objects may also be injected as you would any other service. This can be especially helpful for Athena extensions created by third parties whom services should be configurable by the end use. See the [Configuration][Athena::DependencyInjection::Register--configuration] section in the DI component API documentation for details.
 
 ## Parameters
 
-Parameters represent reusable values that are used to control the application's behavior, e.g. used within its configuration, or directly within the application's services.  For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects.  This URl could be defined as a parameter to allow its definition to be centralized and reused.
+Parameters represent reusable values that are used to control the application's behavior, e.g. used within its configuration, or directly within the application's services. For example, the URL of the application is a common piece of information, used both in configuration and other services for redirects. This URl could be defined as a parameter to allow its definition to be centralized and reused.
 
-Parameters should _NOT_ be used for values that rarely change, such as the max amount of items to return per page.  These types of values are better suited to being a [constant](https://crystal-lang.org/reference/syntax_and_semantics/constants.html) within the related type.  Similarly, infrastructure related values that change from one machine to another, e.g. development machine to production server, should be defined using environmental variables.  However, these values may still be exposed as parameters.
+Parameters should _NOT_ be used for values that rarely change, such as the max amount of items to return per page. These types of values are better suited to being a [constant](https://crystal-lang.org/reference/syntax_and_semantics/constants.html) within the related type. Similarly, infrastructure related values that change from one machine to another, e.g. development machine to production server, should be defined using environmental variables. However, these values may still be exposed as parameters.
 
 Parameters are intended for values that do not change between machines, and control the application's behavior, e.g. the sender of notification emails, what features are enabled, or other high level application level values.
 
@@ -178,7 +178,7 @@ end
 We could now update the configuration from the earlier example to use this parameter.
 
 ```crystal
-def ART::Config::CORS.configure : ART::Config::CORS?
+def ATH::Config::CORS.configure : ATH::Config::CORS?
   new(
     allow_credentials: true,
     allow_origin: [ACF.parameters.app.app_url],
@@ -187,9 +187,9 @@ def ART::Config::CORS.configure : ART::Config::CORS?
 end
 ```
 
-With this change, the configuration is now decoupled from the current environment/location where the application is running.  Common parameters could also be defined in their own shard in order to share the values between multiple applications.  
+With this change, the configuration is now decoupled from the current environment/location where the application is running. Common parameters could also be defined in their own shard in order to share the values between multiple applications. 
 
-It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](dependency_injection.md) component.  See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
+It is also possible to access the same parameter directly within a service via a feature of the [Dependency Injection](dependency_injection.md) component. See the [Parameters][Athena::DependencyInjection::Register--parameters] section for details.
 
 ```crystal
 # Tell ADI what parameter we wish to inject as the `app_url` argument.
@@ -201,15 +201,15 @@ class SomeService
 end
 ```
 
-To reiterate, the primary benefit of parameters is to centralize and decouple their values from the types that actually use them.  Another benefit is they offer full compile time safety, if for example, the type of `app_url` was mistakenly set to `Int32` or if the parameter's name was typo'd, e.g. `"%app.ap_url%"`; both would result in compile time errors.
+To reiterate, the primary benefit of parameters is to centralize and decouple their values from the types that actually use them. Another benefit is they offer full compile time safety, if for example, the type of `app_url` was mistakenly set to `Int32` or if the parameter's name was typo'd, e.g. `"%app.ap_url%"`; both would result in compile time errors.
 
 NOTE: The only valid usecases for accessing parameters directly via `ART.parameters` is within a configuration type, or a type outside of Athena's control/DI framework.
 
 ## Custom Annotations
 
-Athena integrates the `Config` component's ability to define custom annotation configurations.  This feature allows developers to define custom annotations, and the data that should be read off of them, then apply/access the annotations on [ART::Controller][Athena::Routing::Controller] and/or [ART::Action][Athena::Routing::Action]s.
+Athena integrates the `Config` component's ability to define custom annotation configurations. This feature allows developers to define custom annotations, and the data that should be read off of them, then apply/access the annotations on [ATH::Controller][Athena::Framework::Controller] and/or [ATH::Action][Athena::Framework::Action]s.
 
-This is a powerful feature that allows for almost limitless flexibility/customization.  Some ideas include: storing some value in the request attributes, raise an exception, invoke some external service; all based on the presence/absence of it, a value read off of it, or either/both of those in-conjunction with an external service.
+This is a powerful feature that allows for almost limitless flexibility/customization. Some ideas include: storing some value in the request attributes, raise an exception, invoke some external service; all based on the presence/absence of it, a value read off of it, or either/both of those in-conjunction with an external service.
 
 ```crystal
 require "athena"
@@ -224,11 +224,11 @@ class MyAnnotationListener
   include AED::EventListenerInterface
 
   def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{ART::Events::View => 0}
+    AED::SubscribedEvents{ATH::Events::View => 0}
   end
 
-  def call(event : ART::Events::View, dispatcher : AED::EventDispatcherInterface) : Nil
-    # Represents all custom annotations applied to the current ART::Action.
+  def call(event : ATH::Events::View, dispatcher : AED::EventDispatcherInterface) : Nil
+    # Represents all custom annotations applied to the current ATH::Action.
     ann_configs = event.request.action.annotation_configurations
 
     # Check if this action has the annotation
@@ -247,13 +247,13 @@ class MyAnnotationListener
   end
 end
 
-class ExampleController < ART::Controller
-  @[ARTA::Get("one")]
+class ExampleController < ATH::Controller
+  @[ATHA::Get("one")]
   def one : Int32
     1
   end
 
-  @[ARTA::Get("two")]
+  @[ATHA::Get("two")]
   @[MyAnnotation(name: "Fred")]
   def two : Int32
     2

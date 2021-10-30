@@ -9,6 +9,9 @@ for typ in root.lookup("Athena").walk_types():
     # Athena::Validator::Violation -> Validator/Violation/index.md
     filename = '/'.join(typ.abs_id.split('::')[1:] + ['index.md'])
 
+    if filename.startswith('Routing/'):
+        filename = 'Framework/' + filename
+
     with mkdocs_gen_files.open(filename, 'w') as f:
         f.write(f'# ::: {typ.abs_id}\n\n')
 
@@ -20,6 +23,9 @@ for typ in root.types:
     if typ.kind == "alias":
         # Athena::Validator::Annotations -> Validator/aliases.md
         filename = '/'.join([typ.aliased.split('::')[1], 'aliases.md'])
+
+        if filename.startswith('Routing/'):
+            filename = 'Framework/' + filename
 
         with mkdocs_gen_files.open(filename, 'a') as f:
             f.write(f'::: {typ.abs_id}\n\n')
