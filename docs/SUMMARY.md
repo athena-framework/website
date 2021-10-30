@@ -28,6 +28,9 @@
     * [Aliases](Config/aliases.md)
     * [Environment](Config/environment.md)
     * Config/*
+* [Console](Console/index.md)
+    * [Aliases](Console/aliases.md)
+    * Console/*
 * [Serializer](Serializer/index.md)
     * [Aliases](Serializer/aliases.md)
     * Serializer/*
