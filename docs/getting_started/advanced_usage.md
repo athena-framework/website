@@ -32,7 +32,7 @@ class ParamConverterController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /multiply/3 # => 6
 ```

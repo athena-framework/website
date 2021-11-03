@@ -109,7 +109,7 @@ class ExampleController < ATH::Controller
 end
 
 # Run the server
-ART.run
+ATH.run
 
 # POST /article body: {"id":1,"author_id":2} # => {"id":1,"author_id":100}
 # PUT /article body: {"id":1,"author_id":2} # => {"id":1,"author_id":2}

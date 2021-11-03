@@ -203,7 +203,7 @@ end
 
 To reiterate, the primary benefit of parameters is to centralize and decouple their values from the types that actually use them. Another benefit is they offer full compile time safety, if for example, the type of `app_url` was mistakenly set to `Int32` or if the parameter's name was typo'd, e.g. `"%app.ap_url%"`; both would result in compile time errors.
 
-NOTE: The only valid usecases for accessing parameters directly via `ART.parameters` is within a configuration type, or a type outside of Athena's control/DI framework.
+NOTE: The only valid usecases for accessing parameters directly via `ACF.parameters` is within a configuration type, or a type outside of Athena's control/DI framework.
 
 ## Custom Annotations
 
@@ -260,7 +260,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 ```
 
 The [Cookbook](../cookbook/listeners.md#pagination) includes an example of how this can be used for pagination.

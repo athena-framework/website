@@ -141,7 +141,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /values # => [1, 2]
 # GET /values?page=2 # => [3, 4]
