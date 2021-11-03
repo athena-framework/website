@@ -41,7 +41,7 @@ class ArticleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # POST /publish/10 # => {"id":10,"name":"Crystal Lang 101","published":true} - 202
 ```

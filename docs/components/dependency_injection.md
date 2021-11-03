@@ -40,7 +40,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET / # => "Hello World"
 ```

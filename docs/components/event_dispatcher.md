@@ -29,7 +29,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET / # => Hello World (with `FOO => BAR` header)
 ```
@@ -85,7 +85,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /10 # => 100
 ```

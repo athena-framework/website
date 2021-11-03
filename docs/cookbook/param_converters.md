@@ -48,7 +48,7 @@ class ExampleController < ATH::Controller
 end
 
 # Run the server
-ART.run
+ATH.run
 
 # GET /article/1    # => {"id":1,"title":"Article A"}
 # GET /article/5    # => {"id":5,"title":"Article E"}

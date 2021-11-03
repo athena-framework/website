@@ -83,7 +83,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 ```
 
 For example, sending the request body to this endpoint:

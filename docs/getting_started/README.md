@@ -41,7 +41,7 @@ class ExampleController < ATH::Controller
 end
 
 # Run the server
-ART.run
+ATH.run
 
 # GET / # => Hello World
 ```
@@ -68,7 +68,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /add/2/3               # => 5
 # GET /add/5/5?negative=true # => -10
@@ -88,7 +88,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /          # => {"code":422,"message":"Parameter 'page' of value '' violated a constraint: 'This value should not be null.'\n"}
 # GET /?page=10  # => 10
@@ -114,7 +114,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # POST /data body: {"id":1,"name":"Jim"} # => Jim
 ```
@@ -136,7 +136,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /index # => "<h1>Welcome to my website!</h1>"
 ```
@@ -161,7 +161,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /athena/users" # => [{"id":1,...},...]
 ```
@@ -189,7 +189,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 ```
 
 ### URL Generation
@@ -224,7 +224,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET / # => 10
 ```
@@ -260,7 +260,7 @@ class ExampleController < ATH::Controller
   end
 end
 
-ART.run
+ATH.run
 
 # GET /divide/10/0          # => {"code":500,"message":"Internal Server Error"}
 # GET /divide_rescued/10/0  # => {"code":400,"message":"Invalid num2:  Cannot divide by zero"}
