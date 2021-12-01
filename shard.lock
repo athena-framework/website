@@ -14,7 +14,7 @@ shards:
 
   athena-console:
     git: https://github.com/athena-framework/console.git
-    version: 0.1.0
+    version: 0.1.1
 
   athena-dependency_injection:
     git: https://github.com/athena-framework/dependency-injection.git
@@ -30,11 +30,11 @@ shards:
 
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git
-    version: 0.2.9
+    version: 0.2.10
 
   athena-spec:
     git: https://github.com/athena-framework/spec.git
-    version: 0.2.4
+    version: 0.2.6
 
   athena-validator:
     git: https://github.com/athena-framework/validator.git
