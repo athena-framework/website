@@ -3,7 +3,7 @@ These features may not be required for a simple application; however as the appl
 
 ## Param Converters
 
-[ATH::ParamConverter][Athena::Framework::ParamConverter] s allow complex types to be supplied to an action via its arguments.
+[ATH::ParamConverter][] s allow complex types to be supplied to an action via its arguments.
 An example of this could be extracting the id from `/users/10`, doing a DB query to lookup the user with the PK of `10`, then providing the full user object to the action.
 Param converters abstract any custom parameter handling that would otherwise have to be done in each action.
 
@@ -25,7 +25,7 @@ class MultiplyConverter < ATH::ParamConverter
 end
 
 class ParamConverterController < ATH::Controller
-  @[ATHA::Get(path: "/multiply/:num")]
+  @[ARTA::Get(path: "/multiply/{num}")]
   @[ATHA::ParamConverter("num", converter: MultiplyConverter)]
   def multiply(num : Int32) : Int32
     num
@@ -39,7 +39,7 @@ ATH.run
 
 ## Middleware
 
-Athena is an [event based framework](../components/README.md); meaning it emits [ATH::Events][Athena::Framework::Events] that are acted upon internally to handle the request. These same events can also be listened on by custom listeners, via [AED::EventListenerInterface][Athena::EventDispatcher::EventListenerInterface], in order to tap into the life-cycle of the request as a more flexible alternative to [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html)s. An example use case of this could be: adding common headers, cookies, compressing the response, authentication, or even returning a response early like [ATH::Listeners::CORS][Athena::Framework::Listeners::CORS].
+Athena is an [event based framework](../components/README.md); meaning it emits [ATH::Events][] that are acted upon internally to handle the request. These same events can also be listened on by custom listeners, via [AED::EventListenerInterface][], in order to tap into the life-cycle of the request as a more flexible alternative to [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html)s. An example use case of this could be: adding common headers, cookies, compressing the response, authentication, or even returning a response early like [ATH::Listeners::CORS][].
 
 See the [Event Dispatcher](../components/event_dispatcher.md) component for a more detailed look.
 
@@ -57,6 +57,6 @@ See the [Validator](../components/validator.md) component for a more details loo
 
 ## Testing
 
-Each component in the Athena Framework includes a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. Athena itself defines some of its own testing types, mainly to allow for easisly integration testing [ATH::Controller][Athena::Framework::Controller]s.
+Each component in the Athena Framework includes a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. Athena itself defines some of its own testing types, mainly to allow for easisly integration testing [ATH::Controller][]s.
 
 See the [Spec](../components/spec.md) component for a more detailed look.

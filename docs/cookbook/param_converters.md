@@ -1,4 +1,4 @@
-[Param Converters][Athena::Framework::ParamConverter] allow applying custom logic in order to convert one or more primitive request arguments into a more complex type.
+[Param Converters][] allow applying custom logic in order to convert one or more primitive request arguments into a more complex type.
 
 ## DB
 
@@ -37,9 +37,9 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ATHA::Prefix("article")]
+@[ARTA::Route(path: "/article")]
 class ExampleController < ATH::Controller
-  @[ATHA::Get("/:id")]
+  @[ARTA::Get("/{id}")]
   @[ATHA::ParamConverter("article", converter: DBConverter)]
   def get_article(article : Article) : Article
     # Nothing else to do except return the related article.

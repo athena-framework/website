@@ -97,12 +97,12 @@ class ExampleController < ATH::Controller
   # most likely be a part of an `ATH::ParamConverter`.
   def initialize(@serializer : ASR::SerializerInterface); end
 
-  @[ATHA::Post("/article")]
+  @[ARTA::Post("/article")]
   def new_article(request : ATH::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end
 
-  @[ATHA::Put("/article")]
+  @[ARTA::Put("/article")]
   def update_article(request : ATH::Request) : Article
     @serializer.deserialize Article, request.body.not_nil!, :json
   end

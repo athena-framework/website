@@ -75,7 +75,7 @@ end
 class ExampleController < ATH::Controller
   def initialize(@event_dispatcher : AED::EventDispatcherInterface); end
   
-  @[ATHA::Get("/:value")]
+  @[ARTA::Get("/:value")]
   def get_value(value : Int32) : Int32
     event = MyEvent.new value
     

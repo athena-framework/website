@@ -12,7 +12,9 @@ dependencies:
   athena-event_dispatcher:
     github: athena-framework/event-dispatcher
   athena-negotiation:
-    github: athena-framework/negotiation
+    github: athena-framework/negotiation 
+  athena-routing:
+    github: athena-framework/routing
   athena-serializer:
     github: athena-framework/serializer
   athena-spec:

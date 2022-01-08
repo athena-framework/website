@@ -2,20 +2,22 @@
 # $ SHARDS_OVERRIDE=shard.dev.yml shards update
 dependencies:
   athena:
-    path: ../athena
+    path: ../athena/src/components/framework
   athena-config:
-    path: ../config
+    path: ../athena/src/components/config
   athena-console:
-    path: ../console
+    path: ../athena/src/components/console
   athena-dependency_injection:
-    path: ../dependency-injection
+    path: ../athena/src/components/dependency_injection
   athena-event_dispatcher:
-    path: ../event-dispatcher
+    path: ../athena/src/components/event_dispatcher
   athena-negotiation:
-    path: ../negotiation
+    path: ../athena/src/components/negotiation
+  athena-routing:
+    path: ../athena/src/components/routing
   athena-serializer:
-    path: ../serializer
+    path: ../athena/src/components/serializer
   athena-spec:
-    path: ../spec
+    path: ../athena/src/components/spec
   athena-validator:
-    path: ../validator
+    path: ../athena/src/components/validator

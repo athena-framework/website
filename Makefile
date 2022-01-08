@@ -29,6 +29,7 @@ $(MKDOCS): $(PIP) requirements.txt
 
 $(PIP):
 	python3 -m venv .venv
+	./.venv/bin/pip3 install pip-tools
 
 .PHONY: clean
 clean: ## Remove build directory

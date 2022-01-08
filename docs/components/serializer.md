@@ -32,7 +32,7 @@ class Article
 end
 
 class ArticleController < ATH::Controller
-  @[ATHA::Post(path: "/publish/:id")]
+  @[ARTA::Post(path: "/publish/{id}")]
   @[ATHA::View(status: :accepted, serialization_groups: ["default"])]
   def publish(id : Int32) : Article
     article = Article.find id

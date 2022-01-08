@@ -9,8 +9,8 @@ Add the dependency to your `shard.yml`:
 ```yaml
 dependencies:
   athena:
-    github: athena-framework/athena
-    version: ~> 0.15.0
+    github: athena-framework/framework
+    version: ~> 0.16.0
 ```
 
 Run `shards install`. This will install Athena and its required dependencies.
@@ -21,7 +21,7 @@ Athena has a goal of being easy to start using for simple use cases, while still
 
 ### Routing
 
-Athena is a MVC based framework, as such, the logic to handle a given route is defined in an [ATH::Controller][Athena::Framework::Controller] class.
+Athena is a MVC based framework, as such, the logic to handle a given route is defined in an [ATH::Controller][] class.
 
 ```crystal
 require "athena"
@@ -29,7 +29,7 @@ require "athena"
 # Define a controller
 class ExampleController < ATH::Controller
   # Define an action to handle the related route
-  @[ATHA::Get("/")]
+  @[ARTA::Get("/")]
   def index : String
     "Hello World"
   end
@@ -46,21 +46,24 @@ ATH.run
 # GET / # => Hello World
 ```
 
-Annotations applied to the methods are used to define the HTTP method this method handles, such as [ATHA::Get][Athena::Framework::Annotations::Get] or [ATHA::Post][Athena::Framework::Annotations::Post]. A macro DSL also exists to make them a bit less verbose;
-[ATH::Controller.get][Athena::Framework::Controller:get(path,*args,**named_args,&)] or [ATH::Controller.post][Athena::Framework::Controller:post(path,*args,**named_args,&)]. The [ATHA::Route][Athena::Framework::Annotations::Route] annotation can also be used to define custom `HTTP` methods.
+Routing is handled via the [Athena::Routing][] component. It provides a flexible and robust foundation for handling determining which route should match a given request.
+It includes regex based requirements, host name restrictions, and priorities to allow defining routes with parameters at the same location among others.
+Checkout [ART::Route][] and [routing](../components/routing.md) for more information.
 
 Controllers are simply classes and routes are simply methods. Controllers and actions can be documented/tested as you would any Crystal class/method.
 
 ### Route Parameters
 
 Arguments are converted to their expected types if possible, otherwise an error response is automatically returned.
-The values are provided directly as method arguments, thus preventing the need for `env.params.url["name"]` and any boilerplate related to it. Just like normal method arguments, default values can be defined. The method's return type adds some type safety to ensure the expected value is being returned.
+The values are provided directly as method arguments, thus preventing the need for `env.params.url["name"]` and any boilerplate related to it.
+Just like normal method arguments, default values can be defined.
+The method's return type adds some type safety to ensure the expected value is being returned.
 
 ```crystal
 require "athena"
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get("/add/:value1/:value2")]
+  @[ARTA::Get("/add/{value1}/{value2}")]
   @[ATHA::QueryParam("negative")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
@@ -75,13 +78,13 @@ ATH.run
 # GET /add/foo/12            # => {"code":400,"message":"Required parameter 'value1' with value 'foo' could not be converted into a valid 'Int32'"}
 ```
 
-[ATHA::QueryParam][Athena::Framework::Annotations::QueryParam] and [ATHA::RequestParam][Athena::Framework::Annotations::RequestParam]s are defined via annotations and map directly to the method's arguments. See the related annotation docs for more information.
+[ATHA::QueryParam][] and [ATHA::RequestParam][]s are defined via annotations and map directly to the method's arguments. See the related annotation docs for more information.
 
 ```crystal
 require "athena"
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get("/")]
+  @[ARTA::Get("/")]
   @[ATHA::QueryParam("page", requirements: /\d{2}/)]
   def index(page : Int32) : Int32
     page
@@ -98,15 +101,16 @@ ATH.run
 
 #### Request Parameter
 
-Restricting an action argument to [ATH::Request][] will provide the raw request object. This can be useful to access data directly off the request object, such consuming the request's body. This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
+Restricting an action argument to [ATH::Request][] will provide the raw request object. This can be useful to access data directly off the request object, such consuming the request's body.
+This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
 
-TIP: Checkout [Athena::Framework::RequestBodyConverter][Athena::Framework::RequestBodyConverter] for a better way to handle this.
+TIP: Checkout [ATH::RequestBodyConverter][] for a better way to handle this.
 
 ```crystal
 require "athena"
 
 class ExampleController < ATH::Controller
-  @[ATHA::Post("/data")]
+  @[ARTA::Post("/data")]
   def data(request : ATH::Request) : String
     raise ATH::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
     
@@ -121,7 +125,7 @@ ATH.run
 
 #### Returning Raw Data
 
-An [ATH::Response][Athena::Framework::Response] can be used to fully customize the response; such as returning a specific status code, or adding some one-off headers.
+An [ATH::Response][] can be used to fully customize the response; such as returning a specific status code, or adding some one-off headers.
 
 ```crystal
 require "athena"
@@ -130,7 +134,7 @@ require "mime"
 class ExampleController < ATH::Controller
   # A GET endpoint returning an `ATH::Response`.
   # Can be used to return raw data, such as HTML or CSS etc, in a one-off manner.
-  @[ATHA::Get("/index")]
+  @[ARTA::Get("/index")]
   def index : ATH::Response
     ATH::Response.new "<h1>Welcome to my website!</h1>", headers: HTTP::Headers{"content-type" => MIME.from_extension(".html")}
   end
@@ -141,19 +145,19 @@ ATH.run
 # GET /index # => "<h1>Welcome to my website!</h1>"
 ```
 
-An [ATH::Events::View][Athena::Framework::Events::View] is emitted if the returned value is _NOT_ an [ATH::Response][Athena::Framework::Response]. By default, non [ATH::Response][Athena::Framework::Response]s are JSON serialized.
+An [ATH::Events::View][] is emitted if the returned value is _NOT_ an [ATH::Response][]. By default, non [ATH::Response][]s are JSON serialized.
 However, this event can be listened on to customize how the value is serialized.
 
 ##### Streaming Response
 
-By default `ATH::Response` content is written all at once to the response's `IO`. However in some cases the content may be too large to fit into memory. In this case an [ATH::StreamedResponse][Athena::Framework::StreamedResponse] may be used to stream the content back to the client.
+By default `ATH::Response` content is written all at once to the response's `IO`. However in some cases the content may be too large to fit into memory. In this case an [ATH::StreamedResponse][] may be used to stream the content back to the client.
 
 ```crystal
 require "athena"
 require "mime"
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get(path: "/users")]
+  @[ARTA::Get(path: "/users")]
   def users : ATH::Response
     ATH::StreamedResponse.new headers: HTTP::Headers{"content-type" => "application/json; charset=UTF-8"} do |io|
       User.all.to_json io
@@ -168,14 +172,14 @@ ATH.run
 
 #### Returning Files
 
-An [ATH::BinaryFileResponse][Athena::Framework::BinaryFileResponse] may be used to return [static files](../cookbook/listeners.md#static-files). This response type handles caching, partial requests, and setting the relevant headers. Athena also supports downloading of dynamically generated content by using an [ATH::Response][Athena::Framework::Response] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header. [ATH::HeaderUtils.make_dispostion][Athena::Framework::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
+An [ATH::BinaryFileResponse][] may be used to return [static files](../cookbook/listeners.md#static-files). This response type handles caching, partial requests, and setting the relevant headers. Athena also supports downloading of dynamically generated content by using an [ATH::Response][] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header. [ATH::HeaderUtils.make_disposition][Athena::Framework::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
 
 ```crystal
 require "athena"
 require "mime"
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get(path: "/data/export")]
+  @[ARTA::Get(path: "/data/export")]
   def data_export : ATH::Response
     # ...
     
@@ -202,14 +206,14 @@ require "athena"
 class ExampleController < ATH::Controller
   # Define a route to redirect to, explicitly naming this route `add`.
   # The default route name is controller + method down snake-cased; e.x. `example_controller_add`.
-  @[ATHA::Get("/add/:value1/:value2", name: "add")]
+  @[ARTA::Get("/add/{value1}/{value2}", name: "add")]
   def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
     sum = value1 + value2
     negative ? -sum : sum
   end
 
   # Define a route that redirects to the `add` route with fixed parameters.
-  @[ATHA::Get("/")]
+  @[ARTA::Get("/")]
   def redirect : ATH::RedirectResponse
     # Generate a link to the other route.
     url = self.generate_url "add", value1: 8, value2: 2
@@ -229,29 +233,35 @@ ATH.run
 # GET / # => 10
 ```
 
-See [ART::URLGeneratorInterface][Athena::Routing::URLGeneratorInterface] in the API Docs for more details.
+NOTE: When generating [ART::Generator::ReferenceType::ABSOLUTE_URL][]s, the scheme and hostname default to `http` and `localhost` respectively, if they could not be extracted from the request.
+[ATH::Parameters][] can be used to configure the base URI that should be used, and is required when generating URLs in a non request context.
+Such as within a [ACON::Command][].
+
+See [ART::Generator::Interface][] in the API Docs for more details.
 
 ### Error Handling
 
-Exception handling in Athena is similar to exception handling in any Crystal program, with the addition of a new unique exception type, [ATH::Exceptions::HTTPException][Athena::Framework::Exceptions::HTTPException].
-Custom `HTTP` errors can also be defined by inheriting from [ATH::Exceptions::HTTPException][Athena::Framework::Exceptions::HTTPException] or a child type.
+Exception handling in Athena is similar to exception handling in any Crystal program, with the addition of a new unique exception type, [ATH::Exceptions::HTTPException][].
+Custom `HTTP` errors can also be defined by inheriting from [ATH::Exceptions::HTTPException][] or a child type.
 A use case for this could be allowing additional data/context to be included within the exception.
 
-Non [ATH::Exceptions::HTTPException][Athena::Framework::Exceptions::HTTPException] exceptions are represented as a `500 Internal Server Error`.
+Non [ATH::Exceptions::HTTPException][] exceptions are represented as a `500 Internal Server Error`.
 
-When an exception is raised, Athena emits the [ATH::Events::Exception][Athena::Framework::Events::Exception] event to allow an opportunity for it to be handled.
-By default these exceptions will return a `JSON` serialized version of the exception, via [ATH::ErrorRenderer][Athena::Framework::ErrorRenderer], that includes the message and code; with the proper response status set.
-If the exception goes unhandled, i.e. no listener sets an [ATH::Response][Athena::Framework::Response]. By default, non [ATH::Response][Athena::Framework::Response] on the event, then the request is finished and the exception is re-raised.
+When an exception is raised, Athena emits the [ATH::Events::Exception][] event to allow an opportunity for it to be handled.
+By default these exceptions will return a `JSON` serialized version of the exception, via [ATH::ErrorRenderer][], that includes the message and code; with the proper response status set.
+If the exception goes unhandled, i.e. no listener sets an [ATH::Response][]. By default, non [ATH::Response][] on the event, then the request is finished and the exception is re-raised.
 
 ```crystal
 require "athena"
 
 class ExampleController < ATH::Controller
-  get "divide/:num1/:num2", num1 : Int32, num2 : Int32, return_type: Int32 do
+  @[ARTA::Get("/divide/{num1}/{num2}")]
+  def divide(num1 : Int32, num2 : Int32) : Int32
     num1 // num2
   end
 
-  get "divide_rescued/:num1/:num2", num1 : Int32, num2 : Int32, return_type: Int32 do
+  @[ARTA::Get("/divide_rescued/{num1}/{num2}")]
+  def divide_rescued(num1 : Int32, num2 : Int32) : Int32
     num1 // num2
     # Rescue a non `ATH::Exceptions::HTTPException`
   rescue ex : DivisionByZeroError
@@ -272,42 +282,65 @@ ATH.run
 Logging is handled via Crystal's [Log](https://crystal-lang.org/api/Log.html) module. Athena logs when a request matches a controller action, as well as any exception. This of course can be augmented with additional application specific messages.
 
 ```bash
-2020-12-06T17:20:12.334700Z   INFO - Server has started and is listening at http://0.0.0.0:3000
-2020-12-06T17:20:17.163953Z   INFO - athena.routing: Matched route /divide/10/0 -- uri: "/divide/10/0", method: "GET", path_params: {"num2" => "0", "num1" => "10"}, query_params: {}
-2020-12-06T17:20:17.280199Z  ERROR - athena.routing: Uncaught exception #<DivisionByZeroError:Division by 0> at ../../../../../../usr/lib/crystal/int.cr:138:7 in 'check_div_argument'
+2022-01-08T20:44:18.134423Z   INFO - athena.routing: Server has started and is listening at http://0.0.0.0:3000
+2022-01-08T20:44:19.773376Z   INFO - athena.routing: Matched route 'example_controller_divide' -- route: "example_controller_divide", route_parameters: {"_route" => "example_controller_divide", "_controller" => "ExampleController#divide", "num1" => "10", "num2" => "0"}, request_uri: "/divide/10/0", method: "GET"
+2022-01-08T20:44:19.892748Z  ERROR - athena.routing: Uncaught exception #<DivisionByZeroError:Division by 0> at /usr/lib/crystal/int.cr:141:7 in 'check_div_argument'
 Division by 0 (DivisionByZeroError)
-  from ../../../../../../usr/lib/crystal/int.cr:138:7 in 'check_div_argument'
-  from ../../../../../../usr/lib/crystal/int.cr:102:5 in '//'
-  from src/athena.cr:151:5 in 'get_divide__num1__num2'
-  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'execute'
-  from src/route_handler.cr:80:5 in 'handle_raw'
-  from src/route_handler.cr:14:21 in 'handle'
-  from src/athena.cr:127:9 in '->'
-  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'process'
-  from ../../../../../../usr/lib/crystal/http/server.cr:513:5 in 'handle_client'
-  from ../../../../../../usr/lib/crystal/http/server.cr:468:13 in '->'
-  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'run'
-  from ../../../../../../usr/lib/crystal/fiber.cr:92:34 in '->'
+  from /usr/lib/crystal/int.cr:141:7 in 'check_div_argument'
+  from /usr/lib/crystal/int.cr:105:5 in '//'
+  from src/components/framework/src/athena.cr:206:5 in 'divide'
+  from src/components/framework/src/ext/routing/annotation_route_loader.cr:8:5 in '->'
+  from /usr/lib/crystal/primitives.cr:266:3 in 'execute'
+  from src/components/framework/src/route_handler.cr:76:16 in 'handle_raw'
+  from src/components/framework/src/route_handler.cr:19:5 in 'handle'
+  from src/components/framework/src/athena.cr:161:27 in '->'
+  from /usr/lib/crystal/primitives.cr:266:3 in 'process'
+  from /usr/lib/crystal/http/server.cr:515:5 in 'handle_client'
+  from /usr/lib/crystal/http/server.cr:468:13 in '->'
+  from /usr/lib/crystal/primitives.cr:266:3 in 'run'
+  from /usr/lib/crystal/fiber.cr:98:34 in '->'
   from ???
 
-2020-12-06T17:20:18.979050Z   INFO - athena.routing: Matched route /divide_rescued/10/0 -- uri: "/divide_rescued/10/0", method: "GET", path_params: {"num2" => "0", "num1" => "10"}, query_params: {}
-2020-12-06T17:20:18.980397Z   WARN - athena.routing: Uncaught exception #<Athena::Framework::Exceptions::BadRequest:Invalid num2:  Cannot divide by zero> at src/athena.cr:159:5 in 'get_divide_rescued__num1__num2'
+2022-01-08T20:45:10.803001Z   INFO - athena.routing: Matched route 'example_controller_divide_rescued' -- route: "example_controller_divide_rescued", route_parameters: {"_route" => "example_controller_divide_rescued", "_controller" => "ExampleController#divide_rescued", "num1" => "10", "num2" => "0"}, request_uri: "/divide_rescued/10/0", method: "GET"
+2022-01-08T20:45:10.923945Z   WARN - athena.routing: Uncaught exception #<Athena::Framework::Exceptions::BadRequest:Invalid num2:  Cannot divide by zero> at src/components/framework/src/athena.cr:215:5 in 'divide_rescued'
 Invalid num2:  Cannot divide by zero (Athena::Framework::Exceptions::BadRequest)
-  from src/athena.cr:159:5 in 'get_divide_rescued__num1__num2'
-  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'execute'
-  from src/route_handler.cr:80:5 in 'handle_raw'
-  from src/route_handler.cr:14:21 in 'handle'
-  from src/athena.cr:127:9 in '->'
-  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'process'
-  from ../../../../../../usr/lib/crystal/http/server.cr:513:5 in 'handle_client'
-  from ../../../../../../usr/lib/crystal/http/server.cr:468:13 in '->'
-  from ../../../../../../usr/lib/crystal/primitives.cr:255:3 in 'run'
-  from ../../../../../../usr/lib/crystal/fiber.cr:92:34 in '->'
+  from src/components/framework/src/athena.cr:215:5 in 'divide_rescued'
+  from src/components/framework/src/ext/routing/annotation_route_loader.cr:8:5 in '->'
+  from /usr/lib/crystal/primitives.cr:266:3 in 'execute'
+  from src/components/framework/src/route_handler.cr:76:16 in 'handle_raw'
+  from src/components/framework/src/route_handler.cr:19:5 in 'handle'
+  from src/components/framework/src/athena.cr:161:27 in '->'
+  from /usr/lib/crystal/primitives.cr:266:3 in 'process'
+  from /usr/lib/crystal/http/server.cr:515:5 in 'handle_client'
+  from /usr/lib/crystal/http/server.cr:468:13 in '->'
+  from /usr/lib/crystal/primitives.cr:266:3 in 'run'
+  from /usr/lib/crystal/fiber.cr:98:34 in '->'
   from ???
 
-2020-12-06T17:20:21.993811Z   INFO - athena.routing: Matched route /divide_rescued/10/10 -- uri: "/divide_rescued/10/10", method: "GET", path_params: {"num2" => "10", "num1" => "10"}, query_params: {}
+2022-01-08T20:45:14.132652Z   INFO - athena.routing: Matched route 'example_controller_divide_rescued' -- route: "example_controller_divide_rescued", route_parameters: {"_route" => "example_controller_divide_rescued", "_controller" => "ExampleController#divide_rescued", "num1" => "10", "num2" => "10"}, request_uri: "/divide_rescued/10/10", method: "GET"
 ```
 
 #### Customization
 
-By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][Athena::Framework::Listeners::Error].
+By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][].
+
+### WebSockets
+
+Currently due to Athena's [architecture](../components/README.md), WebSockets are not directly supported.
+However Athena does allow prepending [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html) to the Athena server.
+This could be used to leverage the standard library's [HTTP::WebSocketHandler](https://crystal-lang.org/api/HTTP/WebSocketHandler.html) handler
+or a third party library such as https://github.com/cable-cr/cable.
+
+```crystal
+require "athena"
+
+# ...
+
+ws_handler = HTTP::WebSocketHandler.new do |ws, ctx|
+  ws.on_ping { ws.pong ctx.request.path }
+end
+
+ATH.run prepend_handlers: [ws_handler]
+```
+
+In the future, a goal is to have an integration with https://mercure.rocks/, which would allow or the majority of WebSocket use cases in a way that better fits into Athena.
