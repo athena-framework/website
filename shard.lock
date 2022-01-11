@@ -1,12 +1,8 @@
 version: 2.0
 shards:
-  amber_router:
-    git: https://github.com/amberframework/amber-router.git
-    version: 0.4.4
-
   athena:
-    git: https://github.com/athena-framework/athena.git
-    version: 0.15.0
+    git: https://github.com/athena-framework/framework.git
+    version: 0.16.0
 
   athena-config:
     git: https://github.com/athena-framework/config.git
@@ -28,6 +24,10 @@ shards:
     git: https://github.com/athena-framework/negotiation.git
     version: 0.1.1
 
+  athena-routing:
+    git: https://github.com/athena-framework/routing.git
+    version: 0.1.0
+
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git
     version: 0.2.10
@@ -38,5 +38,5 @@ shards:
 
   athena-validator:
     git: https://github.com/athena-framework/validator.git
-    version: 0.1.5
+    version: 0.1.7
 

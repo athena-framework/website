@@ -2,7 +2,7 @@ name: athena-website
 version: 0.1.0
 dependencies:
   athena:
-    github: athena-framework/athena
+    github: athena-framework/framework
   athena-config:
     github: athena-framework/config
   athena-console:
