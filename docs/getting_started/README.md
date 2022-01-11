@@ -48,7 +48,7 @@ ATH.run
 
 Routing is handled via the [Athena::Routing][] component. It provides a flexible and robust foundation for handling determining which route should match a given request.
 It includes regex based requirements, host name restrictions, and priorities to allow defining routes with parameters at the same location among others.
-Checkout [ART::Route][] and [routing](../components/routing.md) for more information.
+See the routing [documentation](../components/routing.md) for more information.
 
 Controllers are simply classes and routes are simply methods. Controllers and actions can be documented/tested as you would any Crystal class/method.
 
@@ -233,9 +233,7 @@ ATH.run
 # GET / # => 10
 ```
 
-NOTE: When generating [ART::Generator::ReferenceType::ABSOLUTE_URL][]s, the scheme and hostname default to `http` and `localhost` respectively, if they could not be extracted from the request.
-[ATH::Parameters][] can be used to configure the base URI that should be used, and is required when generating URLs in a non request context.
-Such as within a [ACON::Command][].
+NOTE: URL generation has some gotchas when used outside of a request context. See the routing [documentation](../components/routing.md) for more information.
 
 See [ART::Generator::Interface][] in the API Docs for more details.
 
