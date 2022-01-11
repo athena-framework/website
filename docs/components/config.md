@@ -248,12 +248,12 @@ class MyAnnotationListener
 end
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get("one")]
+  @[ARTA::Get("one")]
   def one : Int32
     1
   end
 
-  @[ATHA::Get("two")]
+  @[ARTA::Get("two")]
   @[MyAnnotation(name: "Fred")]
   def two : Int32
     2

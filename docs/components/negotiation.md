@@ -153,7 +153,7 @@ def ATH::Config::ContentNegotiation.configure
 end
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get("/users")]
+  @[ARTA::Get("/users")]
   def get_users : ATH::View(Array(User))
     self.view([
       User.new(1, "Jim", "jim@example.com"),

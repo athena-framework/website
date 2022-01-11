@@ -34,7 +34,7 @@ end
 class ExampleController < ATH::Controller
   def initialize(@value_provider : ValueProvider); end
   
-  @[ATHA::Get("/")]
+  @[ARTA::Get("/")]
   def get_value : String
     @value_provider.value
   end

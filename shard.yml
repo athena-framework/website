@@ -2,7 +2,7 @@ name: athena-website
 version: 0.1.0
 dependencies:
   athena:
-    github: athena-framework/athena
+    github: athena-framework/framework
   athena-config:
     github: athena-framework/config
   athena-console:
@@ -12,7 +12,9 @@ dependencies:
   athena-event_dispatcher:
     github: athena-framework/event-dispatcher
   athena-negotiation:
-    github: athena-framework/negotiation
+    github: athena-framework/negotiation 
+  athena-routing:
+    github: athena-framework/routing
   athena-serializer:
     github: athena-framework/serializer
   athena-spec:

@@ -134,7 +134,7 @@ struct PaginationListener
 end
 
 class ExampleController < ATH::Controller
-  @[ATHA::Get("values")]
+  @[ARTA::Get("values")]
   @[Paginated(per_page: 2)]
   def get_values : Array(Int32)
     (1..10).to_a

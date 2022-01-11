@@ -7,6 +7,7 @@
         * [Event Dispatcher](components/event_dispatcher.md)
         * [Config](components/config.md)
         * [Negotiation](components/negotiation.md)
+        * [Routing](components/routing.md)
         * [Serializer](components/serializer.md)
         * [Validator](components/validator.md)
         * [Spec](components/spec.md)
@@ -40,6 +41,9 @@
 * [Negotiation](Negotiation/index.md)
     * [Aliases](Negotiation/aliases.md)
     * Negotiation/*
+* [Routing](Routing/index.md)
+    * [Aliases](Routing/aliases.md)
+    * Routing/*
 * [Spec](Spec/index.md)
     * [Aliases](Spec/aliases.md)
     * Spec/*

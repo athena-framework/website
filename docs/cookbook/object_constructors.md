@@ -70,9 +70,9 @@ class Article < Granite::Base
   column title : String
 end
 
-@[ATHA::Prefix("article")]
+@[ARTA::Route(path: "/article")]
 class ExampleController < ATH::Controller
-  @[ATHA::Put(path: "")]
+  @[ARTA::Put(path: "")]
   @[ATHA::ParamConverter("article", converter: ATH::RequestBodyConverter)]
   def update_article(article : Article) : Article
     # Since we have an actual `Article` instance with the updates
