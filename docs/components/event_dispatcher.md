@@ -51,7 +51,7 @@ require "athena"
 # Define a custom event
 class MyEvent < AED::Event
   property value : Int32
-  
+
   def initialize(@value : Int32); end
 end
 
@@ -74,13 +74,13 @@ end
 @[ADI::Register(public: true)]
 class ExampleController < ATH::Controller
   def initialize(@event_dispatcher : AED::EventDispatcherInterface); end
-  
-  @[ARTA::Get("/:value")]
+
+  @[ARTA::Get("/{value}")]
   def get_value(value : Int32) : Int32
     event = MyEvent.new value
-    
+
     @event_dispatcher.dispatch event
-    
+
     event.value
   end
 end
