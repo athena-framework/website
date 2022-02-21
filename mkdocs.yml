@@ -51,6 +51,7 @@ plugins:
             - lib/athena-serializer/src/athena-serializer.cr
             - lib/athena-validator/src/athena-validator.cr
             - lib/athena-negotiation/src/athena-negotiation.cr
+            - lib/athena-image_size/src/athena-image_size.cr
             - lib/athena-routing/src/athena-routing.cr
             - lib/athena-validator/src/spec.cr
             - lib/athena/src/athena.cr
@@ -60,6 +61,7 @@ plugins:
             lib/athena-console: https://github.com/athena-framework/console/blob/v{shard_version}/{file}#L{line}
             lib/athena-dependency_injection: https://github.com/athena-framework/dependency-injection/blob/v{shard_version}/{file}#L{line}
             lib/athena-event_dispatcher: https://github.com/athena-framework/event-dispatcher/blob/v{shard_version}/{file}#L{line}
+            lib/athena-image_size: https://github.com/athena-framework/image-size/blob/v{shard_version}/{file}#L{line}
             lib/athena-negotiation: https://github.com/athena-framework/negotiation/blob/v{shard_version}/{file}#L{line}
             lib/athena-routing: https://github.com/athena-framework/routing/blob/v{shard_version}/{file}#L{line}
             lib/athena-serializer: https://github.com/athena-framework/serializer/blob/v{shard_version}/{file}#L{line}

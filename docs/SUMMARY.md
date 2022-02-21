@@ -41,6 +41,9 @@
 * [Negotiation](Negotiation/index.md)
     * [Aliases](Negotiation/aliases.md)
     * Negotiation/*
+* [ImageSize](ImageSize/index.md)
+    * [Aliases](ImageSize/aliases.md)
+    * ImageSize/*
 * [Routing](Routing/index.md)
     * [Aliases](Routing/aliases.md)
     * Routing/*

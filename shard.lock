@@ -20,13 +20,17 @@ shards:
     git: https://github.com/athena-framework/event-dispatcher.git
     version: 0.1.3
 
+  athena-image_size:
+    git: https://github.com/athena-framework/image-size.git
+    version: 0.1.0
+
   athena-negotiation:
     git: https://github.com/athena-framework/negotiation.git
     version: 0.1.1
 
   athena-routing:
     git: https://github.com/athena-framework/routing.git
-    version: 0.1.0
+    version: 0.1.1
 
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git

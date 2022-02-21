@@ -11,6 +11,8 @@ dependencies:
     path: ../athena/src/components/dependency_injection
   athena-event_dispatcher:
     path: ../athena/src/components/event_dispatcher
+  athena-image_size:
+    path: ../athena/src/components/image_size
   athena-negotiation:
     path: ../athena/src/components/negotiation
   athena-routing:
