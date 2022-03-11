@@ -2,7 +2,7 @@
 
 ## JWT Security
 
-Currently Athena does not have any built in abstractions related to authentication or authorization. This feature is planned and will be implemented at some point in the future. Until then however, we can define a security listener that implements our authentication logic via listening on the [action](../components/README.md#1-request-event) event which includes a reference to the original [ATH::Request][] object.
+Currently Athena does not have any built in abstractions related to authentication or authorization. This feature is planned and will be implemented at some point in the future. Until then however, we can define a security listener that implements our authentication logic via listening on the [request](../components/README.md#1-request-event) event which includes a reference to the original [ATH::Request][] object.
 
 ```crystal
 # Define and register a listener to handle authenticating requests.
