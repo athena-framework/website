@@ -67,7 +67,7 @@ plugins:
             lib/athena-serializer: https://github.com/athena-framework/serializer/blob/v{shard_version}/{file}#L{line}
             lib/athena-spec: https://github.com/athena-framework/spec/blob/v{shard_version}/{file}#L{line}
             lib/athena-validator: https://github.com/athena-framework/validator/blob/v{shard_version}/{file}#L{line}
-            lib/athena: https://github.com/athena-framework/athena/blob/v{shard_version}/{file}#L{line}
+            lib/athena: https://github.com/athena-framework/framework/blob/v{shard_version}/{file}#L{line}
 
 markdown_extensions:
   - admonition
