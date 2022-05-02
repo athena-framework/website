@@ -21,6 +21,12 @@ serve: ## Run live-preview server
 serve: $(MKDOCS)
 	$(MKDOCS) serve
 
+.PHONY: serve-dev
+serve-dev: ## Run live-preview server using symlinks
+serve-dev: $(MKDOCS)
+	SHARDS_OVERRIDE=shard.dev.yml shards update
+	SHARDS_OVERRIDE=shard.dev.yml $(MKDOCS) serve
+
 deps: $(MKDOCS)
 
 $(MKDOCS): $(PIP) requirements.txt
