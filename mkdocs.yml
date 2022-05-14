@@ -44,6 +44,7 @@ plugins:
           crystal_docs_flags:
             - lib/athena-spec/src/athena-spec.cr
             - lib/athena-event_dispatcher/src/athena-event_dispatcher.cr
+            - lib/athena-event_dispatcher/src/spec.cr
             - lib/athena-console/src/athena-console.cr
             - lib/athena-console/src/spec.cr
             - lib/athena-config/src/athena-config.cr
