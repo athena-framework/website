@@ -42,7 +42,7 @@ This next step is not an event, but a important concept within Athena nonetheles
 
 #### Argument Resolution
 
-Before Athena can call the controller action, it first needs to determine what arguments, if any, should be passed to it. This is achieved via an [ATH::Arguments::ArgumentResolverInterface][Athena::Framework::Arguments::ArgumentResolverInterface] that facilitates gathering all the arguments. One or more [ATH::Arguments::Resolvers::ArgumentValueResolverInterface][Athena::Framework::Arguments::Resolvers::ArgumentValueResolverInterface] will then be used to resolve each specific argument's value.
+Before Athena can call the controller action, it first needs to determine what arguments, if any, should be passed to it. This is achieved via an [ATH::Arguments::ArgumentResolverInterface][Athena::Framework::Arguments::ArgumentResolverInterface] that facilitates gathering all the arguments. One or more [ATH::Arguments::Resolvers::Interface][Athena::Framework::Arguments::Resolvers::Interface] will then be used to resolve each specific argument's value.
 
 The default algorithm is as follows:
 

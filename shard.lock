@@ -2,7 +2,7 @@ version: 2.0
 shards:
   athena:
     git: https://github.com/athena-framework/framework.git
-    version: 0.16.0
+    version: 0.17.0
 
   athena-config:
     git: https://github.com/athena-framework/config.git
@@ -34,7 +34,7 @@ shards:
 
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git
-    version: 0.2.10
+    version: 0.3.0
 
   athena-spec:
     git: https://github.com/athena-framework/spec.git
@@ -42,5 +42,5 @@ shards:
 
   athena-validator:
     git: https://github.com/athena-framework/validator.git
-    version: 0.1.7
+    version: 0.2.0
 
