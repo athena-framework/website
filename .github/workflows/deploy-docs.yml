@@ -1,6 +1,12 @@
 name: Deploy docs
 on: [push, pull_request]
 jobs:
+  check_spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check Spelling
+        uses: crate-ci/typos@v1.12.14
   build:
     name: Deploy docs
     runs-on: ubuntu-latest
