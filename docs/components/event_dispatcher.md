@@ -1,4 +1,4 @@
-As mentiond in the [architecture](README.md) section, Athena is an event based framework utilizing the [Event Dispatcher][Athena::EventDispatcher] component.
+As mentioned in the [architecture](README.md) section, Athena is an event based framework utilizing the [Event Dispatcher][Athena::EventDispatcher] component.
 
 ## Basic Usage
 
