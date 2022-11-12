@@ -4,7 +4,7 @@ OUTPUT_DIR ?= ./site ## Build directory (default: ./site)
 SHARDS_OVERRIDE ?= ./shard.yml
 
 MKDOCS ?= .venv/bin/mkdocs
-PIP ?= .venv/bin/pip
+PIP ?= .venv/bin/pip3
 SHARDS ?= shards
 
 DOCS_FILES := $(shell find docs -type f)
