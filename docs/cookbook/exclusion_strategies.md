@@ -17,10 +17,10 @@ struct IgnoreOnMethodExclusionStrategy
   # :inherit:
   def skip_property?(metadata : ASR::PropertyMetadataBase, context : ASR::Context) : Bool
     # Don't skip if there isn't a request, such as a non web request context.
-    return false unless requst_method = @request_store.request?.try &.method
+    return false unless request_method = @request_store.request?.try &.method
 
     # Determine the annotation that should be read off the property.
-    annotation_class = case requst_method
+    annotation_class = case request_method
                        when "POST" then IgnoreOnCreate
                        when "PUT"  then IgnoreOnUpdate
                        when "GET"  then IgnoreOnRead
