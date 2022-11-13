@@ -17,3 +17,8 @@ div.doc-contents:not(.first) {
 .md-typeset pre>code::-webkit-scrollbar {
   height: 0.4em;
 }
+
+
+.md-grid {
+  max-width: 75%;
+}
