@@ -18,7 +18,12 @@ div.doc-contents:not(.first) {
   height: 0.4em;
 }
 
-
+/* Make content grid a bit wider */
 .md-grid {
   max-width: 75%;
+}
+
+/* Hide prev/next footer buttons */
+.md-footer__inner:not([hidden]) {
+    display: none
 }
