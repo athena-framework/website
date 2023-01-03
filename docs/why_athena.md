@@ -272,13 +272,11 @@ ATH.run
 
 ## Primary Use Cases
 
-While the components that make up Athena Framework can be used within a wide range of applications, the framework itself is best suited for a few main types.
+While the components that make up Athena Framework can be used within a wide range of applications, the framework itself is best suited for a few main types, including HTTP REST APIs, CLI Applications, or a combination of both. Since both types of entry points leverage dependency injection, services can be used in both contexts, allowing the majority of code to be reused.
 
 ### HTTP REST API
 
-At its core, Athena Framework is a MVC web application framework. It can be used to serve any kind of content, but best lends itself to creating RESTful JSON APIs due to the features the framework provides.
-
-#### Native JSON support
+At its core, Athena Framework is a MVC web application framework. It can be used to serve any kind of content, but best lends itself to creating RESTful JSON APIs due to the features the framework as explained in the previous section, as well as due its native JSON support:
 
 * Objects returned from the controller are JSON serialized by default
 * Native support for both [ASR::Serializable][] and [JSON::Serializable](https://crystal-lang.org/api/JSON/Serializable.html)
@@ -330,4 +328,51 @@ ATH.run
 # POST /user body: {"email":"george@dietrich.app"} # => {"email":"george@dietrich.app"}
 ```
 
-#### Powerful Middleware
+### CLI Applications
+
+Athena Framework can also be used to build CLI based applications:
+
+```crystal
+@[ACONA::AsCommand("app:create-user")]
+@[ADI::Register]
+class CreateUserCommand < ACON::Command
+  protected def configure : Nil
+    # ...
+  end
+
+  protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
+    # Implement all the business logic here.
+
+    # Indicates the command executed successfully.
+    Status::SUCCESS
+  end
+end
+```
+
+```shell
+$ ./bin/console
+Athena 0.18.0
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  help                    Display help for a command
+  list                    List commands
+ app
+  app:create-user         
+ debug
+  debug:event-dispatcher  Display configured listeners for an application
+  debug:router            Display current routes for an application
+  debug:router:match      Simulate a path match to see which route, if any, would handle it
+```
+
+Checkout the [console](./architecture/console.md) component for more information.
