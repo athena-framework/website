@@ -15,6 +15,9 @@ dependencies:
 
 Run `shards install`. This will install Athena and its required dependencies.
 
+NOTE: Until https://github.com/crystal-lang/crystal/issues/12790 is resolved, you will need to manually install `pcre2` as it is not yet included with a native Crystal install.
+Check with your OS's package manager for the name of the required package.
+
 ## Usage
 
 Athena has a goal of being easy to start using for simple use cases, while still allowing flexibility/customizability for larger more complex use cases.
