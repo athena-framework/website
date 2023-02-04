@@ -13,7 +13,7 @@ The [SOLID](https://en.wikipedia.org/wiki/SOLID) principles are applicable to an
 Just as the name implies, this principle suggests that each type should have only a single primary purpose. Having types with specialized focuses has various benefits including:
 
 * Easier to test
-* Less copuling due to lower amount of dependencies it requires
+* Less coupling due to lower amount of dependencies it requires
 * Easier to read and search for
 
 A more concrete example of this could be say there is a class representing an article:
@@ -128,7 +128,7 @@ While this is a bit of extra boilerplate, it is an incredibly powerful pattern. 
 
 ### Flexibility
 
-Athena Framework is very flexible in that it is able to support both simple and complex use cases by adapting to the needs of the application without getting in the way of customizations the user wants to make. This is accomplished by providing all the components to the user, but not requiring they be used. If an application does not need to validate anything, the [Athena::Validator][] component can just be ignored. But if the need ever arrises it is there and well integrated into the framework.
+Athena Framework is very flexible in that it is able to support both simple and complex use cases by adapting to the needs of the application without getting in the way of customizations the user wants to make. This is accomplished by providing all the components to the user, but not requiring they be used. If an application does not need to validate anything, the [Athena::Validator][] component can just be ignored. But if the need ever arises it is there and well integrated into the framework.
 
 #### Dependency Injection
 
@@ -171,7 +171,7 @@ ATH.run
 # GET / # => "Hello World"
 ```
 
-It is worth noting again that while dependency injection is a big part of the framework, it is not neccessarly required to fully understand it in order to use the framework, but like other components, it is there if needed. Checkout [ADI::Register][], especially the [aliasing services][Athena::DependencyInjection::Register--aliasing-services] section, as well as the [Dependency Injection](./architecture/dependency_injection.md) component for more information related to this feature.
+It is worth noting again that while dependency injection is a big part of the framework, it is not necessarily required to fully understand it in order to use the framework, but like other components, it is there if needed. Checkout [ADI::Register][], especially the [aliasing services][Athena::DependencyInjection::Register--aliasing-services] section, as well as the [Dependency Injection](./architecture/dependency_injection.md) component for more information related to this feature.
 
 Athena Framework is almost fully overridable/customizable in part since it embraces dependency injection. Want to globally customize how errors are rendered? Create a service implementing [ATH::ErrorRendererInterface][] and make it an alias of the interface:
 
@@ -215,7 +215,7 @@ One of the more unique aspects of Athena Framework, and the Athena ecosystem, is
 
 #### Point of Extension
 
-A common way to do certain things in other frameworks is the use of macro DSLs specific to each framework. While it can work well, it makes it harder to expand upon/customize. Given annotations are a core Crystal language construct, there nothing special needed to access the annotations themselves. This can e espeically useful for third party code to have a tigher integration while also being totally agnostic of what framework the code is even used in.
+A common way to do certain things in other frameworks is the use of macro DSLs specific to each framework. While it can work well, it makes it harder to expand upon/customize. Given annotations are a core Crystal language construct, there nothing special needed to access the annotations themselves. This can be especially useful for third party code to have a tighter integration while also being totally agnostic of what framework the code is even used in.
 
 #### User Defined Annotations
 
