@@ -10,11 +10,11 @@ shards:
 
   athena-console:
     git: https://github.com/athena-framework/console.git
-    version: 0.3.0
+    version: 0.3.1
 
   athena-dependency_injection:
     git: https://github.com/athena-framework/dependency-injection.git
-    version: 0.3.4
+    version: 0.3.5
 
   athena-event_dispatcher:
     git: https://github.com/athena-framework/event-dispatcher.git
