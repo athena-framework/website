@@ -38,7 +38,7 @@ shards:
 
   athena-spec:
     git: https://github.com/athena-framework/spec.git
-    version: 0.3.1
+    version: 0.3.2
 
   athena-validator:
     git: https://github.com/athena-framework/validator.git
