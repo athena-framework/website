@@ -3,7 +3,8 @@ especially the [Dependency inversion principle](https://en.wikipedia.org/wiki/De
 
 If these principles are followed then any controller/service can easily be unit tested on their own as you would any Crystal type, possibly utilizing [ASPEC::TestCase][] to provide helpful abstractions around common testing/helper logic for sets of common types.
 
-However, Athena also comes bundled with [ATH::Spec::APITestCase][] to allow for easily creating integration tests for [ATH::Controller][]s; which is the more ideal way to test a controller.
+However, the framework also comes bundled with [ATH::Spec::APITestCase][] to allow for easily creating integration tests for [ATH::Controller][]s; which is the more ideal way to test a controller.
+Many helpful `HTTP` related [expectations][ATH::Spec::Expectations::HTTP] are also provided.
 
 ```crystal
 require "athena"

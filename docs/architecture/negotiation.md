@@ -1,8 +1,8 @@
-As mentioned in the [view event](/architecture/#4-view-event) documentation; this event is emitted whenever a controller action does _NOT_ return an [ATH::Response][], with this value being JSON serialized by default. The [Negotiation][Athena::Negotiation] component enhances the view layer of Athena by enabling [content negotiation](https://tools.ietf.org/html/rfc7231#section-5.3) support; making it possible to write format agnostic controllers by placing a layer of abstraction between the controller and generation of the final response content. Or in other words allow having the same controller action be rendered based on the request's [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) `HTTP` header and the format priority configuration.
+As mentioned in the [view event](/architecture/#4-view-event) documentation; this event is emitted whenever a controller action does _NOT_ return an [ATH::Response][], with this value being JSON serialized by default. The [Negotiation][Athena::Negotiation] component enhances the view layer of the Athena Framework by enabling [content negotiation](https://tools.ietf.org/html/rfc7231#section-5.3) support; making it possible to write format agnostic controllers by placing a layer of abstraction between the controller and generation of the final response content. Or in other words allow having the same controller action be rendered based on the request's [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) `HTTP` header and the format priority configuration.
 
 ## Configuration
 
-See the [config](config.md) component documentation for an overview on how configuration is handled in Athena.
+See the [config](config.md) component documentation for an overview on how configuration is handled in Athena Framework.
 
 ### Negotiation
 
@@ -53,7 +53,7 @@ An [ATH::View][] is intended to act as an in between returning raw data and an [
 
 ### View Format Handlers
 
-By default Athena uses `json` as the default response format. However it is possible to extend the [ATH::View::ViewHandler][] to support additional, and even custom, formats. This is achieved by creating an [ATH::View::FormatHandlerInterface][] instance that defines the logic needed to turn an [ATH::View][] into an [ATH::Response][].
+By default the Athena Framework uses `json` as the default response format. However it is possible to extend the [ATH::View::ViewHandler][] to support additional, and even custom, formats. This is achieved by creating an [ATH::View::FormatHandlerInterface][] instance that defines the logic needed to turn an [ATH::View][] into an [ATH::Response][].
 
 The implementation can be as simple/complex as needed for the given format. Official handlers could be provided in the future for common formats such as `html`, probably via an integration with some form of tempting engine utilizing [custom annotations](config.md#custom-annotations) to specify the format.
 

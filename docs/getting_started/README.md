@@ -410,7 +410,7 @@ TIP: Checkout the `debug:event-dispatcher` [command](../architecture/console.md)
 
 ### Testing
 
-Each component in the Athena Framework includes a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. Athena itself defines some of its own testing types, mainly to allow for easisly integration testing [ATH::Controller][]s.
+Many Athena components include a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. The framework itself defines some of its own testing types, mainly to allow for easily integration testing [ATH::Controller][]s via [ATH::Spec::APITestCase] and also provides many helpful `HTTP` related [expectations][ATH::Spec::Expectations::HTTP].
 
 ```crystal
 require "athena"

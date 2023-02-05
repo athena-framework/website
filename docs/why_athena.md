@@ -85,7 +85,7 @@ def initialize(
 ); end
 ```
 
-The same beavior as before can also be retained, even when using this new pattern. This will use the proivded instance, or fall back on a default implementation if no custom instance is provided:
+The same behavior as before can also be retained, even when using this new pattern. This will use the provided instance, or fall back on a default implementation if no custom instance is provided:
 
 ```crystal
 def initialize(
