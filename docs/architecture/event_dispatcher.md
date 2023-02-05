@@ -1,8 +1,9 @@
-As mentioned in the [architecture](README.md) section, Athena is an event based framework utilizing the [Event Dispatcher][Athena::EventDispatcher] component.
+As mentioned in the [architecture](README.md#framework-architecture) section, Athena Framework is an event based framework utilizing the [Event Dispatcher][Athena::EventDispatcher] component as its form of middleware.
 
 ## Basic Usage
 
-An event listener is defined by registering a service that includes [AED::EventListenerInterface][Athena::EventDispatcher::EventListenerInterface]. The type should also define a `self.subscribed_events` method that represents what [events][Athena::Framework::Events] it should be listening on.
+The primary use case for event listeners is to tap into the life-cycle of the request, such as adding common headers, setting state extracted from the request, or whatever else the application requires.
+Custom events may also be defined, but more on this soon.
 
 ```crystal
 require "athena"
@@ -11,14 +12,8 @@ require "athena"
 class CustomListener
   include AED::EventListenerInterface
 
-  # Specify that we want to listen on the `Response` event.
-  # The value of the hash represents this listener's priority;
-  # the higher the value the sooner it gets executed.
-  def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{ATH::Events::Response => 25}
-  end
-
-  def call(event : ATH::Events::Response, dispatcher : AED::EventDispatcherInterface) : Nil
+  @[AEDA::AsEventListener]
+  def on_response(event : ATH::Events::Response) : Nil
     event.response.headers["FOO"] = "BAR"
   end
 end
@@ -34,6 +29,8 @@ ATH.run
 # GET / # => Hello World (with `FOO => BAR` header)
 ```
 
+See [AEDA::AsEventListener][] for more information.
+
 TIP: A single event listener may listen on multiple events. Instance variables can be used to share state between the events.
 
 WARNING: The "type" of the listener has an effect on its behavior!
@@ -43,7 +40,11 @@ A `class` service on the other hand will be a reference to the one in the SC. Th
 
 ## Custom Events
 
-Custom events can also be defined and dispatched; either within a listener, or in another service by injecting [AED::EventDispatcherInterface][Athena::EventDispatcher::EventDispatcherInterface] and calling `#dispatch`.
+Using events can be a helpful design pattern to allow for code that is easily extensible.
+An event represents something _has happened_ where nobody may be interested in it, or in other words there may be zero or more listeners listening on a given event.
+A more concrete example is an event could be dispatched after some core piece of application logic.
+From here it would be easy to tap into when this logic is executed to perform some other follow up action, without increasing the complexity of the type that performs the core action.
+This also adheres to the [single responsibility](../why_athena.md#single-responsibility) principle.
 
 ```crystal
 require "athena"
@@ -60,18 +61,15 @@ end
 class CustomEventListener
   include AED::EventListenerInterface
 
-  def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{MyEvent => 0}
-  end
-
-  def call(event : MyEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+  @[AEDA::AsEventListener]
+  def call(event : MyEvent) : Nil
     event.value *= 10
   end
 end
 
 # Register a controller as a service,
 # injecting the event dispatcher to handle processing our value.
-@[ADI::Register(public: true)]
+@[ADI::Register]
 class ExampleController < ATH::Controller
   def initialize(@event_dispatcher : AED::EventDispatcherInterface); end
 

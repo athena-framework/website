@@ -1,4 +1,4 @@
-As mentioned in the [view event](/components/#4-view-event) documentation; this event is emitted whenever a controller action does _NOT_ return an `ATH::Response`, with this value being JSON serialized by default. The [Negotiation][Athena::Negotiation] component enhances the view layer of Athena by enabling [content negotiation](https://tools.ietf.org/html/rfc7231#section-5.3) support; making it possible to write format agnostic controllers by placing a layer of abstraction between the controller and generation of the final response content. Or in other words allow having the same controller action be rendered based on the request's [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) `HTTP` header and the format priority configuration.
+As mentioned in the [view event](/components/#4-view-event) documentation; this event is emitted whenever a controller action does _NOT_ return an [ATH::Response][], with this value being JSON serialized by default. The [Negotiation][Athena::Negotiation] component enhances the view layer of Athena by enabling [content negotiation](https://tools.ietf.org/html/rfc7231#section-5.3) support; making it possible to write format agnostic controllers by placing a layer of abstraction between the controller and generation of the final response content. Or in other words allow having the same controller action be rendered based on the request's [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) `HTTP` header and the format priority configuration.
 
 ## Configuration
 
@@ -105,7 +105,7 @@ end
 @[ADI::Register]
 class CSVFormatHandler
   # Implement the interface.
-  include Athena::Framework::View::FormatHandlerInterface
+  include ATH::View::FormatHandlerInterface
 
   # :inherit:
   def call(view_handler : ATH::View::ViewHandlerInterface, view : ATH::ViewBase, request : ATH::Request, format : String) : ATH::Response

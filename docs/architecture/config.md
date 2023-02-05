@@ -223,11 +223,8 @@ ACF.configuration_annotation MyAnnotation, name : String? = nil
 class MyAnnotationListener
   include AED::EventListenerInterface
 
-  def self.subscribed_events : AED::SubscribedEvents
-    AED::SubscribedEvents{ATH::Events::View => 0}
-  end
-
-  def call(event : ATH::Events::View, dispatcher : AED::EventDispatcherInterface) : Nil
+  @[AEDA::AsEventListener]
+  def on_view(event : ATH::Events::View) : Nil
     # Represents all custom annotations applied to the current ATH::Action.
     ann_configs = event.request.action.annotation_configurations
 

@@ -1,6 +1,25 @@
-## Framework Conventions
+## Conventions
 
+The [Why Athena?](../why_athena.md) page explained some of the reasoning behind the _why_ things are the way they are.
+The framework also has a few conventions related to a more organizational point of view.
 
+### Namespaces
+
+The most obvious may be how each component is organized from a namespace perspective.
+All component namespaces exist within a common top level [Athena][] namespace.
+Each component uses additional sub namespaces for organizational reasons, and as a means to have a place for common documentation.
+
+### Aliases
+
+Due to how Athena defines its namespaces, they can require a fair amount of typing due to the longer paths.
+To help alleviate this, each component defines one or more top level aliases to reduce the number of characters needed to refer to a component's types.
+For example, a controller needs to inherit from the `Athena::Framework::Controller` type, or `ATH::Controller` if using the [ATH][] alias.
+Similarly, `Athena::Routing::Annotations::Get` could be shortened to `ARTA::Get` via the [ARTA][] alias.
+
+In most cases, the component alias is three or four characters abbreviating the name of the component, always starting with an `A`.
+Components that also define numerous annotations may have another alias dedicated to those annotations types.
+This alias usually is the component alias with an `A`, short for annotations, suffix. E.g. [ATHA][] or [ARTA][].
+Each component may also define additional aliases if needed, check the `Aliases` page in each component's API docs to see specifically what each component defines.
 
 ## Framework Architecture
 
