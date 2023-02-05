@@ -1,4 +1,4 @@
-The [Validator][Athena::Validator] component adds a robust/flexible validation framework. This component is also mostly optional, but can be super helpful as part of a [param converter](../getting_started/advanced_usage.md#param-converters) to ensure only valid data make it into the system. The [Cookbook](../cookbook/param_converters.md#request-body) has an example of how this could be implemented. This component can also be used to define validation requirements for [ATH::Params::ParamInterface][Athena::Framework::Params::ParamInterface]s.
+The [Validator][Athena::Validator] component adds a robust/flexible validation framework. This component is also mostly optional, but leveraged for the super useful [ATHR::RequestBody][] resolver type to ensure only valid data make it into the system. This component can also be used to define validation requirements for [ATH::Params::ParamInterface][Athena::Framework::Params::ParamInterface]s.
 
 ## Custom Constraints
 
