@@ -1,6 +1,6 @@
 ##  Creating "good" Software
 
-When creating an application, actually writing the code is often the easiest part. Designing a system that will be readable, maintainable, testable, and extensible on the other hand is a much more challenging task. The features of Athena Framework encourage creating such software. However it does not do much good without also understanding the _why_ it is designed the way it is. Let's take a moment to explore how the features mentioned in the introduction can lead to "good" software design.
+When creating an application, actually writing the code is often the easiest part. Designing a system that will be readable, maintainable, testable, and extensible on the other hand is a much more challenging task. The features of the Athena Framework encourage creating such software. However it does not do much good without also understanding the _why_ behind the way it is designed the way it is. Let's take a moment to explore how the features mentioned in the introduction can lead to "good" software design.
 
 WARNING: As with anything in the software world, "good" software is subjective. The design decision/suggestions on this page are intended to be educational and provide "best practices" guidelines. They are _NOT_ the only way to use the framework nor are prescriptive. Do whatever makes the most sense for your project.
 
@@ -53,9 +53,9 @@ A sharp eye will notice this type was created with the [ADI::Register][] annotat
 
 #### Dependency Inversion
 
-This principle states that code should "Depend upon abstractions, [not] concretions." In other words, services should depend upon interfaces instead of concrete implementation of a specific class. This not only makes the depending services more flexible since different implementations of the interface could be used, but also makes testing easier since mock implementations could also be used. In Crystal, an interface is nothing more than a module with abstract defs that can be included within another type in order to force the including type to define its methods.The example from the previous principle can be used to demonstrate.
+This principle states that code should "Depend upon abstractions, [not] concretions." In other words, services should depend upon interfaces instead of concrete types. This not only makes the depending services more flexible since different implementations of the interface could be used, but also makes testing easier since mock implementations could also be used. In Crystal, an interface is nothing more than a module with abstract defs that can be included within another type in order to force the including type to define its methods.The example from the previous principle can be used to demonstrate.
 
-The `ArticlePersister` can be used to persist an article. For example say there is another service in which an article should be persisted. This could be a controller action, a console command, or some sort of async consumer, etc. The easiest way to handle persisting of the article would be to do something like:
+The `ArticlePersister` can be used to persist an article. For example say there is another service in which an article should be persisted. This could be a controller action, a console command, some sort of async consumer, etc. The easiest way to handle persisting of the article would be to do something like:
 
 ```crystal
 @[ADI::Register]
@@ -132,7 +132,7 @@ Athena Framework is very flexible in that it is able to support both simple and 
 
 #### Dependency Injection
 
-Athena Framework includes an IoC Service Container that manages services automatically. Any service, or a useful type annotated with [ADI::Register][], can be used in another service by defining a constructor typed to the desired service. For example:
+Athena Framework includes an IoC Service Container that manages services automatically. Any service, or a useful type, annotated with [ADI::Register][], can be used in another service by defining a constructor typed to the desired service. For example:
 
 ```crystal
 require "athena"
@@ -171,7 +171,7 @@ ATH.run
 # GET / # => "Hello World"
 ```
 
-It is worth noting again that while dependency injection is a big part of the framework, it is not necessarily required to fully understand it in order to use the framework, but like other components, it is there if needed. Checkout [ADI::Register][], especially the [aliasing services][Athena::DependencyInjection::Register--aliasing-services] section, as well as the [Dependency Injection](./architecture/dependency_injection.md) component for more information related to this feature.
+It is worth noting again that while dependency injection is a big part of the framework, it is not necessarily required to fully understand it in order to use the framework, but like the other components, it is there if needed. Checkout [ADI::Register][], especially the [aliasing services][Athena::DependencyInjection::Register--aliasing-services] section, as well as the [Dependency Injection](./architecture/dependency_injection.md) component for more information related to this feature.
 
 Athena Framework is almost fully overridable/customizable in part since it embraces dependency injection. Want to globally customize how errors are rendered? Create a service implementing [ATH::ErrorRendererInterface][] and make it an alias of the interface:
 
@@ -330,7 +330,7 @@ ATH.run
 
 ### CLI Applications
 
-Athena Framework can also be used to build CLI based applications:
+Athena Framework can also be used to build CLI based applications. These could either be used directly by the end user, used for internal administrative tasks, or invoked on a schedule via `cron` or something similar.
 
 ```crystal
 @[ACONA::AsCommand("app:create-user")]
