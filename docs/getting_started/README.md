@@ -81,6 +81,8 @@ ATH.run
 # GET /add/foo/12            # => {"code":400,"message":"Required parameter 'value1' with value 'foo' could not be converted into a valid 'Int32'"}
 ```
 
+TIP: For more complex conversions, consider creating a [Value Resolver][ATHR::Interface] to encapsulate the logic.
+
 [ATHA::QueryParam][] and [ATHA::RequestParam][]s are defined via annotations and map directly to the method's arguments. See the related annotation docs for more information.
 
 ```crystal
@@ -178,7 +180,7 @@ ATH.run
 
 #### Returning Files
 
-An [ATH::BinaryFileResponse][] may be used to return [static files](../cookbook/listeners.md#static-files). This response type handles caching, partial requests, and setting the relevant headers.
+An [ATH::BinaryFileResponse][] may be used to return static files/content. This response type handles caching, partial requests, and setting the relevant headers.
 The Athena Framework also supports downloading of dynamically generated content by using an [ATH::Response][] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header. [ATH::HeaderUtils.make_disposition][Athena::Framework::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
 
 ```crystal
@@ -201,6 +203,63 @@ class ExampleController < ATH::Controller
 end
 
 ATH.run
+```
+
+##### Static Files
+
+Static files can also be served from an Athena application.
+This can be achieved by combining an [ATH::BinaryFileResponse][Athena::Framework::BinaryFileResponse] with the [request](../architecture/README.md#1-request-event) event;
+checking if the request's path represents a file/directory within the application's public directory and returning the file if so.
+
+```crystal
+# Register a request event listener to handle returning static files.
+@[ADI::Register]
+struct StaticFileListener
+  include AED::EventListenerInterface
+
+  # This could be parameter if the directory changes between environments.
+  private PUBLIC_DIR = Path.new("public").expand
+
+  # Run this listener with a very high priority so it is invoked before any application logic.
+  @[AEDA::AsEventListener(priority: 256)]
+  def on_request(event : ATH::Events::Request) : Nil
+    # Fallback if the request method isn't intended for files.
+    # Alternatively, a 405 could be thrown if the server is dedicated to serving files.
+    return unless event.request.method.in? "GET", "HEAD"
+
+    original_path = event.request.path
+    request_path = URI.decode original_path
+
+    # File path cannot contains '\0' (NUL).
+    if request_path.includes? '\0'
+      raise ATH::Exceptions::BadRequest.new "File path cannot contain NUL bytes."
+    end
+
+    request_path = Path.posix request_path
+    expanded_path = request_path.expand "/"
+
+    file_path = PUBLIC_DIR.join expanded_path.to_kind Path::Kind.native
+
+    is_dir = Dir.exists? file_path
+    is_dir_path = original_path.ends_with? '/'
+
+    event.response = if request_path != expanded_path || is_dir && !is_dir_path
+                       redirect_path = expanded_path
+                       if is_dir && !is_dir_path
+                         redirect_path = expanded_path.join ""
+                       end
+
+                       # Request is a directory but acting as a file,
+                       # redirect to the actual directory URL.
+                       ATH::RedirectResponse.new redirect_path
+                     elsif File.file? file_path
+                       ATH::BinaryFileResponse.new file_path
+                     else
+                       # Nothing to do.
+                       return
+                     end
+  end
+end
 ```
 
 ### URL Generation
@@ -328,6 +387,59 @@ Invalid num2:  Cannot divide by zero (Athena::Framework::Exceptions::BadRequest)
 #### Customization
 
 By default the Athena Framework utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][].
+
+### Middleware
+
+Unlike other frameworks, Athena Framework leverages event based middleware instead of a pipeline based approach. This enables a lot of flexibility in that there is nothing extra that needs to be done to register the listener other than creating a service for it:
+
+```crystal
+@[ADI::Register]
+class CustomListener
+  include AED::EventListenerInterface
+
+  @[AEDA::AsEventListener]
+  def on_response(event : ATH::Events::Response) : Nil
+    event.response.headers["FOO"] = "BAR"
+  end
+end
+```
+
+Similarly, the framework itself is implemented using the same features available to the users. Thus it is very easy to run specific listeners before/after the built-in ones if so desired.
+
+TIP: Checkout the `debug:event-dispatcher` [command](../architecture/console.md) for an easy way see all the listeners and the order in which they are executed.
+
+### Testing
+
+Each component in the Athena Framework includes a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. Athena itself defines some of its own testing types, mainly to allow for easisly integration testing [ATH::Controller][]s.
+
+```crystal
+require "athena"
+require "athena/spec"
+
+class ExampleController < ATH::Controller
+  @[ATHA::QueryParam("negative")]
+  @[ARTA::Get("/add/{value1}/{value2}")]
+  def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
+    sum = value1 + value2
+    negative ? -sum : sum
+  end
+end
+
+struct ExampleControllerTest < ATH::Spec::APITestCase
+  def test_add_positive : Nil
+    self.get("/add/5/3").body.should eq "8"
+  end
+
+  def test_add_negative : Nil
+    self.get("/add/5/3?negative=true").body.should eq "-8"
+  end
+end
+
+# Run all test case tests.
+ASPEC.run_all
+```
+
+See the [Spec](../architecture/spec.md) component for more information.
 
 ### WebSockets
 

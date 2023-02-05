@@ -12,11 +12,6 @@
         * [Validator](architecture/validator.md)
         * [Spec](architecture/spec.md)
     * [Getting Started](getting_started/README.md)
-    * [Cookbook](cookbook/README.md)
-        * [Listeners](cookbook/listeners.md)
-        * [Param Converters](cookbook/param_converters.md)
-        * [Exclusion Strategies](cookbook/exclusion_strategies.md)
-        * [Object Constructors](cookbook/object_constructors.md)
 * [Framework](Framework/index.md)
     * [Aliases](Framework/aliases.md)
     * Framework/*

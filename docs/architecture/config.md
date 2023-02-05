@@ -260,4 +260,67 @@ end
 ATH.run
 ```
 
-The [Cookbook](../cookbook/listeners.md#pagination) includes an example of how this can be used for pagination.
+### Pagination
+
+A good example use case for custom annotations is the creation of a `Paginated` annotation that can be applied to controller actions to have them be paginated via the listener. Generic pagination can be implemented via listening on the [view](../architecture/README.md#4-view-event) event which exposes the value returned via the related controller action.
+
+```crystal
+
+# Define our configuration annotation with the default pagination values.
+# These values can be overridden on a per endpoint basis.
+ACF.configuration_annotation Paginated, page : Int32 = 1, per_page : Int32 = 100, max_per_page : Int32 = 1000
+
+# Define and register our listener that will handle paginating the response.
+@[ADI::Register]
+struct PaginationListener
+  include AED::EventListenerInterface
+
+  private PAGE_QUERY_PARAM     = "page"
+  private PER_PAGE_QUERY_PARAM = "per_page"
+
+  # Use a high priority to ensure future listeners are working with the paginated data
+  @[AEDA::AsEventListener(priority: 255)]
+  def on_view(event : ATH::Events::View) : Nil
+    # Return if the endpoint is not paginated.
+    return unless (pagination = event.request.action.annotation_configurations[Paginated]?)
+
+    # Return if the action result is not able to be paginated.
+    return unless (action_result = event.action_result).is_a? Indexable
+
+    request = event.request
+
+    # Determine pagination values; first checking the request's query parameters,
+    # using the default values in the `Paginated` object if not provided.
+    page = request.query_params[PAGE_QUERY_PARAM]?.try &.to_i || pagination.page
+    per_page = request.query_params[PER_PAGE_QUERY_PARAM]?.try &.to_i || pagination.per_page
+
+    # Raise an exception if `per_page` is higher than the max.
+    raise ATH::Exceptions::BadRequest.new "Query param 'per_page' should be '#{pagination.max_per_page}' or less." if per_page > pagination.max_per_page
+
+    # Paginate the resulting data.
+    # In the future a more robust pagination service could be injected
+    # that could handle types other than `Indexable`, such as
+    # ORM `Collection` objects.
+    end_index = page * per_page
+    start_index = end_index - per_page
+
+    # Paginate and set the action's result.
+    event.action_result = action_result[start_index...end_index]
+  end
+end
+
+class ExampleController < ATH::Controller
+  @[ARTA::Get("values")]
+  @[Paginated(per_page: 2)]
+  def get_values : Array(Int32)
+    (1..10).to_a
+  end
+end
+
+ATH.run
+
+# GET /values # => [1, 2]
+# GET /values?page=2 # => [3, 4]
+# GET /values?per_page=3 # => [1, 2, 3]
+# GET /values?per_page=3&page=2 # => [4, 5, 6]
+```

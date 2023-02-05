@@ -1,4 +1,4 @@
-The [Validator][Athena::Validator] component adds a robust/flexible validation framework. This component is also mostly optional, but leveraged for the super useful [ATHR::RequestBody][] resolver type to ensure only valid data make it into the system. This component can also be used to define validation requirements for [ATH::Params::ParamInterface][Athena::Framework::Params::ParamInterface]s.
+The [Validator][Athena::Validator] component adds a robust/flexible validation framework. This component is also mostly optional, but is leveraged for the super useful [ATHR::RequestBody][] resolver type to ensure only valid data make it into the system. This component can also be used to define validation requirements for [ATH::Params::ParamInterface][Athena::Framework::Params::ParamInterface]s.
 
 ## Custom Constraints
 
