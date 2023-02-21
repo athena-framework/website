@@ -6,7 +6,7 @@ WARNING: As with anything in the software world, "good" software is subjective. 
 
 ### SOLID Principles
 
-The [SOLID](https://en.wikipedia.org/wiki/SOLID) principles are applicable to any Object Oriented Programming (OOP) language. They play a big part in the underlying architecture of the Athena Framework, and the overall ecosystem of Athena itself. There are plenty of resources online to learn more about all of the principles, but this section fill focus on that of the _Dependency Inversion_ and _Single Responsibility_ principles and how how an [Inversion of Control (IoC)](https://en.wikipedia.org/wiki/Inversion_of_control) service container orchestrates it all via [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection).
+The [SOLID](https://en.wikipedia.org/wiki/SOLID) principles are applicable to any Object Oriented Programming (OOP) language. They play a big part in the underlying architecture of the Athena Framework, and the overall ecosystem of Athena itself. There are plenty of resources online to learn more about all of the principles, but this section will focus on that of the _Dependency Inversion_ and _Single Responsibility_ principles and how how an [Inversion of Control (IoC)](https://en.wikipedia.org/wiki/Inversion_of_control) service container orchestrates it all via [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection).
 
 #### Single Responsibility
 
