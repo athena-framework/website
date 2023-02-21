@@ -1,4 +1,4 @@
-The [Serializer][Athena::Serializer] component adds enhanced (de)serialization features. This component is mostly optional, but is integrated into the default view layer of Athena.
+The [Serializer][Athena::Serializer] component adds enhanced (de)serialization features. This component is mostly optional, but is integrated into the default view layer of the Athena Framework.
 
 When an [ASR::Serializable][Athena::Serializer::Serializable] is returned from a controller action, that object will be serialized via the serializer component, as opposed to Crystal's standard libraries' `#to_json` method.
 

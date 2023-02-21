@@ -2,6 +2,9 @@ Athena does not have any other dependencies outside of [Crystal](https://crystal
 It is designed in such a way to be non-intrusive, and not require a strict organizational convention in regards to how a project is setup;
 this allows it to use a minimal amount of setup boilerplate while not preventing it for more complex projects.
 
+NOTE: Until https://github.com/crystal-lang/crystal/issues/12790 is resolved, you will need to manually install `pcre2` as it is not yet included with a native Crystal install.
+Check with your OS's package manager for the name of the required package.
+
 ## Installation
 
 Add the dependency to your `shard.yml`:
@@ -10,21 +13,18 @@ Add the dependency to your `shard.yml`:
 dependencies:
   athena:
     github: athena-framework/framework
-    version: ~> 0.17.0
+    version: ~> 0.18.0
 ```
 
-Run `shards install`. This will install Athena and its required dependencies.
-
-NOTE: Until https://github.com/crystal-lang/crystal/issues/12790 is resolved, you will need to manually install `pcre2` as it is not yet included with a native Crystal install.
-Check with your OS's package manager for the name of the required package.
+Run `shards install`. This will install the framework component and its required component dependencies.
 
 ## Usage
 
-Athena has a goal of being easy to start using for simple use cases, while still allowing flexibility/customizability for larger more complex use cases.
+Athena Framework has a goal of being easy to start using for simple use cases, while still allowing flexibility/customizability for larger more complex use cases.
 
 ### Routing
 
-Athena is a MVC based framework, as such, the logic to handle a given route is defined in an [ATH::Controller][] class.
+The Athena Framework is a MVC based framework, as such, the logic to handle a given route is defined in an [ATH::Controller][] class.
 
 ```crystal
 require "athena"
@@ -51,7 +51,7 @@ ATH.run
 
 Routing is handled via the [Athena::Routing][] component. It provides a flexible and robust foundation for handling determining which route should match a given request.
 It includes regex based requirements, host name restrictions, and priorities to allow defining routes with parameters at the same location among others.
-See the routing [documentation](../components/routing.md) for more information.
+See the routing [documentation](../architecture/routing.md) for more information.
 
 Controllers are simply classes and routes are simply methods. Controllers and actions can be documented/tested as you would any Crystal class/method.
 
@@ -81,6 +81,8 @@ ATH.run
 # GET /add/foo/12            # => {"code":400,"message":"Required parameter 'value1' with value 'foo' could not be converted into a valid 'Int32'"}
 ```
 
+TIP: For more complex conversions, consider creating a [Value Resolver][ATHR::Interface] to encapsulate the logic.
+
 [ATHA::QueryParam][] and [ATHA::RequestParam][]s are defined via annotations and map directly to the method's arguments. See the related annotation docs for more information.
 
 ```crystal
@@ -105,9 +107,9 @@ ATH.run
 #### Request Parameter
 
 Restricting an action argument to [ATH::Request][] will provide the raw request object. This can be useful to access data directly off the request object, such consuming the request's body.
-This approach is fine for simple or one-off endpoints, however for more complex/common request data processing, it is suggested to create a [Param Converter](advanced_usage.md#param-converters) to handle deserializing directly into an object.
+This approach is fine for simple or one-off endpoints.
 
-TIP: Checkout [ATH::RequestBodyConverter][] for a better way to handle this.
+TIP: Checkout [ATHR::RequestBody][] for a better way to handle this.
 
 ```crystal
 require "athena"
@@ -139,7 +141,10 @@ class ExampleController < ATH::Controller
   # Can be used to return raw data, such as HTML or CSS etc, in a one-off manner.
   @[ARTA::Get("/index")]
   def index : ATH::Response
-    ATH::Response.new "<h1>Welcome to my website!</h1>", headers: HTTP::Headers{"content-type" => MIME.from_extension(".html")}
+    ATH::Response.new(
+      "<h1>Welcome to my website!</h1>",
+      headers: HTTP::Headers{"content-type" => MIME.from_extension(".html")}
+    )
   end
 end
 
@@ -175,7 +180,8 @@ ATH.run
 
 #### Returning Files
 
-An [ATH::BinaryFileResponse][] may be used to return [static files](../cookbook/listeners.md#static-files). This response type handles caching, partial requests, and setting the relevant headers. Athena also supports downloading of dynamically generated content by using an [ATH::Response][] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header. [ATH::HeaderUtils.make_disposition][Athena::Framework::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
+An [ATH::BinaryFileResponse][] may be used to return static files/content. This response type handles caching, partial requests, and setting the relevant headers.
+The Athena Framework also supports downloading of dynamically generated content by using an [ATH::Response][] with the [content-disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) header. [ATH::HeaderUtils.make_disposition][Athena::Framework::HeaderUtils.make_disposition(disposition,filename,fallback_filename)] can be used to easily build the header.
 
 ```crystal
 require "athena"
@@ -197,6 +203,63 @@ class ExampleController < ATH::Controller
 end
 
 ATH.run
+```
+
+##### Static Files
+
+Static files can also be served from an Athena application.
+This can be achieved by combining an [ATH::BinaryFileResponse][Athena::Framework::BinaryFileResponse] with the [request](../architecture/README.md#1-request-event) event;
+checking if the request's path represents a file/directory within the application's public directory and returning the file if so.
+
+```crystal
+# Register a request event listener to handle returning static files.
+@[ADI::Register]
+struct StaticFileListener
+  include AED::EventListenerInterface
+
+  # This could be parameter if the directory changes between environments.
+  private PUBLIC_DIR = Path.new("public").expand
+
+  # Run this listener with a very high priority so it is invoked before any application logic.
+  @[AEDA::AsEventListener(priority: 256)]
+  def on_request(event : ATH::Events::Request) : Nil
+    # Fallback if the request method isn't intended for files.
+    # Alternatively, a 405 could be thrown if the server is dedicated to serving files.
+    return unless event.request.method.in? "GET", "HEAD"
+
+    original_path = event.request.path
+    request_path = URI.decode original_path
+
+    # File path cannot contains '\0' (NUL).
+    if request_path.includes? '\0'
+      raise ATH::Exceptions::BadRequest.new "File path cannot contain NUL bytes."
+    end
+
+    request_path = Path.posix request_path
+    expanded_path = request_path.expand "/"
+
+    file_path = PUBLIC_DIR.join expanded_path.to_kind Path::Kind.native
+
+    is_dir = Dir.exists? file_path
+    is_dir_path = original_path.ends_with? '/'
+
+    event.response = if request_path != expanded_path || is_dir && !is_dir_path
+                       redirect_path = expanded_path
+                       if is_dir && !is_dir_path
+                         redirect_path = expanded_path.join ""
+                       end
+
+                       # Request is a directory but acting as a file,
+                       # redirect to the actual directory URL.
+                       ATH::RedirectResponse.new redirect_path
+                     elsif File.file? file_path
+                       ATH::BinaryFileResponse.new file_path
+                     else
+                       # Nothing to do.
+                       return
+                     end
+  end
+end
 ```
 
 ### URL Generation
@@ -236,19 +299,19 @@ ATH.run
 # GET / # => 10
 ```
 
-NOTE: URL generation has some gotchas when used outside of a request context. See the routing [documentation](../components/routing.md) for more information.
+NOTE: URL generation has some gotchas when used outside of a request context. See the routing [documentation](../architecture/routing.md) for more information.
 
 See [ART::Generator::Interface][] in the API Docs for more details.
 
 ### Error Handling
 
-Exception handling in Athena is similar to exception handling in any Crystal program, with the addition of a new unique exception type, [ATH::Exceptions::HTTPException][].
+Exception handling in the Athena Framework is similar to exception handling in any Crystal program, with the addition of a new unique exception type, [ATH::Exceptions::HTTPException][].
 Custom `HTTP` errors can also be defined by inheriting from [ATH::Exceptions::HTTPException][] or a child type.
 A use case for this could be allowing additional data/context to be included within the exception.
 
 Non [ATH::Exceptions::HTTPException][] exceptions are represented as a `500 Internal Server Error`.
 
-When an exception is raised, Athena emits the [ATH::Events::Exception][] event to allow an opportunity for it to be handled.
+When an exception is raised, the framework emits the [ATH::Events::Exception][] event to allow an opportunity for it to be handled.
 By default these exceptions will return a `JSON` serialized version of the exception, via [ATH::ErrorRenderer][], that includes the message and code; with the proper response status set.
 If the exception goes unhandled, i.e. no listener sets an [ATH::Response][]. By default, non [ATH::Response][] on the event, then the request is finished and the exception is re-raised.
 
@@ -280,7 +343,7 @@ ATH.run
 
 ### Logging
 
-Logging is handled via Crystal's [Log](https://crystal-lang.org/api/Log.html) module. Athena logs when a request matches a controller action, as well as any exception. This of course can be augmented with additional application specific messages.
+Logging is handled via Crystal's [Log](https://crystal-lang.org/api/Log.html) module. Athena Framework logs when a request matches a controller action, as well as any exception. This of course can be augmented with additional application specific messages.
 
 ```bash
 2022-01-08T20:44:18.134423Z   INFO - athena.routing: Server has started and is listening at http://0.0.0.0:3000
@@ -323,12 +386,65 @@ Invalid num2:  Cannot divide by zero (Athena::Framework::Exceptions::BadRequest)
 
 #### Customization
 
-By default Athena utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][].
+By default the Athena Framework utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][].
+
+### Middleware
+
+Unlike other frameworks, Athena Framework leverages event based middleware instead of a pipeline based approach. This enables a lot of flexibility in that there is nothing extra that needs to be done to register the listener other than creating a service for it:
+
+```crystal
+@[ADI::Register]
+class CustomListener
+  include AED::EventListenerInterface
+
+  @[AEDA::AsEventListener]
+  def on_response(event : ATH::Events::Response) : Nil
+    event.response.headers["FOO"] = "BAR"
+  end
+end
+```
+
+Similarly, the framework itself is implemented using the same features available to the users. Thus it is very easy to run specific listeners before/after the built-in ones if so desired.
+
+TIP: Checkout the `debug:event-dispatcher` [command](../architecture/console.md) for an easy way see all the listeners and the order in which they are executed.
+
+### Testing
+
+Many Athena components include a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. The framework itself defines some of its own testing types, mainly to allow for easily integration testing [ATH::Controller][]s via [ATH::Spec::APITestCase] and also provides many helpful `HTTP` related [expectations][ATH::Spec::Expectations::HTTP].
+
+```crystal
+require "athena"
+require "athena/spec"
+
+class ExampleController < ATH::Controller
+  @[ATHA::QueryParam("negative")]
+  @[ARTA::Get("/add/{value1}/{value2}")]
+  def add(value1 : Int32, value2 : Int32, negative : Bool = false) : Int32
+    sum = value1 + value2
+    negative ? -sum : sum
+  end
+end
+
+struct ExampleControllerTest < ATH::Spec::APITestCase
+  def test_add_positive : Nil
+    self.get("/add/5/3").body.should eq "8"
+  end
+
+  def test_add_negative : Nil
+    self.get("/add/5/3?negative=true").body.should eq "-8"
+  end
+end
+
+# Run all test case tests.
+ASPEC.run_all
+```
+
+See the [Spec](../architecture/spec.md) component for more information.
 
 ### WebSockets
 
-Currently due to Athena's [architecture](../components/README.md), WebSockets are not directly supported.
-However Athena does allow prepending [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html) to the Athena server.
+Currently due to Athena Framework's [architecture](../architecture/README.md#framework-architecture), WebSockets are not directly supported.
+However the framework does allow prepending [HTTP::Handler](https://crystal-lang.org/api/HTTP/Handler.html) to the internal server.
 This could be used to leverage the standard library's [HTTP::WebSocketHandler](https://crystal-lang.org/api/HTTP/WebSocketHandler.html) handler
 or a third party library such as https://github.com/cable-cr/cable.
 
@@ -344,4 +460,4 @@ end
 ATH.run prepend_handlers: [ws_handler]
 ```
 
-In the future, a goal is to have an integration with https://mercure.rocks/, which would allow or the majority of WebSocket use cases in a way that better fits into Athena.
+In the future, a goal is to have an integration with https://mercure.rocks/, which would allow or the majority of WebSocket use cases in a way that better fits into the Athena ecosystem.
