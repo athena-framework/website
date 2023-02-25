@@ -1,5 +1,5 @@
 Athena does not have any other dependencies outside of [Crystal](https://crystal-lang.org) and [Shards](https://crystal-lang.org/reference/the_shards_command/index.html).
-It is designed in such a way to be non-intrusive, and not require a strict organizational convention in regards to how a project is setup;
+It is designed in such a way to be non-intrusive and not require a strict organizational convention in regards to how a project is setup;
 this allows it to use a minimal amount of setup boilerplate while not preventing it for more complex projects.
 
 NOTE: Until https://github.com/crystal-lang/crystal/issues/12790 is resolved, you will need to manually install `pcre2` as it is not yet included with a native Crystal install.
@@ -106,10 +106,10 @@ ATH.run
 
 #### Request Parameter
 
-Restricting an action argument to [ATH::Request][] will provide the raw request object. This can be useful to access data directly off the request object, such consuming the request's body.
+Restricting an action argument to [ATH::Request][] will provide the raw request object. This can be useful to access data directly off the request object, such as consuming the request's body.
 This approach is fine for simple or one-off endpoints.
 
-TIP: Checkout [ATHR::RequestBody][] for a better way to handle this.
+TIP: Check out [ATHR::RequestBody][] for a better way to handle this.
 
 ```crystal
 require "athena"
@@ -386,7 +386,7 @@ Invalid num2:  Cannot divide by zero (Athena::Framework::Exceptions::BadRequest)
 
 #### Customization
 
-By default the Athena Framework utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, exceptions will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][].
+By default the Athena Framework utilizes the default [Log::Formatter](https://crystal-lang.org/api/Log/Formatter.html) and [Log::Backend](https://crystal-lang.org/api/Log/Backend.html)s Crystal defines. This of course can be customized via interacting with Crystal's [Log](https://crystal-lang.org/api/Log.html) module. It is also possible to control what exceptions, and with what severity, will be logged by redefining the `log_exception` method within [ATH::Listeners::Error][].
 
 ### Middleware
 
@@ -406,11 +406,11 @@ end
 
 Similarly, the framework itself is implemented using the same features available to the users. Thus it is very easy to run specific listeners before/after the built-in ones if so desired.
 
-TIP: Checkout the `debug:event-dispatcher` [command](../architecture/console.md) for an easy way see all the listeners and the order in which they are executed.
+TIP: Check out the `debug:event-dispatcher` [command](../architecture/console.md) for an easy way to see all the listeners and the order in which they are executed.
 
 ### Testing
 
-Many Athena components include a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. The framework itself defines some of its own testing types, mainly to allow for easily integration testing [ATH::Controller][]s via [ATH::Spec::APITestCase] and also provides many helpful `HTTP` related [expectations][ATH::Spec::Expectations::HTTP].
+Many Athena components include a `Spec` module that includes common/helpful testing utilities/types for testing that specific component. The framework itself defines some of its own testing types, mainly to allow for easily integration testing [ATH::Controller][]s via [ATH::Spec::APITestCase][] and also provides many helpful `HTTP` related [expectations][ATH::Spec::Expectations::HTTP].
 
 ```crystal
 require "athena"
@@ -460,4 +460,4 @@ end
 ATH.run prepend_handlers: [ws_handler]
 ```
 
-In the future, a goal is to have an integration with https://mercure.rocks/, which would allow or the majority of WebSocket use cases in a way that better fits into the Athena ecosystem.
+In the future, a goal is to have an integration with https://mercure.rocks/, which would allow for the majority of WebSocket use cases in a way that better fits into the Athena ecosystem.
