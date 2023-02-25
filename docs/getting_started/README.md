@@ -18,6 +18,8 @@ dependencies:
 
 Run `shards install`. This will install the framework component and its required component dependencies.
 
+TIP: Check out the [skeleton](https://github.com/athena-framework/skeleton) template repository to get up and running quickly.
+
 ## Usage
 
 Athena Framework has a goal of being easy to start using for simple use cases, while still allowing flexibility/customizability for larger more complex use cases.
