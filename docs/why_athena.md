@@ -207,7 +207,7 @@ end
 
 Similarly, the framework itself is implemented using the same features available to the users. Thus it is very easy to run specific listeners before/after the built-in ones if so desired.
 
-TIP: Check out the `debug:event-dispatcher` [command](./architecture/console.md) for an easy way see all the listeners and the order in which they are executed.
+TIP: Check out the `debug:event-dispatcher` [command](./architecture/console.md) for an easy way to see all the listeners and the order in which they are executed.
 
 ### Annotations
 
