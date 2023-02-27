@@ -25,7 +25,7 @@ The Athena website integrates general textual documentation with the API docs of
 This allows for easy linking between the two when applicable.
 It does however leverage some conventions that are helpful to understand when reading the documentation.
 
-The navigation bar towards the top of the screen includes a tab for each component representing that component's API documentation.
+When scrolled to the top of the page, the navigation bar includes a tab for each component representing that component's API documentation.
 The `Manual` tab is the contextual documentation for the framework.
 This includes higher level framework level information, such as its architecture, guides, tutorials, and how each component is integrated if applicable.
 
