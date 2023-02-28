@@ -2,7 +2,7 @@
 
 When creating an application, actually writing the code is often the easiest part. Designing a system that will be readable, maintainable, testable, and extensible on the other hand is a much more challenging task. The features of the Athena Framework encourage creating such software. However it does not do much good without also understanding the _why_ behind the way it is designed the way it is. Let's take a moment to explore how the features mentioned in the introduction can lead to "good" software design.
 
-WARNING: As with anything in the software world, "good" software is subjective. The design decision/suggestions on this page are intended to be educational and provide "best practices" guidelines. They are _NOT_ the only way to use the framework nor are prescriptive. Do whatever makes the most sense for your project.
+WARNING: As with anything in the software world, "good" software is subjective. The design decision/suggestions on this page are intended to be educational and provide "best practices" guidelines. They are _NOT_ the only way to use the framework nor prescriptive. Do whatever makes the most sense for your project.
 
 ### SOLID Principles
 
@@ -49,7 +49,7 @@ end
 
 ##### Services
 
-A sharp eye will notice this type was created with the [ADI::Register][] annotation applied to it. This registers the type as a service, which is essentially just a useful object that could be used by other services. Not all types are services tho, such as the `Article` type. This is because it only stores data within the domain of the application and does not provide any useful functionality on its own. More on this topic in the [dependency injection](./#dependency-injection) section.
+A sharp eye will notice this type was created with the [ADI::Register][] annotation applied to it. This registers the type as a service, which is essentially just a useful object that could be used by other services. Not all types are services though, such as the `Article` type. This is because it only stores data within the domain of the application and does not provide any useful functionality on its own. More on this topic in the [dependency injection](./#dependency-injection) section.
 
 #### Dependency Inversion
 
@@ -95,7 +95,7 @@ def initialize(
 end
 ```
 
-Both of these latter two examples remove the tight coupling between the two services. However there is still one thing that is less than ideal. It should be possible to persist an article in multiple places. Meaning it needs to allow for more than one implementation of `ArticlePersister` that handles different locations, such as one for a database and another for the local filesystem. The best way to handle this would be to create a interface module for this type:
+Both of these latter two examples remove the tight coupling between the two services. However there is still one thing that is less than ideal. It should be possible to persist an article in multiple places. Meaning it needs to allow for more than one implementation of `ArticlePersister` that handles different locations, such as one for a database and another for the local filesystem. The best way to handle this would be to create an interface module for this type:
 
 ```crystal
 module ArticlePersisterInterface
@@ -124,7 +124,7 @@ class ArticlePersister
 end
 ```
 
-While this is a bit of extra boilerplate, it is an incredibly powerful pattern. It enables `MyService` to persist an article to anywhere, depending on what implementation instance it is instantiated with. The same pattern can be extended to make testing the service much easier. A mock implementation of `ArticlePersisterInterface` can be used to assert `MyService` calls it with the proper arguments without testing more than is required.
+While this is a bit of extra boilerplate, it is an incredibly powerful pattern. It enables `MyService` to persist an article to anywhere, depending on what implementation instance it is instantiated with. The same pattern can be extended to make testing the service much easier. A mock implementation of `ArticlePersisterInterface` can be used to assert `MyService` calls with the proper arguments without testing more than is required.
 
 ### Flexibility
 
@@ -187,7 +187,7 @@ class MyCustomErrorRenderer
 end
 ```
 
-Athena Framework will pick this up and use it instead of the built one version without any other required configuration changes. The same concept applies to many different features within the framework that have their own interface/default implementation.
+Athena Framework will pick this up and use it instead of the built in version without any other required configuration changes. The same concept applies to many different features within the framework that have their own interface/default implementation.
 
 #### Middleware
 
@@ -207,7 +207,7 @@ end
 
 Similarly, the framework itself is implemented using the same features available to the users. Thus it is very easy to run specific listeners before/after the built-in ones if so desired.
 
-TIP: Checkout the `debug:event-dispatcher` [command](./architecture/console.md) for an easy way see all the listeners and the order in which they are executed.
+TIP: Check out the `debug:event-dispatcher` [command](./architecture/console.md) for an easy way to see all the listeners and the order in which they are executed.
 
 ### Annotations
 
@@ -276,7 +276,7 @@ While the components that make up Athena Framework can be used within a wide ran
 
 ### HTTP REST API
 
-At its core, Athena Framework is a MVC web application framework. It can be used to serve any kind of content, but best lends itself to creating RESTful JSON APIs due to the features the framework as explained in the previous section, as well as due its native JSON support:
+At its core, Athena Framework is a MVC web application framework. It can be used to serve any kind of content, but best lends itself to creating RESTful JSON APIs due to the features explained in the previous section, as well as due its native JSON support:
 
 * Objects returned from the controller are JSON serialized by default
 * Native support for both [ASR::Serializable][] and [JSON::Serializable](https://crystal-lang.org/api/JSON/Serializable.html)
