@@ -315,7 +315,7 @@ Non [ATH::Exceptions::HTTPException][] exceptions are represented as a `500 Inte
 
 When an exception is raised, the framework emits the [ATH::Events::Exception][] event to allow an opportunity for it to be handled.
 By default these exceptions will return a `JSON` serialized version of the exception, via [ATH::ErrorRenderer][], that includes the message and code; with the proper response status set.
-If the exception goes unhandled, i.e. no listener sets an ATH::Response on the event, then the request is finished and the exception is re-raised.
+If the exception goes unhandled, i.e. no listener sets an [ATH::Response][] on the event, then the request is finished and the exception is re-raised.
 
 ```crystal
 require "athena"
