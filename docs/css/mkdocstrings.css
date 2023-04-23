@@ -8,6 +8,10 @@ div.doc-contents:not(.first) {
 
 /* Additional Customizations */
 
+body {
+    font-size: 1rem;
+}
+
 /* Increased spacing between macro & instance methods. */
 .doc-macro + .doc-macro,
 .doc-instance_method + .doc-instance_method {
@@ -17,10 +21,22 @@ div.doc-contents:not(.first) {
 .md-typeset pre>code::-webkit-scrollbar {
   height: 0.4em;
 }
+/* Slightly more compact headings */
+h1.doc-heading {
+  font-size: 1.3rem;
+}
+h3.doc-heading {
+  font-size: 0.85rem;
+}
 
-/* Make content grid a bit wider */
+/* Make content grid a bit wider (but never wider than the screen) */
 .md-grid {
-  max-width: 75%;
+  max-width: min(80rem, 100vw);
+}
+
+/* Make sure page content doesn't get too wide on big 4k monitors */
+.md-content {
+    max-width: 85ch;
 }
 
 /* Hide prev/next footer buttons */
