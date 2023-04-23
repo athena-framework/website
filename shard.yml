@@ -9,12 +9,14 @@ dependencies:
     github: athena-framework/console
   athena-dependency_injection:
     github: athena-framework/dependency-injection
+  athena-dotenv:
+    github: athena-framework/dotenv
   athena-event_dispatcher:
     github: athena-framework/event-dispatcher
   athena-image_size:
     github: athena-framework/image-size
   athena-negotiation:
-    github: athena-framework/negotiation 
+    github: athena-framework/negotiation
   athena-routing:
     github: athena-framework/routing
   athena-serializer:

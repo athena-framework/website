@@ -16,6 +16,10 @@ shards:
     git: https://github.com/athena-framework/dependency-injection.git
     version: 0.3.6
 
+  athena-dotenv:
+    git: https://github.com/athena-framework/dotenv.git
+    version: 0.1.0
+
   athena-event_dispatcher:
     git: https://github.com/athena-framework/event-dispatcher.git
     version: 0.2.2

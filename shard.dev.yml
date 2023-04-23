@@ -9,6 +9,8 @@ dependencies:
     path: ../athena/src/components/console
   athena-dependency_injection:
     path: ../athena/src/components/dependency_injection
+  athena-dotenv:
+    path: ../athena/src/components/dotenv
   athena-event_dispatcher:
     path: ../athena/src/components/event_dispatcher
   athena-image_size:
