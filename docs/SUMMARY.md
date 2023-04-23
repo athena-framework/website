@@ -18,6 +18,8 @@
 * [DependencyInjection](DependencyInjection/index.md)
     * [Aliases](DependencyInjection/aliases.md)
     * DependencyInjection/*
+* [Dotenv](Dotenv/index.md)
+    * Dotenv/*
 * [EventDispatcher](EventDispatcher/index.md)
     * [Aliases](EventDispatcher/aliases.md)
     * EventDispatcher/*
