@@ -1,6 +1,6 @@
 ## Athena
 
-Athena is a collection of robust, independent, and reusable components with the goal of powering a software ecosystem.
+Athena is a collection of general-purpose, robust, independent, and reusable components with the goal of powering a software ecosystem.
 These components may be used on their own to aid in existing projects or integrated into existing (or new) frameworks.
 In either case, this enables a feedback loop that ultimately benefits both the project using the component(s), and the ecosystem as a whole.
 The projects themselves get access to quality, well tested code to reduce the maintenance overhead of their application while any issues they do uncover, or additional features that are implemented, benefit not only that project, but every project using that component.
