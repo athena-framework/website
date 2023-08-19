@@ -84,9 +84,6 @@ markdown_extensions:
       permalink: "#"
 
 extra:
-  analytics:
-    provider: google
-    property: UA-184169799-1
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/athena-framework
