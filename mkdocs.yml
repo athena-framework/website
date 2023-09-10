@@ -26,6 +26,14 @@ theme:
   features:
     - navigation.tabs
 
+validation:
+  omitted_files: ignore
+  absolute_links: ignore
+  unrecognized_links: ignore
+
+exclude_docs: |
+  SUMMARY.md
+
 extra_css:
   - css/mkdocstrings.css
 
@@ -87,7 +95,5 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/athena-framework
-    - icon: fontawesome/brands/gitter
-      link: https://gitter.im/athena-frameworkcr/community
     - icon: fontawesome/brands/discord
       link: https://discord.gg/TmDVPb3dmr
