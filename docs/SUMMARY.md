@@ -20,6 +20,8 @@
     * DependencyInjection/*
 * [Dotenv](Dotenv/index.md)
     * Dotenv/*
+* [Clock](Clock/index.md)
+    * Clock/*
 * [EventDispatcher](EventDispatcher/index.md)
     * [Aliases](EventDispatcher/aliases.md)
     * EventDispatcher/*

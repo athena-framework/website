@@ -3,6 +3,8 @@ version: 0.1.0
 dependencies:
   athena:
     github: athena-framework/framework
+  athena-clock:
+    github: athena-framework/clock
   athena-config:
     github: athena-framework/config
   athena-console:
