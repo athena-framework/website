@@ -3,6 +3,8 @@
 dependencies:
   athena:
     path: ../athena/src/components/framework
+  athena-clock:
+    path: ../athena/src/components/clock
   athena-config:
     path: ../athena/src/components/config
   athena-console:

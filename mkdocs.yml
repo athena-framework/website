@@ -64,9 +64,12 @@ plugins:
             - lib/athena-routing/src/athena-routing.cr
             - lib/athena-validator/src/spec.cr
             - lib/athena-dotenv/src/athena-dotenv.cr
+            - lib/athena-clock/src/athena-clock.cr
+            - lib/athena-clock/src/spec.cr
             - lib/athena/src/athena.cr
             - lib/athena/src/spec.cr
           source_locations:
+            lib/athena-clock: https://github.com/athena-framework/clock/blob/v{shard_version}/{file}#L{line}
             lib/athena-config: https://github.com/athena-framework/config/blob/v{shard_version}/{file}#L{line}
             lib/athena-console: https://github.com/athena-framework/console/blob/v{shard_version}/{file}#L{line}
             lib/athena-dependency_injection: https://github.com/athena-framework/dependency-injection/blob/v{shard_version}/{file}#L{line}
