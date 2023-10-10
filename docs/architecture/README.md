@@ -88,7 +88,7 @@ The [ATH::Events::View][Athena::Framework::Events::View] event is only dispatche
 
 An [ATH::View][] may be used to customize the response, e.g. setting a custom response status and/or adding additional headers; while keeping the controller action response data intact.
 
-This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.). See the [negotiation](/architecture/negotiation) component for more information on this feature.
+This event is intended to be used as a "View" layer; allowing scalar values/objects to be returned while listeners convert that value to the expected format (e.g. JSON, HTML, etc.). See the [negotiation](./negotiation.md) component for more information on this feature.
 
 !!! example "View event in the Athena Framework"
     By default the framework will JSON serialize any non [ATH::Response][Athena::Framework::Response] values.

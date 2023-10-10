@@ -32,5 +32,5 @@ This includes higher level framework level information, such as its architecture
 ## Resources
 
 * [Discord Server](https://discord.gg/TmDVPb3dmr)
-* [API Docs](Framework/)
+* [API Docs](Framework/index.md)
 * [GitHub Repository](https://github.com/athena-framework/athena)
