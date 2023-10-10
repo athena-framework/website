@@ -27,9 +27,9 @@ theme:
     - navigation.tabs
 
 validation:
-  omitted_files: ignore
-  absolute_links: ignore
-  unrecognized_links: ignore
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
 
 exclude_docs: |
   SUMMARY.md

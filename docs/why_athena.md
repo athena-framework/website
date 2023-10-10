@@ -49,7 +49,7 @@ end
 
 ##### Services
 
-A sharp eye will notice this type was created with the [ADI::Register][] annotation applied to it. This registers the type as a service, which is essentially just a useful object that could be used by other services. Not all types are services though, such as the `Article` type. This is because it only stores data within the domain of the application and does not provide any useful functionality on its own. More on this topic in the [dependency injection](./#dependency-injection) section.
+A sharp eye will notice this type was created with the [ADI::Register][] annotation applied to it. This registers the type as a service, which is essentially just a useful object that could be used by other services. Not all types are services though, such as the `Article` type. This is because it only stores data within the domain of the application and does not provide any useful functionality on its own. More on this topic in the [dependency injection](#dependency-injection) section.
 
 #### Dependency Inversion
 

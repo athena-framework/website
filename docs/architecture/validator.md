@@ -2,7 +2,7 @@ The [Validator][Athena::Validator] component adds a robust/flexible validation f
 
 ## Custom Constraints
 
-In addition to the general information for defining [Custom Constraints](../Validator/Constraint#custom-constraints), the validator component defines a specific type for defining service based constraint validators: `AVD::ServiceConstraintValidator`. This type should be inherited from instead of `AVD::ConstraintValidator` _IF_ the validator for your custom constraint needs to be a service, E.x.
+In addition to the general information for defining [Custom Constraints][Athena::Validator--custom-constraints], the validator component defines a specific type for defining service based constraint validators: `AVD::ServiceConstraintValidator`. This type should be inherited from instead of `AVD::ConstraintValidator` _IF_ the validator for your custom constraint needs to be a service, E.x.
 
 ```crystal
 class Athena::Validator::Constraints::CustomConstraint < AVD::Constraint
