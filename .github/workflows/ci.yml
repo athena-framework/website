@@ -1,14 +1,18 @@
-name: Deploy docs
-on: [push, pull_request]
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+
 jobs:
   check_spelling:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Check Spelling
-        uses: crate-ci/typos@v1.13.18
+        uses: crate-ci/typos@v1.17.1
   build:
-    name: Deploy docs
     runs-on: ubuntu-latest
     steps:
       - name: Download source
@@ -24,8 +28,7 @@ jobs:
         run: pip3 install --no-deps -r requirements.txt
       - name: Install Crystal libs
         run: shards install
+        env:
+          SHARDS_OVERRIDE: shard.prod.yml
       - name: Build site
         run: mkdocs build --strict
-      - name: Deploy to gh-pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: mkdocs gh-deploy --force

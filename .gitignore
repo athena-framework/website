@@ -1,3 +1,5 @@
 site/
 .venv/
 lib/
+
+shard.lock

@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v3
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          check-latest: true
+      - name: Install Python libs
+        run: pip3 install --no-deps -r requirements.txt
+      - name: Install Crystal libs
+        run: shards install
+        env:
+          SHARDS_OVERRIDE: shard.prod.yml
+      - name: Build site
+        run: mkdocs build --strict
+      - name: Deploy to gh-pages
+        run: mkdocs gh-deploy --force
