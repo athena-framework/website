@@ -9,14 +9,14 @@ jobs:
   check_spelling:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Check Spelling
         uses: crate-ci/typos@v1.17.1
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Download source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Crystal
         uses: oprypin/install-crystal@v1
       - name: Install Python
