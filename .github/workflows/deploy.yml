@@ -7,7 +7,6 @@ on:
 
 jobs:
   deploy:
-    name: Deploy docs
     runs-on: ubuntu-latest
     steps:
       - name: Download source
