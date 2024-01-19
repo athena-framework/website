@@ -1,5 +1,10 @@
-name: Deploy docs
-on: [push, pull_request]
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+
 jobs:
   check_spelling:
     runs-on: ubuntu-latest
@@ -24,6 +29,8 @@ jobs:
         run: pip3 install --no-deps -r requirements.txt
       - name: Install Crystal libs
         run: shards install
+        env:
+          SHARDS_OVERRIDE: shard.prod.yml
       - name: Build site
         run: mkdocs build --strict
       - name: Deploy to gh-pages
