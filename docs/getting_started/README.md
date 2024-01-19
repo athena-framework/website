@@ -2,9 +2,6 @@ Athena does not have any other dependencies outside of [Crystal](https://crystal
 It is designed in such a way to be non-intrusive and not require a strict organizational convention in regards to how a project is setup;
 this allows it to use a minimal amount of setup boilerplate while not preventing it for more complex projects.
 
-NOTE: Until https://github.com/crystal-lang/crystal/issues/12790 is resolved, you will need to manually install `pcre2` as it is not yet included with a native Crystal install.
-Check with your OS's package manager for the name of the required package.
-
 ## Installation
 
 Add the dependency to your `shard.yml`:
@@ -120,7 +117,7 @@ class ExampleController < ATH::Controller
   @[ARTA::Post("/data")]
   def data(request : ATH::Request) : String
     raise ATH::Exceptions::BadRequest.new "Request body is empty." unless body = request.body
-    
+
     JSON.parse(body).as_h["name"].as_s
   end
 end
@@ -193,7 +190,7 @@ class ExampleController < ATH::Controller
   @[ARTA::Get(path: "/data/export")]
   def data_export : ATH::Response
     # ...
-    
+
     ATH::Response.new(
       content,
       headers: HTTP::Headers{
