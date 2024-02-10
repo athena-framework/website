@@ -29,6 +29,22 @@ h3.doc-heading {
   font-size: 0.85rem;
 }
 
+h3.schema-heading {
+  margin: 0;
+}
+
+.schema-default, .schema-type {
+  display: inline;
+}
+
+.schema-type p {
+  display: inline;
+}
+
+.schema-default p {
+  display: inline;
+}
+
 /* Make content grid a bit wider (but never wider than the screen) */
 .md-grid {
   max-width: min(80rem, 100vw);

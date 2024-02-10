@@ -47,6 +47,7 @@ plugins:
   - section-index
   - mkdocstrings:
       default_handler: crystal
+      custom_templates: templates
       handlers:
         crystal:
           crystal_docs_flags:

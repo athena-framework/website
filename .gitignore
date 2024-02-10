@@ -1,5 +1,6 @@
 site/
 .venv/
-lib/
+__pycache__/
 
+lib/
 shard.lock
