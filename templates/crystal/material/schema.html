@@ -20,14 +20,14 @@
       <div class="schema-members">
         <p>This property consists of an object with the following properties:
 
-        <blockquote>
+        <blockquote style="color: inherit;">
           {% for member in param['members'] %}
             {% filter heading(heading_level+3, id="%s.%s" % (obj.abs_id, member['name']), class="doc schema-heading", toc_label="%s.%s" % (obj.short_name, member['name'])) -%}
               {{ member['name'] | code_highlight(title='', language="crystal", inline=True) }}
             {%- endfilter %}
 
             <div class="schema-type">
-              <strong>type: </strong>{{ param['type'] |convert_markdown_ctx(obj, heading_level+4, obj.abs_id) }}
+              <strong>type: </strong>{{ member['type'] |convert_markdown_ctx(obj, heading_level+4, obj.abs_id) }}
             </div>
 
             <div class="schema-default">

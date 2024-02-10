@@ -27,6 +27,8 @@ h1.doc-heading {
 }
 h3.doc-heading {
   font-size: 0.85rem;
+  background: var(--md-code-bg-color);
+  border-radius: 2px;
 }
 
 h3.schema-heading {
