@@ -9,7 +9,6 @@ import markdown as md
 import json
 
 handler = mkdocs_gen_files.config['plugins']['mkdocstrings'].get_handler('crystal')
-root = handler.collector.root
 
 # get the `update_env` method of the handler
 update_env = handler.update_env
@@ -26,6 +25,8 @@ def patched_update_env(markdown: md.Markdown, config: dict[str, Any]) -> None:
 
 # patch the method
 handler.update_env = patched_update_env
+
+root = handler.collector.root
 
 for typ in root.lookup("Athena").walk_types():
     # Athena::Validator::Violation -> Validator/Violation/index.md
